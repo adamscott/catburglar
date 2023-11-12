@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bghshtxr6m0nw"]
+
+[ext_resource type="Script" path="res://objects/patrol_point.gd" id="1_vvcoy"]
+
+[node name="PatrolPoint1" type="Node2D"]
+script = ExtResource("1_vvcoy")

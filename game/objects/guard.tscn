@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4mps0fd7w7o6"]
+
+[ext_resource type="Script" path="res://objects/guard.gd" id="1_2k1pj"]
+[ext_resource type="Texture2D" uid="uid://qvu3r3ukmghp" path="res://sprites/guard.png" id="1_a0fpc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gke4u"]
+size = Vector2(16, 40)
+
+[node name="Guard" type="CharacterBody2D"]
+z_index = 10
+collision_layer = 0
+script = ExtResource("1_2k1pj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -20)
+texture = ExtResource("1_a0fpc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_gke4u")
+
+[node name="Raycasts_Detection" type="Node2D" parent="."]
+position = Vector2(8, -24)
+
+[node name="RayCast2D" type="RayCast2D" parent="Raycasts_Detection"]
+target_position = Vector2(120, 0)
+collision_mask = 2
+
+[node name="RayCast2D2" type="RayCast2D" parent="Raycasts_Detection"]
+target_position = Vector2(64, -16)
+collision_mask = 2
+
+[node name="RayCast2D3" type="RayCast2D" parent="Raycasts_Detection"]
+target_position = Vector2(80, 24)
+collision_mask = 2
+
+[node name="RayCast2D4" type="RayCast2D" parent="Raycasts_Detection"]
+target_position = Vector2(32, 24)
+collision_mask = 2

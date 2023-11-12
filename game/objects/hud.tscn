@@ -1,0 +1,117 @@
+[gd_scene load_steps=8 format=3 uid="uid://ctu21mpqd6ic7"]
+
+[ext_resource type="Texture2D" uid="uid://w4nq8u07csbl" path="res://sprites/ui/in_light.png" id="1_b307x"]
+[ext_resource type="Script" path="res://objects/hud.gd" id="1_u7oft"]
+[ext_resource type="Texture2D" uid="uid://beflwuqvx2rj8" path="res://sprites/ui/in_shadow.png" id="2_hgbn0"]
+[ext_resource type="Texture2D" uid="uid://bvxf26kxreek2" path="res://sprites/ui/hidden.png" id="4_cea3m"]
+[ext_resource type="FontFile" uid="uid://bv2ueoe4tuk2l" path="res://fonts/PixelOperator8-Bold.ttf" id="5_inwql"]
+[ext_resource type="FontFile" uid="uid://df5ot0i6uigl2" path="res://fonts/PixelOperator-Bold.ttf" id="6_2egn7"]
+[ext_resource type="FontFile" uid="uid://cakdxp8wgubam" path="res://fonts/PixelOperator8.ttf" id="7_7sfxa"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_u7oft")
+
+[node name="Texture_InLight" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 40.0
+grow_horizontal = 2
+texture = ExtResource("1_b307x")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Texture_InShadow" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 40.0
+grow_horizontal = 2
+texture = ExtResource("2_hgbn0")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Texture_Hidden" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -96.0
+offset_top = 8.0
+offset_right = 96.0
+offset_bottom = 40.0
+grow_horizontal = 2
+texture = ExtResource("4_cea3m")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Label_Loot_Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 80.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0.701961, 0.72549, 0.819608, 1)
+theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_inwql")
+theme_override_font_sizes/font_size = 16
+text = "LOOT"
+
+[node name="Label_Loot_Value" type="Label" parent="."]
+texture_filter = 1
+offset_left = 88.0
+offset_top = 4.0
+offset_right = 154.0
+offset_bottom = 39.0
+theme_override_colors/font_color = Color(0.854902, 0.878431, 0.917647, 1)
+theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("6_2egn7")
+theme_override_font_sizes/font_size = 32
+text = "$0"
+
+[node name="Label_Objective_Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = 16.0
+offset_top = 688.0
+offset_right = 156.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0.701961, 0.72549, 0.819608, 1)
+theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_inwql")
+theme_override_font_sizes/font_size = 16
+text = "OBJECTIVE"
+horizontal_alignment = 2
+
+[node name="Label_Objective_Value" type="Label" parent="."]
+texture_filter = 1
+offset_left = 168.0
+offset_top = 688.0
+offset_right = 960.0
+offset_bottom = 707.0
+theme_override_colors/font_color = Color(0.854902, 0.878431, 0.917647, 1)
+theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("7_7sfxa")
+theme_override_font_sizes/font_size = 16
+text = "Steal at least $500 worth of loot."
