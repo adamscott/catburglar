@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://ddmbynfaaseq6"]
+[gd_scene load_steps=18 format=3 uid="uid://ddmbynfaaseq6"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_6pabv"]
+[ext_resource type="Script" path="res://scripts/scenarios/scenario1.gd" id="2_d1yl0"]
 [ext_resource type="TileSet" uid="uid://chsne2qg356r2" path="res://tilesets/tileset.tres" id="3_laivw"]
 [ext_resource type="PackedScene" uid="uid://bf1drr1n10l11" path="res://objects/camera.tscn" id="4_50so7"]
 [ext_resource type="PackedScene" uid="uid://cp23fhb4v3gty" path="res://objects/player.tscn" id="4_jb0ff"]
@@ -19,8 +20,7 @@
 
 [node name="Testbed" type="Node"]
 script = ExtResource("1_6pabv")
-
-[node name="Scenario" type="Node" parent="."]
+path_scenario = NodePath("Scenario")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -121,6 +121,10 @@ wait_time = 2.0
 [node name="PatrolPoint2" parent="PatrolPath1" instance=ExtResource("14_pkt3h")]
 position = Vector2(208, 160)
 wait_time = 2.0
+
+[node name="Scenario" type="Node" parent="."]
+script = ExtResource("2_d1yl0")
+path_hud = NodePath("../HUD")
 
 [connection signal="caught" from="Player" to="." method="_on_player_caught"]
 [connection signal="stolen" from="Treasure1" to="." method="_on_treasure_stolen"]

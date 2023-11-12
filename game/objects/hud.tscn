@@ -55,12 +55,18 @@ texture = ExtResource("4_cea3m")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="Label_Loot_Label" type="Label" parent="."]
-texture_filter = 1
+[node name="Loot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 16.0
 offset_top = 16.0
-offset_right = 80.0
-offset_bottom = 39.0
+offset_right = 256.0
+offset_bottom = 32.0
+
+[node name="Label_Loot_Label" type="Label" parent="Loot"]
+texture_filter = 1
+offset_right = 64.0
+offset_bottom = 23.0
 theme_override_colors/font_color = Color(0.701961, 0.72549, 0.819608, 1)
 theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
 theme_override_constants/shadow_offset_x = 0
@@ -70,12 +76,12 @@ theme_override_fonts/font = ExtResource("5_inwql")
 theme_override_font_sizes/font_size = 16
 text = "LOOT"
 
-[node name="Label_Loot_Value" type="Label" parent="."]
+[node name="Label_Loot_Value" type="Label" parent="Loot"]
 texture_filter = 1
-offset_left = 88.0
-offset_top = 4.0
-offset_right = 154.0
-offset_bottom = 39.0
+offset_left = 72.0
+offset_top = -12.0
+offset_right = 138.0
+offset_bottom = 23.0
 theme_override_colors/font_color = Color(0.854902, 0.878431, 0.917647, 1)
 theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
 theme_override_constants/shadow_offset_x = 0
@@ -85,12 +91,18 @@ theme_override_fonts/font = ExtResource("6_2egn7")
 theme_override_font_sizes/font_size = 32
 text = "$0"
 
-[node name="Label_Objective_Label" type="Label" parent="."]
-texture_filter = 1
+[node name="Objective" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 16.0
 offset_top = 688.0
-offset_right = 156.0
-offset_bottom = 711.0
+offset_right = 1024.0
+offset_bottom = 704.0
+
+[node name="Label_Objective_Label" type="Label" parent="Objective"]
+texture_filter = 1
+offset_right = 140.0
+offset_bottom = 23.0
 theme_override_colors/font_color = Color(0.701961, 0.72549, 0.819608, 1)
 theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
 theme_override_constants/shadow_offset_x = 0
@@ -101,12 +113,11 @@ theme_override_font_sizes/font_size = 16
 text = "OBJECTIVE"
 horizontal_alignment = 2
 
-[node name="Label_Objective_Value" type="Label" parent="."]
+[node name="Label_Objective_Value" type="Label" parent="Objective"]
 texture_filter = 1
-offset_left = 168.0
-offset_top = 688.0
-offset_right = 960.0
-offset_bottom = 707.0
+offset_left = 152.0
+offset_right = 944.0
+offset_bottom = 19.0
 theme_override_colors/font_color = Color(0.854902, 0.878431, 0.917647, 1)
 theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
 theme_override_constants/shadow_offset_x = 0
