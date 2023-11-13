@@ -7,8 +7,11 @@ extends Node
 
 var loot : int = 0
 
+signal game_over
+
 func _on_player_caught() -> void:
 	hud.do_game_over()
+	emit_signal("game_over")
 
 func _on_treasure_stolen(value : int) -> void:
 	loot += value

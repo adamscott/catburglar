@@ -1,0 +1,91 @@
+[gd_scene load_steps=5 format=3 uid="uid://btmwklwbjyob0"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_icy1q"]
+
+[sub_resource type="Animation" id="Animation_no1i5"]
+resource_name = "anim_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Bar_Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -360)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Bar_Bottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(3, 1),
+"update": 0,
+"values": [Vector2(0, 360), Vector2(0, 720)]
+}
+
+[sub_resource type="Animation" id="Animation_6k54f"]
+resource_name = "anim_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Bar_Top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, -360), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Bar_Bottom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(0, 720), Vector2(0, 360)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uieal"]
+_data = {
+"anim_in": SubResource("Animation_no1i5"),
+"anim_out": SubResource("Animation_6k54f")
+}
+
+[node name="Game" type="Node"]
+script = ExtResource("1_icy1q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Bar_Top" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1280.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="Bar_Bottom" type="ColorRect" parent="CanvasLayer"]
+offset_top = 360.0
+offset_right = 1280.0
+offset_bottom = 720.001
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uieal")
+}
+
+[node name="Timer_RestartLevel" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Timer_RestartLevel" to="." method="_on_timer_restart_level_timeout"]

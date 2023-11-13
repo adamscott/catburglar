@@ -52,3 +52,6 @@ func _physics_process(delta : float) -> void:
 	if game_over:
 		grey_amount = clampf(grey_amount + delta, 0.0, 1.0)
 		greyout.material.set_shader_parameter("amount", grey_amount)
+
+func _ready() -> void:
+	greyout.material.set_shader_parameter("amount", grey_amount)
