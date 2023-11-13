@@ -5,7 +5,7 @@ const WALK_SPEED : float = 80.0
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var area_interact : Area2D = $Area2D_Interact
 
-enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_BOX, IN_BOX, LEAVING_BOX, ENTERING_DOOR, LEAVING_DOOR, PICKING_LOCK, CRACKING_SAFE, CAUGHT}
+enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_BOX, IN_BOX, LEAVING_BOX, ENTERING_DOOR, LEAVING_DOOR, SWIPING, PICKING_LOCK, CRACKING_SAFE, CAUGHT}
 
 var current_state : int = State.NORMAL
 var anim_index : float = 0.0
@@ -46,6 +46,8 @@ func update_obscured() -> void:
 
 func spotted() -> void:
 	current_state = State.CAUGHT
+	anim_index = 0.0
+	emit_signal("caught")
 
 func try_to_interact() -> void:
 	var interactables : Array[Area2D] = area_interact.get_overlapping_areas()
@@ -57,6 +59,8 @@ func try_to_interact() -> void:
 			anim_index = 0.0
 		else:
 			interactable.interact()
+			current_state = State.SWIPING
+			anim_index = 0.0
 
 func _physics_process_entering_door(delta : float) -> void:
 	obscured = false
@@ -78,7 +82,7 @@ func _physics_process_leaving_door(delta : float) -> void:
 
 func _physics_process_crouching_down(delta : float) -> void:
 	obscured = false
-	anim_index += delta * 10.0
+	anim_index += delta * 15.0
 	sprite.frame = 28 + clampf(anim_index, 0.0, 4.0)
 	if anim_index >= 4.0:
 		current_state = State.CROUCHED
@@ -96,7 +100,7 @@ func _physics_process_crouched(delta : float) -> void:
 
 func _physics_process_standing_up(delta : float) -> void:
 	obscured = false
-	anim_index += delta * 10.0
+	anim_index += delta * 15.0
 	if anim_index >= 2.0:
 		current_state = State.NORMAL
 	sprite.frame = 34 + clampf(anim_index, 0.0, 1.0)
@@ -112,11 +116,23 @@ func _physics_process_normal(delta : float) -> void:
 	elif Input.is_action_just_pressed(&"down"):
 		current_state = State.CROUCHING_DOWN
 		anim_index = 0.0
-	anim_index += delta
+	anim_index += delta * 10.0
 	if movement_desired == 0.0:
-		sprite.frame = wrapf(anim_index * 8.0, 0, 14)
+		sprite.frame = wrapf(anim_index, 0, 14)
 	else:
-		sprite.frame = 14 + wrapf(anim_index * 8.0, 0, 8)
+		sprite.frame = 14 + wrapf(anim_index, 0, 8)
+
+func _physics_process_swiping(delta : float) -> void:
+	obscured = false
+	anim_index += delta * 15.0
+	sprite.frame = 56 + clampf(anim_index, 0.0, 8.0)
+	if anim_index >= 9.0:
+		current_state = State.NORMAL
+
+func _physics_process_caught(delta : float) -> void:
+	obscured = false
+	anim_index += delta * 15.0
+	sprite.frame = 70 + clampf(anim_index, 0.0, 4.0)
 
 func _physics_process(delta : float) -> void:
 	match current_state:
@@ -126,6 +142,8 @@ func _physics_process(delta : float) -> void:
 		State.NORMAL: _physics_process_normal(delta)
 		State.ENTERING_DOOR: _physics_process_entering_door(delta)
 		State.LEAVING_DOOR: _physics_process_leaving_door(delta)
+		State.SWIPING: _physics_process_swiping(delta)
+		State.CAUGHT: _physics_process_caught(delta)
 	lit = false
 	for illuminator in get_tree().get_nodes_in_group("illuminator"):
 		if illuminator.is_lighting_player():

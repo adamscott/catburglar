@@ -22,7 +22,7 @@ texture_filter = 1
 position = Vector2(0, -18)
 texture = ExtResource("1_xo8fu")
 hframes = 14
-vframes = 4
+vframes = 7
 
 [node name="Area2D_Interact" type="Area2D" parent="."]
 position = Vector2(0, -16)
