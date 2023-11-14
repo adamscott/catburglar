@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cghkheaklv3ll" path="res://sprites/desk.png" id="1_h8ww6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8smty"]
-size = Vector2(24, 16)
+size = Vector2(16, 16)
 
 [node name="Desk" type="Area2D" groups=["obscurer"]]
 z_index = 5

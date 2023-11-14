@@ -42,7 +42,7 @@ func get_interact_action_label() -> String:
 	return &""
 
 func can_be_spotted() -> bool:
-	return current_state in [State.NORMAL, State.CROUCHED, State.PICKING_LOCK, State.CRACKING_SAFE] and lit and !obscured
+	return current_state in [State.NORMAL, State.CROUCHING_DOWN, State.CROUCHED, State.STANDING_UP, State.ENTERING_ROLL, State.ROLLING, State.LEAVING_ROLL, State.PICKING_LOCK, State.CRACKING_SAFE] and lit and !obscured
 
 func update_obscured() -> void:
 	obscured = false
