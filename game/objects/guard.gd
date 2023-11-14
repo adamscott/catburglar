@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const WALK_SPEED : float = 40.0
-const THINKING_TIME : float = 1.0
+const THINKING_TIME : float = 0.5
 
 enum State {WAITING_AT_POINT, PATROLLING, SPOTTED_PLAYER, ALERT}
 
