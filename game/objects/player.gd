@@ -1,15 +1,21 @@
 extends CharacterBody2D
 
 const WALK_SPEED : float = 80.0
+const HALF_ROLL_SPEED : float = 120.0
+const ROLL_SPEED : float = 160.0
+const MAX_ROLL_DISTANCE : float = 96.0
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var area_interact : Area2D = $Area2D_Interact
 
-enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_BOX, IN_BOX, LEAVING_BOX, ENTERING_DOOR, LEAVING_DOOR, SWIPING, PICKING_LOCK, CRACKING_SAFE, CAUGHT}
+enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_BOX, IN_BOX, LEAVING_BOX, ENTERING_DOOR, LEAVING_DOOR, SWIPING, PICKING_LOCK, CRACKING_SAFE, CAUGHT}
 
 var current_state : int = State.NORMAL
 var anim_index : float = 0.0
 var door_destination : Vector2
+
+var facing : Vector2 = Vector2.RIGHT
+var roll_distance : float
 
 var lit : bool = false
 var obscured : bool = false
@@ -81,7 +87,7 @@ func _physics_process_leaving_door(delta : float) -> void:
 		sprite.modulate.a = 1.0
 
 func _physics_process_crouching_down(delta : float) -> void:
-	obscured = false
+	update_obscured()
 	anim_index += delta * 15.0
 	sprite.frame = 28 + clampf(anim_index, 0.0, 4.0)
 	if anim_index >= 4.0:
@@ -94,16 +100,53 @@ func _physics_process_crouched(delta : float) -> void:
 	if not Input.is_action_pressed(&"down"):
 		current_state = State.STANDING_UP
 		anim_index = 0.0
-	var movement_desired : float = Input.get_axis(&"left", &"right")
-	if movement_desired != 0.0:
-		sprite.flip_h = movement_desired < 0.0
+	if Input.is_action_pressed(&"right"):
+		sprite.flip_h = false
+		facing = Vector2.RIGHT
+		roll_distance = MAX_ROLL_DISTANCE
+		current_state = State.ENTERING_ROLL
+		anim_index = 0.0
+	elif Input.is_action_pressed(&"left"):
+		sprite.flip_h = true
+		facing = Vector2.LEFT
+		roll_distance = MAX_ROLL_DISTANCE
+		current_state = State.ENTERING_ROLL
+		anim_index = 0.0
 
 func _physics_process_standing_up(delta : float) -> void:
-	obscured = false
+	update_obscured()
 	anim_index += delta * 15.0
+	sprite.frame = 34 + clampf(anim_index, 0.0, 1.0)
 	if anim_index >= 2.0:
 		current_state = State.NORMAL
-	sprite.frame = 34 + clampf(anim_index, 0.0, 1.0)
+
+func _physics_process_entering_roll(delta : float) -> void:
+	update_obscured()
+	anim_index += delta * 15.0
+	sprite.frame = 84 + clampf(anim_index, 0.0, 1.0)
+	if anim_index >= 2.0:
+		current_state = State.ROLLING
+		anim_index = 0.0
+	move_and_collide(facing * HALF_ROLL_SPEED * delta)
+
+func _physics_process_rolling(delta : float) -> void:
+	update_obscured()
+	anim_index += delta * 15.0
+	sprite.frame = 86 + wrapf(anim_index, 0.0, 4.0)
+	move_and_collide(facing * ROLL_SPEED * delta)
+	roll_distance -= ROLL_SPEED * delta
+	if roll_distance <= 0.0 or Input.is_action_just_pressed("interact"):
+		current_state = State.LEAVING_ROLL
+		anim_index = 0.0
+
+func _physics_process_leaving_roll(delta : float) -> void:
+	update_obscured()
+	anim_index += delta * 15.0
+	sprite.frame = 90 + clampf(anim_index, 0.0, 1.0)
+	if anim_index >= 2.0:
+		current_state = State.CROUCHED
+		anim_index = 0.0
+	move_and_collide(facing * HALF_ROLL_SPEED * delta)
 
 func _physics_process_normal(delta : float) -> void:
 	obscured = false
@@ -111,6 +154,7 @@ func _physics_process_normal(delta : float) -> void:
 	if movement_desired != 0.0:
 		var collision : KinematicCollision2D = move_and_collide(Vector2.RIGHT * movement_desired * delta * WALK_SPEED)
 		sprite.flip_h = movement_desired < 0.0
+		facing = Vector2.RIGHT if movement_desired > 0.0 else Vector2.LEFT
 	if Input.is_action_just_pressed(&"interact"):
 		try_to_interact()
 	elif Input.is_action_just_pressed(&"down"):
@@ -140,6 +184,9 @@ func _physics_process(delta : float) -> void:
 		State.CROUCHED: _physics_process_crouched(delta)
 		State.STANDING_UP: _physics_process_standing_up(delta)
 		State.NORMAL: _physics_process_normal(delta)
+		State.ENTERING_ROLL: _physics_process_entering_roll(delta)
+		State.ROLLING: _physics_process_rolling(delta)
+		State.LEAVING_ROLL: _physics_process_leaving_roll(delta)
 		State.ENTERING_DOOR: _physics_process_entering_door(delta)
 		State.LEAVING_DOOR: _physics_process_leaving_door(delta)
 		State.SWIPING: _physics_process_swiping(delta)
