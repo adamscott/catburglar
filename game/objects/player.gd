@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const WALK_SPEED : float = 80.0
 const IN_AIR_MOVE_SPEED : float = 40.0
-const HALF_ROLL_SPEED : float = 120.0
+const HALF_ROLL_SPEED : float = 60.0
 const ROLL_SPEED : float = 160.0
 const MAX_ROLL_DISTANCE : float = 96.0
 const MAX_FALL_SPEED : float = 192.0
@@ -219,8 +219,8 @@ func _physics_process_rolling(delta : float) -> void:
 func _physics_process_leaving_roll(delta : float) -> void:
 	update_obscured()
 	anim_index += delta * 15.0
-	sprite.frame = 90 + clampf(anim_index, 0.0, 1.0)
-	if anim_index >= 2.0:
+	sprite.frame = 90 + clampf(anim_index, 0.0, 6.0)
+	if anim_index >= 7.0:
 		current_state = State.CROUCHED
 		anim_index = 0.0
 	do_rolling_horizontal_movement(HALF_ROLL_SPEED, delta)

@@ -17,7 +17,8 @@ script = ExtResource("1_2k1pj")
 texture_filter = 1
 position = Vector2(0, -18)
 texture = ExtResource("1_a0fpc")
-hframes = 11
+hframes = 10
+vframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)

@@ -144,6 +144,7 @@ path_player = NodePath("../Player")
 [node name="PatrolPoint1" parent="PatrolPath1" instance=ExtResource("14_pkt3h")]
 position = Vector2(112, 160)
 wait_time = 2.0
+sleep_time = 4.0
 
 [node name="PatrolPoint2" parent="PatrolPath1" instance=ExtResource("14_pkt3h")]
 position = Vector2(208, 160)
