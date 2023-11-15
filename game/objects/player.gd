@@ -57,7 +57,12 @@ func update_obscured() -> void:
 		if node.is_hiding_player():
 			obscured = true
 
-func spotted() -> void:
+func seen() -> void:
+	if current_state == State.IN_BOX:
+		current_state = State.LEAVING_BOX
+		anim_index = 0.0
+
+func catch() -> void:
 	current_state = State.CAUGHT
 	anim_index = 0.0
 	emit_signal(&"caught")
@@ -197,7 +202,7 @@ func _physics_process_standing_up(delta : float) -> void:
 
 func _physics_process_entering_roll(delta : float) -> void:
 	update_obscured()
-	anim_index += delta * 15.0
+	anim_index += delta * 30.0
 	sprite.frame = 84 + clampf(anim_index, 0.0, 1.0)
 	if anim_index >= 2.0:
 		current_state = State.ROLLING
@@ -270,8 +275,8 @@ func _physics_process_falling(delta : float) -> void:
 func _physics_process_landing(delta : float) -> void:
 	update_obscured()
 	anim_index += delta * 15.0
-	sprite.frame = 100 + clampf(anim_index, 0.0, 3.0)
-	if anim_index >= 4.0:
+	sprite.frame = 100 + clampf(anim_index, 0.0, 4.0)
+	if anim_index >= 5.0:
 		current_state = State.NORMAL
 
 func _physics_process_swiping(delta : float) -> void:

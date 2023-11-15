@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvndx7lqnykun"]
+
+[ext_resource type="Script" path="res://objects/security_camera.gd" id="1_i7ij8"]
+[ext_resource type="Texture2D" uid="uid://ct64il0as8owa" path="res://sprites/security_camera.png" id="1_pqttt"]
+
+[node name="SecurityCamera" type="Node2D"]
+script = ExtResource("1_i7ij8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 8)
+texture = ExtResource("1_pqttt")
+hframes = 8
+frame = 4
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-8, 16)
+target_position = Vector2(-24, 80)
+collision_mask = 2
+
+[node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-8, 16)
+target_position = Vector2(-40, 80)
+collision_mask = 2
+
+[node name="RayCast2D3" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-8, 16)
+target_position = Vector2(-64, 80)
+collision_mask = 2
+
+[node name="RayCast2D4" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-8, 16)
+target_position = Vector2(-80, 80)
+collision_mask = 2
+
+[node name="RayCast2D5" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-8, 16)
+target_position = Vector2(-80, 56)
+collision_mask = 2

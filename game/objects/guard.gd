@@ -53,12 +53,12 @@ func _physics_process_waiting(delta : float) -> void:
 		current_state = State.SPOTTED_PLAYER
 		thinking_time = THINKING_TIME
 		sprite_question.show()
+		get_player().seen()
 	else:
 		waiting_time -= delta
 		if waiting_time <= 0.0:
 			select_next_patrol_point()
 			current_state = State.PATROLLING
-			print("Next!")
 
 func _physics_process_patrolling(delta : float) -> void:
 	anim_index += delta * 10.0
@@ -67,6 +67,7 @@ func _physics_process_patrolling(delta : float) -> void:
 		current_state = State.SPOTTED_PLAYER
 		thinking_time = THINKING_TIME
 		sprite_question.show()
+		get_player().seen()
 	else:
 		var destination_position : Vector2 = get_current_patrol_point().global_position
 		var distance_to_destination : float = global_position.distance_to(destination_position)
@@ -116,7 +117,7 @@ func _physics_process_spotted_player(delta : float) -> void:
 	thinking_time -= delta
 	if thinking_time <= 0.0:
 		if can_see_player():
-			get_player().spotted()
+			get_player().catch()
 			current_state = State.ALERT
 			sprite_question.hide()
 			sprite_exclamation.show()
