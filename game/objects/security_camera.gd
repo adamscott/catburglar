@@ -5,6 +5,9 @@ const ALARM_TIME : float = 3.0
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var raycasts : Node2D = $Raycasts
+@onready var audio_sight : AudioStreamPlayer2D = $Audio_Sight
+@onready var audio_nevermind : AudioStreamPlayer2D = $Audio_Nevermind
+@onready var audio_alarm : AudioStreamPlayer2D = $Audio_Alarm
 
 enum State {WATCHING, MOVING, MAYBE, ALARM}
 
@@ -40,6 +43,7 @@ func _physics_process_watching(delta : float) -> void:
 	if can_see_player():
 		current_state = State.MAYBE
 		anim_index = 0.0
+		audio_sight.play()
 	elif anim_index >= wait_time:
 		current_state = State.MOVING
 		anim_index = 0.0
@@ -65,9 +69,11 @@ func _physics_process_maybe(delta : float) -> void:
 		if can_see_player():
 			current_state = State.ALARM
 			anim_index = 0.0
+			audio_alarm.play()
 		else:
 			current_state = State.WATCHING
 			anim_index = 0.0
+			audio_nevermind.play()
 
 func _physics_process_alarm(delta : float) -> void:
 	sprite.frame = 1 if pointed == Vector2.LEFT else 3

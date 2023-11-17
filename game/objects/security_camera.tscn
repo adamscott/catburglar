@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvndx7lqnykun"]
+[gd_scene load_steps=6 format=3 uid="uid://dvndx7lqnykun"]
 
 [ext_resource type="Script" path="res://objects/security_camera.gd" id="1_i7ij8"]
 [ext_resource type="Texture2D" uid="uid://ct64il0as8owa" path="res://sprites/security_camera.png" id="1_pqttt"]
+[ext_resource type="AudioStream" uid="uid://dj2fjuv7muunl" path="res://audio/sfx/camera_sight.ogg" id="3_31bku"]
+[ext_resource type="AudioStream" uid="uid://brlvjw2qijkll" path="res://audio/sfx/camera_nevermind.ogg" id="4_dcstg"]
+[ext_resource type="AudioStream" uid="uid://c833yeul0q5lk" path="res://audio/sfx/camera_alarm.ogg" id="5_4ahha"]
 
 [node name="SecurityCamera" type="Node2D"]
 script = ExtResource("1_i7ij8")
@@ -39,3 +42,15 @@ collision_mask = 2
 position = Vector2(-8, 16)
 target_position = Vector2(-80, 56)
 collision_mask = 2
+
+[node name="Audio_Sight" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_31bku")
+bus = &"SFX"
+
+[node name="Audio_Nevermind" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dcstg")
+bus = &"SFX"
+
+[node name="Audio_Alarm" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_4ahha")
+bus = &"SFX"
