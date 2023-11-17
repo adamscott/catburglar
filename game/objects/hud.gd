@@ -14,6 +14,7 @@ const MOVE_SPEED : float = 4.0
 @onready var label_objective_value : Label = $Objective/Label_Objective_Value
 @onready var loot : Control = $Loot
 @onready var objective : Control = $Objective
+@onready var minigame : Node2D = $Minigame
 @onready var greyout : ColorRect = $Greyout
 
 var loot_show_time : float = 0.0
@@ -21,6 +22,21 @@ var objective_show_time : float = 0.0
 
 var game_over : bool = false
 var grey_amount : float = 0.0
+
+signal minigame_succeeded
+signal minigame_failed
+
+func _on_minigame_succeeded() -> void:
+	minigame.hide()
+	emit_signal("minigame_succeeded")
+
+func _on_minigame_failed() -> void:
+	minigame.hide()
+	emit_signal("minigame_failed")
+
+func start_minigame() -> void:
+	minigame.start()
+	minigame.show()
 
 func do_game_over() -> void:
 	game_over = true

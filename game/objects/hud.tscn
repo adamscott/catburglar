@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctu21mpqd6ic7"]
+[gd_scene load_steps=11 format=3 uid="uid://ctu21mpqd6ic7"]
 
 [ext_resource type="Texture2D" uid="uid://w4nq8u07csbl" path="res://sprites/ui/in_light.png" id="1_b307x"]
 [ext_resource type="Script" path="res://objects/hud.gd" id="1_u7oft"]
@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://df5ot0i6uigl2" path="res://fonts/PixelOperator-Bold.ttf" id="6_2egn7"]
 [ext_resource type="FontFile" uid="uid://cakdxp8wgubam" path="res://fonts/PixelOperator8.ttf" id="7_7sfxa"]
 [ext_resource type="Shader" path="res://shaders/game_over.gdshader" id="8_w2msb"]
+[ext_resource type="PackedScene" uid="uid://dv15ok1gu3g6l" path="res://objects/minigame.tscn" id="9_nlp0m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7nc1o"]
 shader = ExtResource("8_w2msb")
@@ -136,6 +137,11 @@ theme_override_fonts/font = ExtResource("7_7sfxa")
 theme_override_font_sizes/font_size = 16
 text = "Steal at least $500 worth of loot."
 
+[node name="Minigame" parent="." instance=ExtResource("9_nlp0m")]
+visible = false
+position = Vector2(1088, 560)
+scale = Vector2(4, 4)
+
 [node name="Greyout" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_7nc1o")
 anchors_preset = 15
@@ -143,3 +149,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[connection signal="failed" from="Minigame" to="." method="_on_minigame_failed"]
+[connection signal="succeeded" from="Minigame" to="." method="_on_minigame_succeeded"]

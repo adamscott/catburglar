@@ -1,0 +1,127 @@
+[gd_scene load_steps=3 format=3 uid="uid://bylhny47vikrl"]
+
+[ext_resource type="FontFile" uid="uid://cwgn18qi488vs" path="res://fonts/breamcatcher rg.otf" id="1_0g4j8"]
+[ext_resource type="Texture2D" uid="uid://ycspb6nkcbog" path="res://sprites/banner1.png" id="2_12mdc"]
+
+[node name="LevelComplete" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 40.0
+offset_right = 598.0
+offset_bottom = 188.0
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 120
+text = "Level Complete"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 192.0
+offset_right = 595.0
+offset_bottom = 616.0
+theme_override_constants/h_separation = 128
+theme_override_constants/v_separation = -24
+columns = 2
+
+[node name="Label_TimeTaken_Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 50
+text = "Time"
+vertical_alignment = 1
+
+[node name="Label_TimeTaken_Value" type="Label" parent="GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 100
+text = "00:00.000"
+horizontal_alignment = 2
+
+[node name="Label_Loot_Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 50
+text = "Loot"
+vertical_alignment = 1
+
+[node name="Label_Loot_Value" type="Label" parent="GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 100
+text = "$0"
+horizontal_alignment = 2
+
+[node name="Label_Alerts_Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 50
+text = "Alerts"
+vertical_alignment = 1
+
+[node name="Label_Alerts_Value" type="Label" parent="GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 100
+text = "0"
+horizontal_alignment = 2
+
+[node name="Label_Rank_Label" type="Label" parent="GridContainer"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 50
+text = "Rank"
+vertical_alignment = 1
+
+[node name="Label_Rank_Value" type="Label" parent="GridContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 100
+text = "A"
+horizontal_alignment = 2
+
+[node name="Label_Prompt" type="Label" parent="."]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 624.0
+offset_right = 399.0
+offset_bottom = 688.0
+size_flags_vertical = 5
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("1_0g4j8")
+theme_override_font_sizes/font_size = 32
+text = "P r e s s   X   t o   c o n t i n u e"
+vertical_alignment = 1
+
+[node name="Banner1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 672.0
+offset_right = 1152.0
+offset_bottom = 720.0
+texture = ExtResource("2_12mdc")
+expand_mode = 5
+stretch_mode = 4

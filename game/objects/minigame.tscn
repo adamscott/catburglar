@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://dv15ok1gu3g6l"]
+
+[ext_resource type="Texture2D" uid="uid://ch3qjq80rkfat" path="res://sprites/minigame/background.png" id="1_4245s"]
+[ext_resource type="Script" path="res://objects/minigame.gd" id="1_uyrc2"]
+[ext_resource type="Texture2D" uid="uid://ck56e00b007lg" path="res://sprites/minigame/progress.png" id="2_dvjwv"]
+[ext_resource type="Texture2D" uid="uid://ttxinhahp78h" path="res://sprites/minigame/arrows.png" id="3_girdl"]
+[ext_resource type="Texture2D" uid="uid://dmwbkcsrmijxg" path="res://sprites/minigame/timer.png" id="4_vyjxg"]
+
+[node name="Minigame" type="Node2D"]
+script = ExtResource("1_uyrc2")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(4, 0)
+texture = ExtResource("1_4245s")
+
+[node name="Progress" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 28)
+texture = ExtResource("2_dvjwv")
+vframes = 6
+
+[node name="Arrow_Up" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -16)
+texture = ExtResource("3_girdl")
+hframes = 4
+
+[node name="Arrow_Down" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 16)
+texture = ExtResource("3_girdl")
+hframes = 4
+frame = 1
+
+[node name="Arrow_Left" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-16, 0)
+texture = ExtResource("3_girdl")
+hframes = 4
+frame = 2
+
+[node name="Arrow_Right" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(16, 0)
+texture = ExtResource("3_girdl")
+hframes = 4
+frame = 3
+
+[node name="Timer" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -27.5)
+texture = ExtResource("4_vyjxg")

@@ -1,0 +1,97 @@
+[gd_scene load_steps=5 format=3 uid="uid://cijj2qvgjwwqw"]
+
+[ext_resource type="Texture2D" uid="uid://dgxyvp8ruqmuo" path="res://sprites/banner2.png" id="1_nmjce"]
+[ext_resource type="FontFile" uid="uid://cwgn18qi488vs" path="res://fonts/breamcatcher rg.otf" id="1_nxoif"]
+[ext_resource type="FontFile" uid="uid://dobcyrrdj03ub" path="res://fonts/CaviarDreams.ttf" id="3_w3gso"]
+[ext_resource type="FontFile" uid="uid://c4edf8hd56tf2" path="res://fonts/CaviarDreams_Bold.ttf" id="4_66fp8"]
+
+[node name="Briefing" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Banner2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 480.0
+offset_bottom = 720.0
+texture = ExtResource("1_nmjce")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 712.0
+offset_top = 40.0
+offset_right = 1214.0
+offset_bottom = 188.0
+theme_override_fonts/font = ExtResource("1_nxoif")
+theme_override_font_sizes/font_size = 120
+text = "Level 1"
+horizontal_alignment = 2
+
+[node name="Label_Prompt" type="Label" parent="."]
+layout_mode = 2
+offset_left = 920.0
+offset_top = 624.0
+offset_right = 1215.0
+offset_bottom = 688.0
+size_flags_vertical = 5
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+theme_override_fonts/font = ExtResource("1_nxoif")
+theme_override_font_sizes/font_size = 32
+text = "P r e s s   X   t o   c o n t i n u e"
+vertical_alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 512.0
+offset_top = 192.0
+offset_right = 1216.0
+offset_bottom = 640.0
+
+[node name="Label_Description" type="Label" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_w3gso")
+theme_override_font_sizes/font_size = 20
+text = "Looks like Sternwood isn't home. Probably told his wife he was going to spend the night reading, then slipped away to meet a nice young friend. Not that I'm complaining; with any luck, he'll have forgotten to set the alarm."
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Label_Objectives_Title" type="Label" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_66fp8")
+theme_override_font_sizes/font_size = 20
+text = "
+Objectives"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Label_Objectives" type="Label" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_w3gso")
+theme_override_font_sizes/font_size = 20
+text = "• Steal at least $500 worth of loot.
+• (Optional): Hack into Sternwood's computer."
+horizontal_alignment = 2
+autowrap_mode = 2
