@@ -79,6 +79,9 @@ offset_right = 1280.0
 offset_bottom = 720.001
 color = Color(0, 0, 0, 1)
 
+[node name="Audio_BGM" type="AudioStreamPlayer" parent="."]
+bus = &"BGM"
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_uieal")

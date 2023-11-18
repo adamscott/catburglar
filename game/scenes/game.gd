@@ -2,6 +2,7 @@ extends Node
 
 const _Testbed : PackedScene = preload("res://scenes/levels/level1.tscn")
 
+@onready var audio_bgm : AudioStreamPlayer = $Audio_BGM
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 @onready var timer_restart_level : Timer = $Timer_RestartLevel
 
@@ -47,3 +48,5 @@ func spawn_level() -> void:
 func _ready() -> void:
 	spawn_level()
 	anim_player.play("anim_in")
+	audio_bgm.stream = load(Constants.get_level_music_path(GameProgress.current_level))
+	audio_bgm.play()
