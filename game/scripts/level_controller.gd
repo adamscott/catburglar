@@ -8,19 +8,31 @@ extends Node
 
 @onready var hud : CanvasLayer = $HUD
 
-var loot : int = 0
-
+signal complete
 signal game_over
+
+func _on_dialogue_trigger_activated(which : String) -> void:
+	play_dialogue(which)
+
+func _on_hud_dialogue_finished() -> void:
+	await get_tree().create_timer(0.05).timeout # janky hack m8
+	player.ignore_inputs = false
 
 func _on_player_caught() -> void:
 	hud.do_game_over()
 	emit_signal("game_over")
 
+func _on_player_started_hacking() -> void:
+	hud.start_minigame()
+
+func _on_player_escaped() -> void:
+	emit_signal("complete")
+
 func _on_treasure_stolen(value : int) -> void:
-	loot += value
-	hud.update_loot_value(loot)
+	GameProgress.loot += value
+	hud.update_loot_value(GameProgress.loot)
 	hud.show_loot()
-	scenario._on_loot_value_changed(loot)
+	scenario._on_loot_value_changed(GameProgress.loot)
 
 func _on_hud_minigame_succeeded() -> void:
 	player.stop_hacking()
@@ -28,5 +40,9 @@ func _on_hud_minigame_succeeded() -> void:
 func _on_hud_minigame_failed() -> void:
 	player.stop_hacking()
 
-func _on_player_started_hacking() -> void:
-	hud.start_minigame()
+func play_dialogue(which : String) -> void:
+	if not GameProgress.is_dialogue_played(which):
+		hud.start_dialogue(which)
+		GameProgress.dialogue_played(which)
+		player.ignore_inputs = true
+

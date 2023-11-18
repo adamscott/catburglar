@@ -70,6 +70,8 @@ func _physics_process_maybe(delta : float) -> void:
 			current_state = State.ALARM
 			anim_index = 0.0
 			audio_alarm.play()
+			GameProgress.camera_alerts += 1
+			get_player().camera_alerted()
 		else:
 			current_state = State.WATCHING
 			anim_index = 0.0

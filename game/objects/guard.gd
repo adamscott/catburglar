@@ -3,22 +3,37 @@ extends CharacterBody2D
 const WALK_SPEED : float = 40.0
 const THINKING_TIME : float = 0.5
 
+const AUDIO_STEPS : Array = [
+	preload("res://audio/sfx/step1.ogg"),
+	preload("res://audio/sfx/step2.ogg"),
+	preload("res://audio/sfx/step3.ogg")
+]
+
 enum State {WAITING_AT_POINT, PATROLLING, ENTERING_SLEEP, SLEEPING, LEAVING_SLEEP, SPOTTED_PLAYER, ALERT}
 
-@export_node_path("Node2D") var path_patrol_points
+@export_node_path("Node") var path_patrol_points
 
 @onready var sprite : Sprite2D = $Sprite2D
-@onready var patrol_points : Node2D = get_node(path_patrol_points)
+@onready var patrol_points : Node = get_node(path_patrol_points)
 @onready var raycasts : Node2D = $Raycasts_Detection
 @onready var sprite_question : Sprite2D = $Sprite_Question
 @onready var sprite_exclamation : Sprite2D = $Sprite_Exclamation
+@onready var audio_step : AudioStreamPlayer2D = $Audio_Step
 
 var current_state : int = State.PATROLLING
 var patrol_point_index : int = 0
 var thinking_time : float = 0.0
-var waiting_time : float = 2.0
+var waiting_time : float = randf_range(2.0, 3.0)
 var sleeping_time : float
+var footstep_cooldown : float = 0.1
 var anim_index : float = 0.0
+
+func play_footstep_sound() -> void:
+	if footstep_cooldown <= 0.0:
+		audio_step.stream = AUDIO_STEPS.pick_random()
+		audio_step.pitch_scale = randf_range(0.45, 0.55)
+		audio_step.play()
+		footstep_cooldown = 0.1
 
 func select_next_patrol_point() -> void:
 	patrol_point_index = wrapi(patrol_point_index + 1, 0, patrol_points.get_child_count())
@@ -63,6 +78,8 @@ func _physics_process_waiting(delta : float) -> void:
 func _physics_process_patrolling(delta : float) -> void:
 	anim_index += delta * 10.0
 	sprite.frame = 10 + wrapf(anim_index, 0, 10)
+	if sprite.frame in [14, 19]:
+		play_footstep_sound()
 	if can_see_player():
 		current_state = State.SPOTTED_PLAYER
 		thinking_time = THINKING_TIME
@@ -133,3 +150,4 @@ func _physics_process(delta : float) -> void:
 		State.SLEEPING: _physics_process_sleeping(delta)
 		State.LEAVING_SLEEP: _physics_process_leaving_sleep(delta)
 		State.SPOTTED_PLAYER: _physics_process_spotted_player(delta)
+	footstep_cooldown -= delta

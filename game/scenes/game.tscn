@@ -63,6 +63,7 @@ _data = {
 }
 
 [node name="Game" type="Node"]
+process_mode = 3
 script = ExtResource("1_icy1q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

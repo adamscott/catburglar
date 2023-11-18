@@ -19,38 +19,41 @@ frame = 4
 [node name="Raycasts" type="Node2D" parent="."]
 
 [node name="RayCast2D" type="RayCast2D" parent="Raycasts"]
-position = Vector2(-8, 16)
+position = Vector2(-8, 12)
 target_position = Vector2(-24, 80)
-collision_mask = 2
+collision_mask = 11
 
 [node name="RayCast2D2" type="RayCast2D" parent="Raycasts"]
-position = Vector2(-8, 16)
+position = Vector2(-8, 12)
 target_position = Vector2(-40, 80)
-collision_mask = 2
+collision_mask = 11
 
 [node name="RayCast2D3" type="RayCast2D" parent="Raycasts"]
-position = Vector2(-8, 16)
+position = Vector2(-8, 12)
 target_position = Vector2(-64, 80)
-collision_mask = 2
+collision_mask = 11
 
 [node name="RayCast2D4" type="RayCast2D" parent="Raycasts"]
-position = Vector2(-8, 16)
+position = Vector2(-8, 12)
 target_position = Vector2(-80, 80)
-collision_mask = 2
+collision_mask = 11
 
 [node name="RayCast2D5" type="RayCast2D" parent="Raycasts"]
-position = Vector2(-8, 16)
+position = Vector2(-8, 12)
 target_position = Vector2(-80, 56)
-collision_mask = 2
+collision_mask = 11
 
 [node name="Audio_Sight" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_31bku")
+max_distance = 640.0
 bus = &"SFX"
 
 [node name="Audio_Nevermind" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_dcstg")
+max_distance = 640.0
 bus = &"SFX"
 
 [node name="Audio_Alarm" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_4ahha")
+max_distance = 640.0
 bus = &"SFX"

@@ -10,13 +10,24 @@ const FALL_INCR : float = 512.0
 const LAND_THRESHOLD : float = 128.0
 const PLATFORMS_OFF_LENGTH : float = 0.1
 const PIPE_MOVE_RATE : float = 0.75
+const MAX_CAMERA_ALERTS : float = 3
+
+const AUDIO_STEPS : Array = [
+	preload("res://audio/sfx/step1.ogg"),
+	preload("res://audio/sfx/step2.ogg"),
+	preload("res://audio/sfx/step3.ogg")
+]
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var area_interact : Area2D = $Area2D_Interact
 @onready var collision_standing : CollisionShape2D = $CollisionShape2D_Standing
 @onready var collision_crouched : CollisionShape2D = $CollisionShape2D_Crouched
+@onready var audio_step : AudioStreamPlayer2D = $Audio_Step
+@onready var audio_roll : AudioStreamPlayer2D = $Audio_Roll
+@onready var audio_land : AudioStreamPlayer2D = $Audio_Land
+@onready var audio_vent_hit : AudioStreamPlayer2D = $Audio_VentHit
 
-enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, SWIPING, HACKING, IN_PIPE, CAUGHT}
+enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, SWIPING, HACKING, IN_PIPE, CAUGHT, ESCAPING}
 
 var current_state : int = State.NORMAL
 var anim_index : float = 0.0
@@ -24,7 +35,6 @@ var door_destination : Vector2
 
 var facing : Vector2 = Vector2.RIGHT
 var roll_distance : float
-var fall_velocity : float = 0.0
 var platforms_on_timer : float = 0.0
 
 var lit : bool = false
@@ -37,8 +47,13 @@ var pipe_destination : Node2D
 var pipe_exit_facing : Vector2
 var pipe_next_point_timer : float
 
+var footstep_cooldown : float = 0.0
+
+var ignore_inputs : bool = false
+
 signal caught
 signal started_hacking
+signal escaped
 
 func can_interact() -> bool:
 	return area_interact.has_overlapping_areas()
@@ -62,7 +77,7 @@ func get_interact_action_label() -> String:
 	return &""
 
 func can_be_spotted() -> bool:
-	return current_state in [State.NORMAL, State.CROUCHING_DOWN, State.CROUCHED, State.STANDING_UP, State.ENTERING_ROLL, State.ROLLING, State.LEAVING_ROLL, State.FALLING, State.LANDING, State.SWIPING, State.HACKING, State.CAUGHT] and lit and !obscured
+	return current_state in [State.NORMAL, State.CROUCHING_DOWN, State.CROUCHED, State.STANDING_UP, State.ENTERING_ROLL, State.ROLLING, State.LEAVING_ROLL, State.FALLING, State.LANDING, State.SWIPING, State.HACKING, State.CAUGHT] and lit and !obscured and !ignore_inputs
 
 func update_obscured() -> void:
 	obscured = false
@@ -72,6 +87,10 @@ func update_obscured() -> void:
 
 func seen() -> void:
 	pass
+
+func camera_alerted() -> void:
+	if GameProgress.camera_alerts >= MAX_CAMERA_ALERTS:
+		catch()
 
 func catch() -> void:
 	current_state = State.CAUGHT
@@ -93,6 +112,17 @@ func enter_pipe(journey : Array, source : Node2D, destination : Node2D, exit_fac
 	collision_crouched.disabled = true
 	visible = false
 	current_state = State.IN_PIPE
+
+func escape() -> void:
+	current_state = State.ESCAPING
+	emit_signal("escaped")
+
+func play_footstep_sound() -> void:
+	if footstep_cooldown <= 0.0:
+		audio_step.stream = AUDIO_STEPS.pick_random()
+		audio_step.pitch_scale = randf_range(0.95, 1.05)
+		audio_step.play()
+		footstep_cooldown = 0.1
 
 func try_to_interact() -> void:
 	var interactables : Array[Area2D] = area_interact.get_overlapping_areas()
@@ -116,6 +146,10 @@ func try_to_interact() -> void:
 func on_ground() -> bool:
 	var collision : KinematicCollision2D = move_and_collide(Vector2.DOWN * 0.25, true)
 	return collision != null
+
+func can_stand_up() -> bool:
+	var collision : KinematicCollision2D = move_and_collide(Vector2.UP * 16, true)
+	return collision == null
 
 func do_horizontal_movement(movement_desired : float, speed : float, delta : float) -> void:
 	sprite.flip_h = movement_desired < 0.0
@@ -177,7 +211,7 @@ func _physics_process_crouching_down(delta : float) -> void:
 	if anim_index >= 4.0:
 		current_state = State.CROUCHED
 		anim_index = 0.0
-	if Input.is_action_just_pressed(&"interact"):
+	if Input.is_action_just_pressed(&"interact") and !ignore_inputs:
 		set_collision_mask_value(4, false)
 		platforms_on_timer = PLATFORMS_OFF_LENGTH
 	if not on_ground():
@@ -192,23 +226,25 @@ func _physics_process_crouching_down(delta : float) -> void:
 			anim_index = 0.0
 			collision_standing.disabled = false
 			collision_crouched.disabled = true
-		elif Input.is_action_pressed(&"right"):
+		elif Input.is_action_pressed(&"right") and !ignore_inputs:
 			sprite.flip_h = false
 			facing = Vector2.RIGHT
 			roll_distance = MAX_ROLL_DISTANCE
 			current_state = State.ENTERING_ROLL
 			anim_index = 0.0
-		elif Input.is_action_pressed(&"left"):
+			audio_roll.play()
+		elif Input.is_action_pressed(&"left") and !ignore_inputs:
 			sprite.flip_h = true
 			facing = Vector2.LEFT
 			roll_distance = MAX_ROLL_DISTANCE
 			current_state = State.ENTERING_ROLL
 			anim_index = 0.0
+			audio_roll.play()
 
 func _physics_process_crouched(delta : float) -> void:
 	update_obscured()
 	sprite.frame = 33
-	if Input.is_action_just_pressed(&"interact"):
+	if Input.is_action_just_pressed(&"interact") and !ignore_inputs:
 		set_collision_mask_value(4, false)
 		platforms_on_timer = PLATFORMS_OFF_LENGTH
 	if not on_ground():
@@ -223,18 +259,21 @@ func _physics_process_crouched(delta : float) -> void:
 			anim_index = 0.0
 			collision_standing.disabled = false
 			collision_crouched.disabled = true
-		elif Input.is_action_pressed(&"right"):
+		elif Input.is_action_pressed(&"right") and !ignore_inputs:
 			sprite.flip_h = false
 			facing = Vector2.RIGHT
 			roll_distance = MAX_ROLL_DISTANCE
 			current_state = State.ENTERING_ROLL
 			anim_index = 0.0
-		elif Input.is_action_pressed(&"left"):
+			
+			audio_roll.play()
+		elif Input.is_action_pressed(&"left") and !ignore_inputs:
 			sprite.flip_h = true
 			facing = Vector2.LEFT
 			roll_distance = MAX_ROLL_DISTANCE
 			current_state = State.ENTERING_ROLL
 			anim_index = 0.0
+			audio_roll.play()
 
 func _physics_process_standing_up(delta : float) -> void:
 	update_obscured()
@@ -260,7 +299,7 @@ func _physics_process_rolling(delta : float) -> void:
 	do_rolling_horizontal_movement(ROLL_SPEED, delta)
 	do_rolling_fall(delta)
 	roll_distance -= ROLL_SPEED * delta
-	if (roll_distance <= 0.0 or Input.is_action_just_pressed(&"interact")) and on_ground():
+	if (roll_distance <= 0.0 or (Input.is_action_just_pressed(&"interact") and !ignore_inputs)) and (on_ground() and can_stand_up()):
 		current_state = State.LEAVING_ROLL
 		anim_index = 0.0
 
@@ -271,20 +310,23 @@ func _physics_process_leaving_roll(delta : float) -> void:
 	if anim_index >= 7.0:
 		current_state = State.CROUCHED
 		anim_index = 0.0
+	if sprite.frame == 95 and footstep_cooldown <= 0.0:
+		audio_land.play()
+		footstep_cooldown = 0.1
 	do_rolling_horizontal_movement(HALF_ROLL_SPEED, delta)
 	do_rolling_fall(delta)
 
 func _physics_process_normal(delta : float) -> void:
 	obscured = false
 	var movement_desired : float = Input.get_axis(&"left", &"right")
-	if movement_desired != 0.0:
+	if movement_desired != 0.0 and !ignore_inputs:
 		do_horizontal_movement(movement_desired, WALK_SPEED, delta)
 	if not on_ground():
 		current_state = State.FALLING
 		anim_index = 0.0
-	elif Input.is_action_just_pressed(&"interact"):
+	elif Input.is_action_just_pressed(&"interact") and !ignore_inputs:
 		try_to_interact()
-	elif Input.is_action_just_pressed(&"down"):
+	elif Input.is_action_just_pressed(&"down") and !ignore_inputs:
 		current_state = State.CROUCHING_DOWN
 		anim_index = 0.0
 		collision_standing.disabled = true
@@ -292,8 +334,10 @@ func _physics_process_normal(delta : float) -> void:
 	anim_index += delta * 10.0
 	if movement_desired == 0.0:
 		sprite.frame = wrapf(anim_index, 0, 14)
-	else:
+	elif !ignore_inputs:
 		sprite.frame = 14 + wrapf(anim_index, 0, 8)
+	if sprite.frame in [17, 21]:
+		play_footstep_sound()
 
 func _physics_process_falling(delta : float) -> void:
 	obscured = false
@@ -304,16 +348,18 @@ func _physics_process_falling(delta : float) -> void:
 	else:
 		set_collision_mask_value(4, true)
 	var movement_desired : float = Input.get_axis(&"left", &"right")
-	if movement_desired != 0.0:
+	if movement_desired != 0.0 and !ignore_inputs:
 		do_horizontal_movement(movement_desired, IN_AIR_MOVE_SPEED, delta)
 	velocity.y = clampf(velocity.y + (FALL_INCR * delta), -MAX_FALL_SPEED, MAX_FALL_SPEED)
 	var fall_collision : KinematicCollision2D = move_and_collide(velocity * delta)
 	if fall_collision != null:
 		set_collision_mask_value(4, true)
 		if velocity.y > LAND_THRESHOLD:
-			current_state = State.CROUCHED if Input.is_action_pressed(&"down") else State.LANDING
+			print(velocity.y)
+			current_state = State.CROUCHED if Input.is_action_pressed(&"down") and !ignore_inputs else State.LANDING
 			anim_index = 0.0
 			velocity.y = 0.0
+			audio_land.play()
 		else:
 			current_state = State.NORMAL
 
@@ -357,6 +403,9 @@ func _physics_process_in_pipe(delta : float) -> void:
 			collision_standing.disabled = false
 			collision_crouched.disabled = true
 			visible = true
+		else:
+			audio_vent_hit.pitch_scale = randf_range(0.9, 1.1)
+			audio_vent_hit.play()
 
 func _physics_process_caught(delta : float) -> void:
 	obscured = false
@@ -384,3 +433,4 @@ func _physics_process(delta : float) -> void:
 	for illuminator in get_tree().get_nodes_in_group(&"illuminator"):
 		if illuminator.is_lighting_player():
 			lit = true
+	footstep_cooldown -= delta

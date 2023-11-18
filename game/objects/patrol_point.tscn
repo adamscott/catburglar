@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://objects/patrol_point.gd" id="1_vvcoy"]
 
-[node name="PatrolPoint1" type="Node2D"]
+[node name="PatrolPoint" type="Node2D"]
 script = ExtResource("1_vvcoy")
