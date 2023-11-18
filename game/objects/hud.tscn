@@ -147,7 +147,6 @@ offset_right = 640.0
 offset_bottom = 656.0
 
 [node name="TextureRect" type="TextureRect" parent="Dialogue"]
-modulate = Color(1, 1, 1, 0.25098)
 material = SubResource("CanvasItemMaterial_l8ofe")
 layout_mode = 0
 offset_right = 640.0
@@ -170,9 +169,44 @@ offset_left = 128.0
 offset_top = 32.0
 offset_right = 640.0
 offset_bottom = 113.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("8_ererx")
 theme_override_font_sizes/font_size = 20
 text = "Good to see Cronjager's still finding work, but those eyes of his aren't doing him any favours. As long as I'm in the dark, I'm invisible."
+autowrap_mode = 2
+
+[node name="Hint" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 640.0
+offset_top = 536.0
+offset_right = 1280.0
+offset_bottom = 616.0
+
+[node name="TextureRect" type="TextureRect" parent="Hint"]
+material = SubResource("CanvasItemMaterial_l8ofe")
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 80.0
+texture = ExtResource("9_k6bj4")
+flip_h = true
+
+[node name="Label_Line" type="Label" parent="Hint"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 624.0
+offset_bottom = 64.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("8_ererx")
+theme_override_font_sizes/font_size = 20
+text = "Furniture that is  positioned in front of Cynth can act as cover. Duck while in front of it to remind out of sight."
+horizontal_alignment = 2
 autowrap_mode = 2
 
 [node name="Minigame" parent="." instance=ExtResource("9_nlp0m")]
@@ -188,9 +222,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Timer_HideHint" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [node name="Audio_VO" type="AudioStreamPlayer" parent="."]
 bus = &"VO"
 
 [connection signal="failed" from="Minigame" to="." method="_on_minigame_failed"]
 [connection signal="succeeded" from="Minigame" to="." method="_on_minigame_succeeded"]
+[connection signal="timeout" from="Timer_HideHint" to="." method="_on_timer_hide_hint_timeout"]
 [connection signal="finished" from="Audio_VO" to="." method="_on_audio_vo_finished"]

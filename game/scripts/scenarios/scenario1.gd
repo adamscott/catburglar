@@ -12,6 +12,7 @@ const LOOT_REQUIRED : int = 100
 @onready var level_exit : Node2D = get_node(path_level_exit)
 
 var objective_complete : bool = false
+var secondary_objective_complete : bool = false
 
 func _on_loot_value_changed(loot : int) -> void:
 	if loot >= 200 and !objective_complete:
@@ -20,6 +21,10 @@ func _on_loot_value_changed(loot : int) -> void:
 		objective_complete = true
 		level_exit.become_active()
 		level_controller.play_dialogue("level1_goal")
+
+func _on_hud_minigame_succeeded() -> void:
+	GameProgress.secondary_objective_met = true
+	level_controller.play_dialogue("level1_computer")
 
 func _ready() -> void:
 	hud.update_objective_value("Steal at least $500 worth of loot.")

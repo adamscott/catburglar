@@ -18,6 +18,9 @@ const MOVE_SPEED : float = 4.0
 @onready var greyout : ColorRect = $Greyout
 @onready var dialogue : Control = $Dialogue
 @onready var dialogue_line : Label = $Dialogue/Label_Line
+@onready var hint : Control = $Hint
+@onready var hint_line : Label = $Hint/Label_Line
+@onready var timer_hide_hint : Timer = $Timer_HideHint
 @onready var audio_vo : AudioStreamPlayer = $Audio_VO
 
 var loot_show_time : float = 0.0
@@ -44,6 +47,12 @@ func _on_audio_vo_finished() -> void:
 	create_tween().tween_property(dialogue, "modulate", Color.TRANSPARENT, 0.25)
 	emit_signal("dialogue_finished")
 	playing_dialogue = false
+	
+func _on_timer_hide_hint_timeout() -> void:
+	create_tween().tween_property(hint, "modulate", Color.TRANSPARENT, 0.25)
+
+func _on_hint_trigger_activated(hint_slug : String):
+	show_hint(hint_slug)
 
 func start_minigame() -> void:
 	minigame.start()
@@ -55,6 +64,13 @@ func start_dialogue(which : String) -> void:
 	audio_vo.stream = load(Dialogues.get_dialogue_vo_path(which))
 	audio_vo.play()
 	playing_dialogue = true
+
+func show_hint(which : String) -> void:
+	if not GameProgress.is_hint_shown(which):
+		hint_line.text = Dialogues.get_hint_line(which)
+		create_tween().tween_property(hint, "modulate", Color.WHITE, 0.25)
+		GameProgress.hint_shown(which)
+		timer_hide_hint.start()
 
 func do_game_over() -> void:
 	game_over = true

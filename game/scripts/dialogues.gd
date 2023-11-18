@@ -17,8 +17,15 @@ const DIALOGUE_LINES : Dictionary = {
 	"level3_vase": {"line": "Hope it was worth it, Chandler."}
 }
 
+const HINT_LINES : Dictionary = {
+	"cover": "Furniture that is positioned in front of Cynth can act as cover. Duck while in front of it to remind out of sight."
+}
+
 func get_dialogue_line(which : String) -> String:
 	return DIALOGUE_LINES[which]["line"]
 
 func get_dialogue_vo_path(which : String) -> String:
 	return "res://audio/vo/" + which + ".ogg"
+
+func get_hint_line(which : String) -> String:
+	return HINT_LINES[which]
