@@ -35,10 +35,10 @@ func _on_treasure_stolen(value : int) -> void:
 	scenario._on_loot_value_changed(GameProgress.loot)
 
 func _on_hud_minigame_succeeded() -> void:
-	player.stop_hacking()
+	player.stop_hacking(true)
 
 func _on_hud_minigame_failed() -> void:
-	player.stop_hacking()
+	player.stop_hacking(false)
 
 func play_dialogue(which : String) -> void:
 	if not GameProgress.is_dialogue_played(which):
@@ -46,3 +46,6 @@ func play_dialogue(which : String) -> void:
 		GameProgress.dialogue_played(which)
 		player.ignore_inputs = true
 
+func _physics_process(delta : float) -> void:
+	var interact_label : String = player.get_interact_action_label()
+	hud.set_prompt(interact_label != &"", interact_label)

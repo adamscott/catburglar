@@ -20,6 +20,8 @@ const MOVE_SPEED : float = 4.0
 @onready var dialogue_line : Label = $Dialogue/Label_Line
 @onready var hint : Control = $Hint
 @onready var hint_line : Label = $Hint/Label_Line
+@onready var prompt : Control = $Prompt
+@onready var prompt_action : Label = $Prompt/Label_Action
 @onready var timer_hide_hint : Timer = $Timer_HideHint
 @onready var audio_vo : AudioStreamPlayer = $Audio_VO
 
@@ -36,11 +38,11 @@ signal minigame_failed
 signal dialogue_finished
 
 func _on_minigame_succeeded() -> void:
-	minigame.hide()
+	create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE).tween_property(minigame, "position:x", 1440, 0.5)
 	emit_signal("minigame_succeeded")
 
 func _on_minigame_failed() -> void:
-	minigame.hide()
+	create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_SINE).tween_property(minigame, "position:x", 1440, 0.5)
 	emit_signal("minigame_failed")
 
 func _on_audio_vo_finished() -> void:
@@ -56,7 +58,7 @@ func _on_hint_trigger_activated(hint_slug : String):
 
 func start_minigame() -> void:
 	minigame.start()
-	minigame.show()
+	create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE).tween_property(minigame, "position:x", 1088, 0.5)
 
 func start_dialogue(which : String) -> void:
 	dialogue_line.text = Dialogues.get_dialogue_line(which)
@@ -71,6 +73,14 @@ func show_hint(which : String) -> void:
 		create_tween().tween_property(hint, "modulate", Color.WHITE, 0.25)
 		GameProgress.hint_shown(which)
 		timer_hide_hint.start()
+
+func set_prompt(vis : bool, action : String) -> void:
+	if playing_dialogue:
+		prompt.visible = true
+		prompt_action.text = &"Skip"
+	else:
+		prompt.visible = vis
+		prompt_action.text = action
 
 func do_game_over() -> void:
 	game_over = true

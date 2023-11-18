@@ -32,6 +32,7 @@ enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLIN
 var current_state : int = State.NORMAL
 var anim_index : float = 0.0
 var door_destination : Vector2
+var last_computer_used : Node2D
 
 var facing : Vector2 = Vector2.RIGHT
 var roll_distance : float
@@ -60,6 +61,8 @@ func can_interact() -> bool:
 
 # This function assumes that we'll never be overlapping two or more interactables at once
 func get_interact_action_label() -> String:
+	if ignore_inputs or current_state != State.NORMAL:
+		return &""
 	var interactables : Array[Area2D] = area_interact.get_overlapping_areas()
 	for interactable in interactables:
 		if interactable.is_in_group(&"stealable"):
@@ -70,7 +73,7 @@ func get_interact_action_label() -> String:
 			return &"Enter"
 		elif interactable.is_in_group(&"level_exit"):
 			return &"Escape"
-		elif interactable.is_in_group(&"computer"):
+		elif interactable.is_in_group(&"computer") and !interactable.hacked:
 			return &"Hack"
 		elif interactable.is_in_group(&"readable"):
 			return &"Read"
@@ -97,9 +100,11 @@ func catch() -> void:
 	anim_index = 0.0
 	emit_signal(&"caught")
 
-func stop_hacking() -> void:
+func stop_hacking(success : float) -> void:
 	current_state = State.NORMAL
 	anim_index = 0.0
+	if success:
+		last_computer_used.hacked = true
 
 func enter_pipe(journey : Array, source : Node2D, destination : Node2D, exit_facing : Vector2) -> void:
 	pipe_path_points = journey
@@ -134,10 +139,12 @@ func try_to_interact() -> void:
 			current_state = State.ENTERING_DOOR
 			anim_index = 0.0
 		elif interactable.is_in_group(&"computer"):
-			global_position = interactable.global_position
-			current_state = State.HACKING
-			anim_index = 0.0
-			emit_signal(&"started_hacking")
+			if !interactable.hacked:
+				global_position = interactable.global_position
+				current_state = State.HACKING
+				anim_index = 0.0
+				last_computer_used = interactable
+				emit_signal(&"started_hacking")
 		else:
 			interactable.interact()
 			current_state = State.SWIPING
