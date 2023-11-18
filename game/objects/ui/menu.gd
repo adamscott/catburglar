@@ -15,6 +15,7 @@ func change_current_item(diff : int) -> void:
 	update_buttons()
 
 func _input(event : InputEvent) -> void:
+	if not active: return
 	if event.is_action_pressed("up"):
 		change_current_item(-1)
 	elif event.is_action_pressed("down"):
