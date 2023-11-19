@@ -102,6 +102,22 @@ theme_override_fonts/font = ExtResource("8_ererx")
 theme_override_font_sizes/font_size = 24
 text = "$0"
 
+[node name="Label_LootDescription" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 1
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 640.0
+offset_bottom = 83.0
+theme_override_colors/font_color = Color(0.854902, 0.878431, 0.917647, 1)
+theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("8_ererx")
+theme_override_font_sizes/font_size = 24
+text = "Description of the thing you just stole."
+
 [node name="Objective" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -266,10 +282,15 @@ grow_vertical = 2
 wait_time = 5.0
 one_shot = true
 
+[node name="Timer_HideLootDescription" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [node name="Audio_VO" type="AudioStreamPlayer" parent="."]
 bus = &"VO"
 
 [connection signal="failed" from="Minigame" to="." method="_on_minigame_failed"]
 [connection signal="succeeded" from="Minigame" to="." method="_on_minigame_succeeded"]
 [connection signal="timeout" from="Timer_HideHint" to="." method="_on_timer_hide_hint_timeout"]
+[connection signal="timeout" from="Timer_HideLootDescription" to="." method="_on_timer_hide_loot_description_timeout"]
 [connection signal="finished" from="Audio_VO" to="." method="_on_audio_vo_finished"]

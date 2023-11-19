@@ -27,12 +27,13 @@ const AUDIO_STEPS : Array = [
 @onready var audio_land : AudioStreamPlayer2D = $Audio_Land
 @onready var audio_vent_hit : AudioStreamPlayer2D = $Audio_VentHit
 
-enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, ENTERING_LIFT, IN_LIFT, LEAVING_LIFT, SWIPING, HACKING, IN_PIPE, CAUGHT, ESCAPING}
+enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, ENTERING_LIFT, SEARCHING, SWIPING, HACKING, IN_PIPE, CAUGHT, ESCAPING}
 
 var current_state : int = State.NORMAL
 var anim_index : float = 0.0
 var door_destination : Node2D
 var last_computer_used : Node2D
+var thing_to_search : Node2D
 
 var facing : Vector2 = Vector2.RIGHT
 var roll_distance : float
@@ -67,6 +68,8 @@ func get_interact_action_label() -> String:
 	for interactable in interactables:
 		if interactable.is_in_group(&"stealable"):
 			return &"Steal"
+		elif interactable.is_in_group(&"searchable") and !interactable.searched:
+			return &"Search"
 		elif interactable.is_in_group(&"hiding_place"):
 			return &"Hide"
 		elif interactable.is_in_group(&"door"):
@@ -150,6 +153,11 @@ func try_to_interact() -> void:
 				emit_signal(&"started_hacking")
 		elif interactable.is_in_group(&"light_toggle"):
 			interactable.interact()
+		elif interactable.is_in_group(&"searchable"):
+			if !interactable.searched:
+				thing_to_search = interactable
+				current_state = State.SEARCHING
+				anim_index = 0.0
 		else:
 			interactable.interact()
 			current_state = State.SWIPING
@@ -396,6 +404,15 @@ func _physics_process_hacking(delta : float) -> void:
 	anim_index += delta * 15.0
 	sprite.frame = 42 + wrapf(anim_index, 0.0, 14.0)
 
+func _physics_process_searching(delta : float) -> void:
+	obscured = false
+	anim_index += delta * 4.0
+	sprite.frame = 78 + clampf(anim_index * 2.0, 0.0, 1.0)
+	if anim_index >= 2.0:
+		current_state = State.NORMAL
+		anim_index = 0.0
+		thing_to_search.search()
+
 func _physics_process_swiping(delta : float) -> void:
 	obscured = false
 	anim_index += delta * 15.0
@@ -444,6 +461,7 @@ func _physics_process(delta : float) -> void:
 		State.ENTERING_DOOR: _physics_process_entering_door(delta)
 		State.LEAVING_DOOR: _physics_process_leaving_door(delta)
 		State.HACKING: _physics_process_hacking(delta)
+		State.SEARCHING: _physics_process_searching(delta)
 		State.SWIPING: _physics_process_swiping(delta)
 		State.IN_PIPE: _physics_process_in_pipe(delta)
 		State.CAUGHT: _physics_process_caught(delta)

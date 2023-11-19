@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://djjs1exf7e7aq"]
+[gd_scene load_steps=46 format=3 uid="uid://djjs1exf7e7aq"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_t2k1n"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_cpp0q"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dvndx7lqnykun" path="res://objects/security_camera.tscn" id="8_xkfet"]
 [ext_resource type="PackedScene" uid="uid://bghshtxr6m0nw" path="res://objects/patrol_point.tscn" id="9_avkl0"]
 [ext_resource type="PackedScene" uid="uid://dcv1iqay33qep" path="res://objects/light.tscn" id="9_causn"]
+[ext_resource type="PackedScene" uid="uid://hxebst30nlht" path="res://objects/searchable.tscn" id="9_y1ey0"]
 [ext_resource type="PackedScene" uid="uid://26dcmt2uqm4y" path="res://objects/flickering_light.tscn" id="11_625eh"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="11_yu3wf"]
 [ext_resource type="PackedScene" uid="uid://b2lfcpiy60nl0" path="res://objects/light_toggle.tscn" id="14_17ouq"]
@@ -28,6 +29,9 @@ _data = {
 }
 point_count = 10
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4xh5"]
+size = Vector2(8, 8)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gy4mb"]
 atlas = ExtResource("11_yu3wf")
 region = Rect2(384, 56, 32, 40)
@@ -38,6 +42,10 @@ region = Rect2(304, 8, 64, 40)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_akqfy"]
 load_path = "res://.godot/imported/furniture.png-3c539439d2560ea2ca89cbaf88497f22.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1152"]
+atlas = SubResource("CompressedTexture2D_akqfy")
+region = Rect2(208, 24, 48, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_avinl"]
 atlas = SubResource("CompressedTexture2D_akqfy")
@@ -50,6 +58,18 @@ region = Rect2(192, 128, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_51jxy"]
 atlas = SubResource("CompressedTexture2D_akqfy")
 region = Rect2(48, 24, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvm6j"]
+atlas = ExtResource("11_yu3wf")
+region = Rect2(608, 120, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewvjm"]
+atlas = SubResource("CompressedTexture2D_akqfy")
+region = Rect2(256, 24, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywumn"]
+atlas = SubResource("CompressedTexture2D_akqfy")
+region = Rect2(192, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pwcpc"]
 atlas = ExtResource("11_yu3wf")
@@ -83,6 +103,10 @@ atlas = ExtResource("11_yu3wf")
 region = Rect2(496, 16, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ml074"]
+atlas = ExtResource("11_yu3wf")
+region = Rect2(624, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkvhn"]
 atlas = ExtResource("11_yu3wf")
 region = Rect2(624, 64, 16, 16)
 
@@ -302,6 +326,16 @@ scale = Vector2(-1, 1)
 
 [node name="Treasure" type="Node" parent="."]
 
+[node name="Searchables" type="Node" parent="."]
+
+[node name="Searchable1" parent="Searchables" instance=ExtResource("9_y1ey0")]
+position = Vector2(272, 512)
+value = 2.0
+description = "Some loose change under the cushions."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable1"]
+shape = SubResource("RectangleShape2D_s4xh5")
+
 [node name="Guards" type="Node" parent="."]
 
 [node name="Guard1" parent="Guards" instance=ExtResource("8_su3oj")]
@@ -397,7 +431,7 @@ texture = SubResource("AtlasTexture_uu45h")
 z_index = -2
 texture_filter = 1
 position = Vector2(76, 514)
-texture = SubResource("AtlasTexture_avinl")
+texture = SubResource("AtlasTexture_j1152")
 
 [node name="Furniture4" type="Sprite2D" parent="Furniture"]
 z_index = -2
@@ -411,17 +445,41 @@ texture_filter = 1
 position = Vector2(400, 70)
 texture = SubResource("AtlasTexture_k82gx")
 
+[node name="Furniture6" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(296, 66)
+texture = SubResource("AtlasTexture_51jxy")
+
 [node name="Furniture7" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
 position = Vector2(560, 70)
 texture = SubResource("AtlasTexture_k82gx")
 
-[node name="Furniture6" type="Sprite2D" parent="Furniture"]
+[node name="Furniture8" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(296, 66)
-texture = SubResource("AtlasTexture_51jxy")
+position = Vector2(520, 66)
+texture = SubResource("AtlasTexture_vvm6j")
+
+[node name="Furniture9" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(272, 514)
+texture = SubResource("AtlasTexture_j1152")
+
+[node name="Furniture10" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(320, 514)
+texture = SubResource("AtlasTexture_ewvjm")
+
+[node name="Furniture11" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(300, 518)
+texture = SubResource("AtlasTexture_ywumn")
 
 [node name="Lamp1" type="Sprite2D" parent="Furniture"]
 z_index = -2
@@ -682,6 +740,18 @@ light_range = 80.0
 [node name="LightToggle" parent="Furniture/Lamp24" instance=ExtResource("14_17ouq")]
 path_light = NodePath("../Light")
 
+[node name="Lamp25" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(300, 504)
+texture = SubResource("AtlasTexture_hkvhn")
+
+[node name="Light" parent="Furniture/Lamp25" instance=ExtResource("9_causn")]
+light_range = 80.0
+
+[node name="LightToggle" parent="Furniture/Lamp25" instance=ExtResource("14_17ouq")]
+path_light = NodePath("../Light")
+
 [node name="Lights" type="Node" parent="."]
 
 [node name="OutsideLight1" type="PointLight2D" parent="Lights"]
@@ -742,6 +812,7 @@ path_level_exit = NodePath("../Misc/LevelExit")
 [connection signal="caught" from="Player" to="." method="_on_player_caught"]
 [connection signal="escaped" from="Player" to="." method="_on_player_escaped"]
 [connection signal="started_hacking" from="Player" to="." method="_on_player_started_hacking"]
+[connection signal="looted" from="Searchables/Searchable1" to="." method="_on_searchable_looted"]
 [connection signal="activated" from="Dialogues/DialogueTrigger1" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger2" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger3" to="." method="_on_dialogue_trigger_activated"]

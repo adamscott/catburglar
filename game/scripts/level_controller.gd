@@ -34,6 +34,13 @@ func _on_treasure_stolen(value : int) -> void:
 	hud.show_loot()
 	scenario._on_loot_value_changed(GameProgress.loot)
 
+func _on_searchable_looted(value : int, description : String) -> void:
+	GameProgress.loot += value
+	hud.update_loot_value(GameProgress.loot)
+	hud.show_loot()
+	hud.show_loot_description(description)
+	scenario._on_loot_value_changed(GameProgress.loot)
+
 func _on_hud_minigame_succeeded() -> void:
 	player.stop_hacking(true)
 
@@ -49,3 +56,4 @@ func play_dialogue(which : String) -> void:
 func _physics_process(delta : float) -> void:
 	var interact_label : String = player.get_interact_action_label()
 	hud.set_prompt(interact_label != &"", interact_label)
+

@@ -13,6 +13,7 @@ const MOVE_SPEED : float = 4.0
 @onready var label_loot_value : Label = $Loot/Label_Loot_Value
 @onready var label_objective_value : Label = $Objective/Label_Objective_Value
 @onready var loot : Control = $Loot
+@onready var label_loot_description = $Label_LootDescription
 @onready var objective : Control = $Objective
 @onready var minigame : Node2D = $Minigame
 @onready var greyout : ColorRect = $Greyout
@@ -23,6 +24,7 @@ const MOVE_SPEED : float = 4.0
 @onready var prompt : Control = $Prompt
 @onready var prompt_action : Label = $Prompt/Label_Action
 @onready var timer_hide_hint : Timer = $Timer_HideHint
+@onready var timer_hide_loot_description : Timer = $Timer_HideLootDescription
 @onready var audio_vo : AudioStreamPlayer = $Audio_VO
 
 var loot_show_time : float = 0.0
@@ -53,6 +55,9 @@ func _on_audio_vo_finished() -> void:
 func _on_timer_hide_hint_timeout() -> void:
 	create_tween().tween_property(hint, "modulate", Color.TRANSPARENT, 0.25)
 
+func _on_timer_hide_loot_description_timeout() -> void:
+	create_tween().tween_property(label_loot_description, "modulate", Color.TRANSPARENT, 0.25)
+
 func _on_hint_trigger_activated(hint_slug : String):
 	show_hint(hint_slug)
 
@@ -73,6 +78,11 @@ func show_hint(which : String) -> void:
 		create_tween().tween_property(hint, "modulate", Color.WHITE, 0.25)
 		GameProgress.hint_shown(which)
 		timer_hide_hint.start()
+
+func show_loot_description(desc : String) -> void:
+	label_loot_description.text = desc
+	create_tween().tween_property(label_loot_description, "modulate", Color.WHITE, 0.25)
+	timer_hide_loot_description.start()
 
 func set_prompt(vis : bool, action : String) -> void:
 	if playing_dialogue:
