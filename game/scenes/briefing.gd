@@ -28,6 +28,7 @@ func _ready() -> void:
 	label_level_description.text = Constants.get_level_briefing(GameProgress.current_level)
 	label_level_objectives.text = Constants.get_level_objectives(GameProgress.current_level)
 	audio_vo.stream = load(Constants.get_level_vo_path(GameProgress.current_level))
+	await get_tree().create_timer(0.1).timeout
 	audio_bgm.play()
 	anim_player.play("appear")
 

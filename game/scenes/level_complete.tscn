@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://cwgn18qi488vs" path="res://fonts/breamcatcher rg.otf" id="1_0g4j8"]
 [ext_resource type="Script" path="res://scenes/level_complete.gd" id="1_pultl"]
-[ext_resource type="Texture2D" uid="uid://ycspb6nkcbog" path="res://sprites/banner1.png" id="2_12mdc"]
+[ext_resource type="Texture2D" uid="uid://dhtloiom8evcj" path="res://sprites/level_complete.png" id="2_r3vtg"]
 [ext_resource type="AudioStream" uid="uid://3561usoqegql" path="res://audio/music/results.ogg" id="4_kprox"]
 
 [sub_resource type="Animation" id="Animation_njyte"]
@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
-"values": [Vector2(920, 0), Vector2(800, 0)]
+"values": [Vector2(320, 0), Vector2(0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -27,9 +27,9 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-480, 0)]
+"values": [Vector2(0, 0), Vector2(-720, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -93,7 +93,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(2, 0.25),
 "update": 0,
-"values": [Vector2(800, 0), Vector2(920, 0)]
+"values": [Vector2(0, 0), Vector2(320, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -105,7 +105,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(2, 0.5),
 "update": 0,
-"values": [Vector2(-480, 0), Vector2(0, 0)]
+"values": [Vector2(-720, 0), Vector2(0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -173,10 +173,10 @@ script = ExtResource("1_pultl")
 
 [node name="Banner" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = 920.0
-offset_right = 1400.0
+offset_left = 320.0
+offset_right = 1600.0
 offset_bottom = 720.0
-texture = ExtResource("2_12mdc")
+texture = ExtResource("2_r3vtg")
 expand_mode = 5
 stretch_mode = 4
 
@@ -192,20 +192,20 @@ color = Color(0, 0, 0, 1)
 [node name="Label" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 272.0
-offset_top = 40.0
-offset_right = 774.0
-offset_bottom = 188.0
+offset_left = 64.0
+offset_top = 48.0
+offset_right = 482.0
+offset_bottom = 196.0
 theme_override_fonts/font = ExtResource("1_0g4j8")
-theme_override_font_sizes/font_size = 120
+theme_override_font_sizes/font_size = 100
 text = "Level Complete"
 
 [node name="GridContainer" type="GridContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 360.0
+offset_left = 64.0
 offset_top = 192.0
-offset_right = 773.0
+offset_right = 477.0
 offset_bottom = 616.0
 theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = -24
@@ -218,7 +218,6 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 50
 text = "Time"
-horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Label_TimeTaken_Value" type="Label" parent="GridContainer"]
@@ -235,7 +234,6 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 50
 text = "Loot"
-horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Label_Loot_Value" type="Label" parent="GridContainer"]
@@ -252,7 +250,6 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 50
 text = "Alerts"
-horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Label_Alerts_Value" type="Label" parent="GridContainer"]
@@ -269,7 +266,6 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 50
 text = "Rank"
-horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Label_Rank_Value" type="Label" parent="GridContainer"]
@@ -282,16 +278,15 @@ horizontal_alignment = 2
 [node name="Label_Prompt" type="Label" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-offset_left = 392.0
+offset_left = 64.0
 offset_top = 624.0
-offset_right = 767.0
+offset_right = 439.0
 offset_bottom = 688.0
 size_flags_vertical = 5
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 32
 text = "P r e s s   X   t o   c o n t i n u e"
-horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Audio_BGM" type="AudioStreamPlayer" parent="."]

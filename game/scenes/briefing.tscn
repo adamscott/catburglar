@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://cijj2qvgjwwqw"]
 
 [ext_resource type="Script" path="res://scenes/briefing.gd" id="1_djkep"]
-[ext_resource type="Texture2D" uid="uid://dgxyvp8ruqmuo" path="res://sprites/banner2.png" id="1_nmjce"]
 [ext_resource type="FontFile" uid="uid://cwgn18qi488vs" path="res://fonts/breamcatcher rg.otf" id="1_nxoif"]
+[ext_resource type="Texture2D" uid="uid://csb4c52uilfu2" path="res://sprites/briefing.png" id="2_65h2k"]
 [ext_resource type="FontFile" uid="uid://dobcyrrdj03ub" path="res://fonts/CaviarDreams.ttf" id="3_w3gso"]
 [ext_resource type="FontFile" uid="uid://c4edf8hd56tf2" path="res://fonts/CaviarDreams_Bold.ttf" id="4_66fp8"]
 [ext_resource type="AudioStream" uid="uid://b48qqcxtpp6oh" path="res://audio/music/briefing.ogg" id="6_2xm8s"]
@@ -31,7 +31,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(0.25, 1),
 "update": 0,
-"values": [Vector2(-120, 0), Vector2(0, 0)]
+"values": [Vector2(-320, 0), Vector2(-120, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -156,7 +156,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 0.25),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-120, 0)]
+"values": [Vector2(-120, 0), Vector2(-320, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -260,10 +260,10 @@ script = ExtResource("1_djkep")
 
 [node name="Banner" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -120.0
-offset_right = 360.0
+offset_left = -320.0
+offset_right = 960.0
 offset_bottom = 720.0
-texture = ExtResource("1_nmjce")
+texture = ExtResource("2_65h2k")
 expand_mode = 5
 stretch_mode = 4
 
