@@ -9,6 +9,6 @@ extends Area2D
 
 signal stolen
 
-func interact() -> void:
+func steal() -> void:
 	emit_signal("stolen", value)
 	queue_free()

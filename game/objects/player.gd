@@ -34,6 +34,7 @@ var anim_index : float = 0.0
 var door_destination : Node2D
 var last_computer_used : Node2D
 var thing_to_search : Node2D
+var thing_to_steal : Node2D
 
 var facing : Vector2 = Vector2.RIGHT
 var roll_distance : float
@@ -151,8 +152,10 @@ func try_to_interact() -> void:
 				anim_index = 0.0
 				last_computer_used = interactable
 				emit_signal(&"started_hacking")
-		elif interactable.is_in_group(&"light_toggle"):
-			interactable.interact()
+		elif interactable.is_in_group(&"stealable"):
+			thing_to_steal = interactable
+			current_state = State.SWIPING
+			anim_index = 0.0
 		elif interactable.is_in_group(&"searchable"):
 			if !interactable.searched:
 				thing_to_search = interactable
@@ -160,8 +163,6 @@ func try_to_interact() -> void:
 				anim_index = 0.0
 		else:
 			interactable.interact()
-			current_state = State.SWIPING
-			anim_index = 0.0
 
 func on_ground() -> bool:
 	var collision : KinematicCollision2D = move_and_collide(Vector2.DOWN * 0.25, true)
@@ -417,6 +418,9 @@ func _physics_process_swiping(delta : float) -> void:
 	obscured = false
 	anim_index += delta * 15.0
 	sprite.frame = 56 + clampf(anim_index, 0.0, 8.0)
+	if sprite.frame == 60 and thing_to_steal != null:
+		thing_to_steal.steal()
+		thing_to_steal = null
 	if anim_index >= 9.0:
 		current_state = State.NORMAL
 		collision_standing.disabled = false

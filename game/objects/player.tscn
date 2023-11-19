@@ -27,7 +27,6 @@ position = Vector2(0, -18)
 texture = ExtResource("1_xo8fu")
 hframes = 14
 vframes = 8
-frame = 78
 
 [node name="Area2D_Interact" type="Area2D" parent="."]
 position = Vector2(0, -16)

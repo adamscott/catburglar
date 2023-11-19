@@ -336,6 +336,28 @@ description = "Some loose change under the cushions."
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable1"]
 shape = SubResource("RectangleShape2D_s4xh5")
 
+[node name="Searchable2" parent="Searchables" instance=ExtResource("9_y1ey0")]
+position = Vector2(504, 504)
+description = "Some expired milk. Ew."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable2"]
+shape = SubResource("RectangleShape2D_s4xh5")
+
+[node name="Searchable3" parent="Searchables" instance=ExtResource("9_y1ey0")]
+position = Vector2(304, 64)
+value = 200.0
+description = "A set of exquisite photo frames."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable3"]
+shape = SubResource("RectangleShape2D_s4xh5")
+
+[node name="Searchable4" parent="Searchables" instance=ExtResource("9_y1ey0")]
+position = Vector2(344, 256)
+description = "Nothing. What were you expecting?"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable4"]
+shape = SubResource("RectangleShape2D_s4xh5")
+
 [node name="Guards" type="Node" parent="."]
 
 [node name="Guard1" parent="Guards" instance=ExtResource("8_su3oj")]
@@ -813,6 +835,9 @@ path_level_exit = NodePath("../Misc/LevelExit")
 [connection signal="escaped" from="Player" to="." method="_on_player_escaped"]
 [connection signal="started_hacking" from="Player" to="." method="_on_player_started_hacking"]
 [connection signal="looted" from="Searchables/Searchable1" to="." method="_on_searchable_looted"]
+[connection signal="looted" from="Searchables/Searchable2" to="." method="_on_searchable_looted"]
+[connection signal="looted" from="Searchables/Searchable3" to="." method="_on_searchable_looted"]
+[connection signal="looted" from="Searchables/Searchable4" to="." method="_on_searchable_looted"]
 [connection signal="activated" from="Dialogues/DialogueTrigger1" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger2" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger3" to="." method="_on_dialogue_trigger_activated"]
