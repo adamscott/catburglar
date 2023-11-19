@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b55tuqsfcht5a" path="res://sprites/pipe.png" id="1_e5ahl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrw7w"]
-size = Vector2(2, 8)
+size = Vector2(16, 16)
 
 [node name="Pipe" type="Area2D"]
 collision_layer = 0
@@ -18,9 +18,10 @@ texture = ExtResource("1_e5ahl")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(-16, 16, -8, 8, 8, 8, 8, -8, -8, -8, -16, -16, 16, -16, 16, 16)
+polygon = PackedVector2Array(-16, -8, -16, -16, 24, -16, 24, 16, 16, 16, 16, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_xrw7w")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

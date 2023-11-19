@@ -115,8 +115,8 @@ func enter_pipe(journey : Array, source : Node2D, destination : Node2D, exit_fac
 	pipe_destination = destination
 	pipe_exit_facing = exit_facing
 	pipe_next_point_timer = PIPE_MOVE_RATE
-	collision_standing.disabled = true
-	collision_crouched.disabled = true
+	collision_standing.set_deferred("disabled", true)
+	collision_crouched.set_deferred("disabled", true)
 	visible = false
 	current_state = State.IN_PIPE
 
