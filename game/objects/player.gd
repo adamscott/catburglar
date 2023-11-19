@@ -27,11 +27,11 @@ const AUDIO_STEPS : Array = [
 @onready var audio_land : AudioStreamPlayer2D = $Audio_Land
 @onready var audio_vent_hit : AudioStreamPlayer2D = $Audio_VentHit
 
-enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, SWIPING, HACKING, IN_PIPE, CAUGHT, ESCAPING}
+enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, ENTERING_LIFT, IN_LIFT, LEAVING_LIFT, SWIPING, HACKING, IN_PIPE, CAUGHT, ESCAPING}
 
 var current_state : int = State.NORMAL
 var anim_index : float = 0.0
-var door_destination : Vector2
+var door_destination : Node2D
 var last_computer_used : Node2D
 
 var facing : Vector2 = Vector2.RIGHT
@@ -137,9 +137,10 @@ func try_to_interact() -> void:
 		var interactable : Area2D = interactables[0]
 		if interactable.is_in_group(&"door"):
 			global_position = interactable.global_position
-			door_destination = interactable.get_destination_position()
+			door_destination = interactable.get_destination()
 			current_state = State.ENTERING_DOOR
 			anim_index = 0.0
+			interactable.open()
 		elif interactable.is_in_group(&"computer"):
 			if !interactable.hacked:
 				global_position = interactable.global_position
@@ -199,20 +200,22 @@ func do_rolling_fall(delta : float) -> void:
 
 func _physics_process_entering_door(delta : float) -> void:
 	obscured = false
-	anim_index += delta * 4.0
-	sprite.modulate.a = 1.0 - anim_index
+	anim_index += delta
+	sprite.frame = 78 + clampf(anim_index * 4.0, 0.0, 1.0)
+	sprite.modulate.a = clampf(2.0 - (anim_index * 4.0), 0.0, 1.0)
 	if anim_index >= 1.0: # TODO: tweak this
 		current_state = State.LEAVING_DOOR
-		global_position = door_destination
+		global_position = door_destination.global_position
+		door_destination.open()
 		anim_index = 0.0
 
 func _physics_process_leaving_door(delta : float) -> void:
 	obscured = false
 	anim_index += delta * 4.0
+	sprite.frame = 0
 	sprite.modulate.a = anim_index
 	if anim_index >= 1.0: # TODO: tweak this
 		current_state = State.NORMAL
-		anim_index = 0.0
 		sprite.modulate.a = 1.0
 
 func _physics_process_crouching_down(delta : float) -> void:

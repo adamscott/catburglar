@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://djjs1exf7e7aq"]
+[gd_scene load_steps=39 format=3 uid="uid://djjs1exf7e7aq"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_t2k1n"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_cpp0q"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bf1drr1n10l11" path="res://objects/camera.tscn" id="5_68o1k"]
 [ext_resource type="PackedScene" uid="uid://yc5fsy3tmtre" path="res://objects/door.tscn" id="6_848vf"]
 [ext_resource type="PackedScene" uid="uid://b0pwne8tissnt" path="res://objects/level_exit.tscn" id="6_hlqkw"]
+[ext_resource type="PackedScene" uid="uid://c7gy24dsii3su" path="res://objects/lift.tscn" id="6_kh1so"]
 [ext_resource type="PackedScene" uid="uid://dqw0d7ada657g" path="res://objects/pipe.tscn" id="7_40ony"]
 [ext_resource type="PackedScene" uid="uid://ctu21mpqd6ic7" path="res://objects/hud.tscn" id="7_83k46"]
 [ext_resource type="PackedScene" uid="uid://bms12ql4d2pev" path="res://objects/dialogue_trigger.tscn" id="8_46snf"]
@@ -17,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://26dcmt2uqm4y" path="res://objects/flickering_light.tscn" id="11_625eh"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="11_yu3wf"]
 [ext_resource type="PackedScene" uid="uid://b2lfcpiy60nl0" path="res://objects/light_toggle.tscn" id="14_17ouq"]
+[ext_resource type="Texture2D" uid="uid://cki0solhdng5r" path="res://sprites/gradient.png" id="15_gkbw6"]
 [ext_resource type="PackedScene" uid="uid://b8rgrlge5sx1q" path="res://objects/computer.tscn" id="17_icuwq"]
 [ext_resource type="Script" path="res://scripts/scenarios/scenario2.gd" id="19_14245"]
 
@@ -135,37 +137,41 @@ color = Color(0.12549, 0.156863, 0.25098, 1)
 
 [node name="Doors" type="Node" parent="."]
 
-[node name="DoorA1" parent="Doors" instance=ExtResource("6_848vf")]
+[node name="LiftA" parent="Doors" instance=ExtResource("6_kh1so")]
 position = Vector2(296, 480)
-destination = NodePath("../DoorA2")
+destination = NodePath("Destination")
 
-[node name="DoorA2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(296, 398)
-destination = NodePath("../DoorA1")
+[node name="Destination" parent="Doors/LiftA" instance=ExtResource("6_kh1so")]
+z_index = 0
+position = Vector2(0, -80)
+destination = NodePath("..")
 
-[node name="DoorB1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(248, 398)
-destination = NodePath("../DoorB2")
+[node name="LiftB" parent="Doors" instance=ExtResource("6_kh1so")]
+position = Vector2(248, 400)
+destination = NodePath("Destination")
 
-[node name="DoorB2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(248, 334)
-destination = NodePath("../DoorB1")
+[node name="Destination" parent="Doors/LiftB" instance=ExtResource("6_kh1so")]
+z_index = 0
+position = Vector2(0, -64)
+destination = NodePath("..")
 
-[node name="DoorC1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(344, 398)
-destination = NodePath("../DoorC2")
+[node name="LiftC" parent="Doors" instance=ExtResource("6_kh1so")]
+position = Vector2(344, 400)
+destination = NodePath("Destination")
 
-[node name="DoorC2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(344, 334)
-destination = NodePath("../DoorC1")
+[node name="Destination" parent="Doors/LiftC" instance=ExtResource("6_kh1so")]
+z_index = 0
+position = Vector2(0, -64)
+destination = NodePath("..")
 
-[node name="DoorD1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(120, 270)
-destination = NodePath("../DoorD2")
+[node name="LiftD" parent="Doors" instance=ExtResource("6_kh1so")]
+position = Vector2(120, 272)
+destination = NodePath("Destination")
 
-[node name="DoorD2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(120, 206)
-destination = NodePath("../DoorD1")
+[node name="Destination" parent="Doors/LiftD" instance=ExtResource("6_kh1so")]
+z_index = 0
+position = Vector2(0, -64)
+destination = NodePath("..")
 
 [node name="DoorE1" parent="Doors" instance=ExtResource("6_848vf")]
 position = Vector2(112, 526)
@@ -199,45 +205,48 @@ destination = NodePath("../DoorH2")
 position = Vector2(304, 270)
 destination = NodePath("../DoorH1")
 
-[node name="DoorI1" parent="Doors" instance=ExtResource("6_848vf")]
+[node name="LiftI1" parent="Doors" instance=ExtResource("6_kh1so")]
 position = Vector2(488, 398)
-destination = NodePath("../DoorI2")
+destination = NodePath("../LiftI2")
 
-[node name="DoorI2" parent="Doors" instance=ExtResource("6_848vf")]
+[node name="LiftI2" parent="Doors" instance=ExtResource("6_kh1so")]
 position = Vector2(488, 334)
-destination = NodePath("../DoorI1")
+destination = NodePath("../LiftI1")
 
-[node name="DoorJ1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(552, 462)
-destination = NodePath("../DoorJ2")
+[node name="LiftJ1" parent="Doors" instance=ExtResource("6_kh1so")]
+position = Vector2(552, 464)
+destination = NodePath("../LiftJ2")
 
-[node name="DoorJ2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(552, 398)
-destination = NodePath("../DoorJ1")
+[node name="LiftJ2" parent="Doors" instance=ExtResource("6_kh1so")]
+position = Vector2(552, 400)
+destination = NodePath("../LiftJ1")
 
-[node name="DoorK1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(552, 270)
-destination = NodePath("../DoorK2")
+[node name="LiftK" parent="Doors" instance=ExtResource("6_kh1so")]
+position = Vector2(552, 272)
+destination = NodePath("Destination")
 
-[node name="DoorK2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(552, 142)
-destination = NodePath("../DoorK1")
+[node name="Destination" parent="Doors/LiftK" instance=ExtResource("6_kh1so")]
+z_index = 0
+position = Vector2(0, -130)
+destination = NodePath("..")
 
-[node name="DoorL1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(336, 142)
-destination = NodePath("../DoorL2")
+[node name="LiftL" parent="Doors" instance=ExtResource("6_kh1so")]
+position = Vector2(336, 144)
+destination = NodePath("Destination")
 
-[node name="DoorL2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(336, 78)
-destination = NodePath("../DoorL1")
+[node name="Destination" parent="Doors/LiftL" instance=ExtResource("6_kh1so")]
+z_index = 0
+position = Vector2(0, -66)
+destination = NodePath("..")
 
-[node name="DoorM1" parent="Doors" instance=ExtResource("6_848vf")]
+[node name="DoorM" parent="Doors" instance=ExtResource("6_848vf")]
 position = Vector2(432, 78)
-destination = NodePath("../DoorM2")
+destination = NodePath("Destination")
 
-[node name="DoorM2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(480, 78)
-destination = NodePath("../DoorM1")
+[node name="Destination" parent="Doors/DoorM" instance=ExtResource("6_848vf")]
+z_index = 0
+position = Vector2(48, 0)
+destination = NodePath("..")
 
 [node name="DoorN1" parent="Doors" instance=ExtResource("6_848vf")]
 position = Vector2(192, 78)
@@ -255,21 +264,23 @@ destination = NodePath("../DoorO2")
 position = Vector2(208, 142)
 destination = NodePath("../DoorO1")
 
-[node name="DoorP1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(40, 142)
-destination = NodePath("../DoorP2")
+[node name="LiftP" parent="Doors" instance=ExtResource("6_kh1so")]
+position = Vector2(40, 144)
+destination = NodePath("Destination")
 
-[node name="DoorP2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(40, 78)
-destination = NodePath("../DoorP1")
+[node name="Destination" parent="Doors/LiftP" instance=ExtResource("6_kh1so")]
+z_index = 0
+position = Vector2(0, -66)
+destination = NodePath("..")
 
-[node name="DoorQ1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(40, 462)
-destination = NodePath("../DoorQ2")
+[node name="LiftQ" parent="Doors" instance=ExtResource("6_kh1so")]
+position = Vector2(40, 464)
+destination = NodePath("Destination")
 
-[node name="DoorQ2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(40, 398)
-destination = NodePath("../DoorQ1")
+[node name="Destination" parent="Doors/LiftQ" instance=ExtResource("6_kh1so")]
+z_index = 0
+position = Vector2(0, -66)
+destination = NodePath("..")
 
 [node name="Pipes" type="Node" parent="."]
 
@@ -672,6 +683,19 @@ light_range = 80.0
 path_light = NodePath("../Light")
 
 [node name="Lights" type="Node" parent="."]
+
+[node name="OutsideLight1" type="PointLight2D" parent="Lights"]
+position = Vector2(32, 0)
+scale = Vector2(1, 100)
+color = Color(0.25098, 0.376471, 0.501961, 1)
+texture = ExtResource("15_gkbw6")
+
+[node name="OutsideLight2" type="PointLight2D" parent="Lights"]
+position = Vector2(560, 0)
+rotation = 3.14159
+scale = Vector2(1, -100)
+color = Color(0.25098, 0.376471, 0.501961, 1)
+texture = ExtResource("15_gkbw6")
 
 [node name="Dialogues" type="Node" parent="."]
 

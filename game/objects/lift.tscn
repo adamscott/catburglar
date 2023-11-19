@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7gy24dsii3su"]
+
+[ext_resource type="Script" path="res://objects/lift.gd" id="1_gaicb"]
+[ext_resource type="Texture2D" uid="uid://bgn43xwrbyrjs" path="res://sprites/lift_single.png" id="2_dvofd"]
+[ext_resource type="Texture2D" uid="uid://ddfbiav6gy0pu" path="res://sprites/lift_doors.png" id="2_ncetw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxvj4"]
+size = Vector2(16, 40)
+
+[node name="Lift" type="Area2D" groups=["door", "interactable"]]
+z_index = -10
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_gaicb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, -24)
+texture = ExtResource("2_dvofd")
+
+[node name="Sprite2D_Doors" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -24)
+texture = ExtResource("2_ncetw")
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_kxvj4")
+
+[node name="Timer_CloseDoors" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="Timer_CloseDoors" to="." method="_on_timer_close_doors_timeout"]
