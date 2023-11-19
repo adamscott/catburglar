@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/briefing.ogg-ecd77bc6665c20d99aa0dcd622c2bb95
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
