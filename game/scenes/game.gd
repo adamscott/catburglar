@@ -12,6 +12,7 @@ var level : Node
 var current_state : int = State.IN_GAME
 
 func _on_level_complete() -> void:
+	get_tree().paused = true
 	Utilities.pause_timer()
 	GameProgress.time_taken = Utilities.get_time_taken_msec()
 	current_state = State.LEVEL_COMPLETE
