@@ -45,8 +45,11 @@ func _on_animation_player_animation_finished(anim_name : String) -> void:
 			menu.active = true
 		"fade_out":
 			match current_state:
-				State.FADE_OUT_GAME: get_tree().change_scene_to_file("res://scenes/game.tscn")
-				State.FADE_OUT_QUIT: get_tree().quit()
+				State.FADE_OUT_GAME:
+					GameProgress.new_game()
+					get_tree().change_scene_to_file("res://scenes/briefing.tscn")
+				State.FADE_OUT_QUIT:
+					get_tree().quit()
 
 func _on_video_stream_player_finished() -> void:
 	video_player.play()
