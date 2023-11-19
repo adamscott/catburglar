@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ctu21mpqd6ic7"]
+[gd_scene load_steps=13 format=3 uid="uid://ctu21mpqd6ic7"]
 
 [ext_resource type="Texture2D" uid="uid://w4nq8u07csbl" path="res://sprites/ui/in_light.png" id="1_b307x"]
 [ext_resource type="Script" path="res://objects/hud.gd" id="1_u7oft"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bvxf26kxreek2" path="res://sprites/ui/hidden.png" id="4_cea3m"]
 [ext_resource type="FontFile" uid="uid://c4edf8hd56tf2" path="res://fonts/CaviarDreams_Bold.ttf" id="7_qhic6"]
 [ext_resource type="FontFile" uid="uid://dobcyrrdj03ub" path="res://fonts/CaviarDreams.ttf" id="8_ererx"]
+[ext_resource type="Texture2D" uid="uid://ckbn23ym0rqk5" path="res://sprites/mugshot.png" id="8_ijmbr"]
 [ext_resource type="Shader" path="res://shaders/game_over.gdshader" id="8_w2msb"]
 [ext_resource type="Texture2D" uid="uid://cki0solhdng5r" path="res://sprites/gradient.png" id="9_k6bj4"]
 [ext_resource type="PackedScene" uid="uid://dv15ok1gu3g6l" path="res://objects/minigame.tscn" id="9_nlp0m"]
@@ -152,6 +153,14 @@ layout_mode = 0
 offset_right = 640.0
 offset_bottom = 120.0
 texture = ExtResource("9_k6bj4")
+
+[node name="Mugshot" type="TextureRect" parent="Dialogue"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 120.0
+texture = ExtResource("8_ijmbr")
+expand_mode = 2
+stretch_mode = 4
 
 [node name="Label_Speaker" type="Label" parent="Dialogue"]
 layout_mode = 0
