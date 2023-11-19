@@ -15,12 +15,14 @@ var objective_complete : bool = false
 var secondary_objective_complete : bool = false
 
 func _on_loot_value_changed(loot : int) -> void:
-	if loot >= 200 and !objective_complete:
-		hud.update_objective_value("Escape.")
-		hud.show_objective()
-		objective_complete = true
-		level_exit.become_active()
-		level_controller.play_dialogue("level2_goal")
+	pass
+
+func _on_vase_stolen(value : int) -> void:
+	hud.update_objective_value("Escape.")
+	hud.show_objective()
+	objective_complete = true
+	level_exit.become_active()
+	level_controller.play_dialogue("level2_goal")
 
 func _on_hud_minigame_succeeded() -> void:
 	GameProgress.secondary_objective_met = true

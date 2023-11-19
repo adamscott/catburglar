@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://djjs1exf7e7aq"]
+[gd_scene load_steps=48 format=3 uid="uid://djjs1exf7e7aq"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_t2k1n"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_cpp0q"]
@@ -15,7 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://dvndx7lqnykun" path="res://objects/security_camera.tscn" id="8_xkfet"]
 [ext_resource type="PackedScene" uid="uid://bghshtxr6m0nw" path="res://objects/patrol_point.tscn" id="9_avkl0"]
 [ext_resource type="PackedScene" uid="uid://dcv1iqay33qep" path="res://objects/light.tscn" id="9_causn"]
+[ext_resource type="PackedScene" uid="uid://dtgqt2tuo0uwg" path="res://objects/treasure.tscn" id="9_rjy45"]
 [ext_resource type="PackedScene" uid="uid://hxebst30nlht" path="res://objects/searchable.tscn" id="9_y1ey0"]
+[ext_resource type="Texture2D" uid="uid://fv8pyh60q8ee" path="res://sprites/gold.png" id="10_dby50"]
 [ext_resource type="PackedScene" uid="uid://26dcmt2uqm4y" path="res://objects/flickering_light.tscn" id="11_625eh"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="11_yu3wf"]
 [ext_resource type="PackedScene" uid="uid://b2lfcpiy60nl0" path="res://objects/light_toggle.tscn" id="14_17ouq"]
@@ -326,6 +328,11 @@ scale = Vector2(-1, 1)
 
 [node name="Treasure" type="Node" parent="."]
 
+[node name="Vase" parent="Treasure" instance=ExtResource("9_rjy45")]
+position = Vector2(520, 54)
+value = 0
+treasure_sprite = ExtResource("10_dby50")
+
 [node name="Searchables" type="Node" parent="."]
 
 [node name="Searchable1" parent="Searchables" instance=ExtResource("9_y1ey0")]
@@ -428,7 +435,7 @@ position = Vector2(160, 160)
 pointed = Vector2(1, 0)
 
 [node name="SecurityCamera4" parent="SecurityCameras" instance=ExtResource("8_xkfet")]
-position = Vector2(552, 32)
+position = Vector2(544, 32)
 wait_time = 3600.0
 
 [node name="SecurityCamera5" parent="SecurityCameras" instance=ExtResource("8_xkfet")]
@@ -834,6 +841,7 @@ path_level_exit = NodePath("../Misc/LevelExit")
 [connection signal="caught" from="Player" to="." method="_on_player_caught"]
 [connection signal="escaped" from="Player" to="." method="_on_player_escaped"]
 [connection signal="started_hacking" from="Player" to="." method="_on_player_started_hacking"]
+[connection signal="stolen" from="Treasure/Vase" to="Scenario" method="_on_vase_stolen"]
 [connection signal="looted" from="Searchables/Searchable1" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable2" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable3" to="." method="_on_searchable_looted"]

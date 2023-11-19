@@ -417,11 +417,11 @@ func _physics_process_searching(delta : float) -> void:
 func _physics_process_swiping(delta : float) -> void:
 	obscured = false
 	anim_index += delta * 15.0
-	sprite.frame = 56 + clampf(anim_index, 0.0, 8.0)
-	if sprite.frame == 60 and thing_to_steal != null:
+	sprite.frame = 56 + clampf(anim_index, 0.0, 10.0)
+	if sprite.frame == 62 and thing_to_steal != null:
 		thing_to_steal.steal()
 		thing_to_steal = null
-	if anim_index >= 9.0:
+	if anim_index >= 11.0:
 		current_state = State.NORMAL
 		collision_standing.disabled = false
 		collision_crouched.disabled = true
