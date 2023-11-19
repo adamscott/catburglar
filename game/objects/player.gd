@@ -367,7 +367,12 @@ func _physics_process_falling(delta : float) -> void:
 		set_collision_mask_value(4, true)
 		if velocity.y > LAND_THRESHOLD:
 			print(velocity.y)
-			current_state = State.CROUCHED if Input.is_action_pressed(&"down") and !ignore_inputs else State.LANDING
+			if Input.is_action_pressed(&"down") and !ignore_inputs:
+				collision_standing.disabled = true
+				collision_crouched.disabled = false
+				current_state = State.CROUCHED
+			else:
+				current_state = State.LANDING
 			anim_index = 0.0
 			velocity.y = 0.0
 			audio_land.play()

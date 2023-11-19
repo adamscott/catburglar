@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://djjs1exf7e7aq"]
+[gd_scene load_steps=37 format=3 uid="uid://djjs1exf7e7aq"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_t2k1n"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_cpp0q"]
@@ -17,6 +17,8 @@
 [ext_resource type="PackedScene" uid="uid://26dcmt2uqm4y" path="res://objects/flickering_light.tscn" id="11_625eh"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="11_yu3wf"]
 [ext_resource type="PackedScene" uid="uid://b2lfcpiy60nl0" path="res://objects/light_toggle.tscn" id="14_17ouq"]
+[ext_resource type="PackedScene" uid="uid://b8rgrlge5sx1q" path="res://objects/computer.tscn" id="17_icuwq"]
+[ext_resource type="Script" path="res://scripts/scenarios/scenario2.gd" id="19_14245"]
 
 [sub_resource type="Curve2D" id="Curve2D_6laij"]
 _data = {
@@ -31,6 +33,21 @@ region = Rect2(384, 56, 32, 40)
 [sub_resource type="AtlasTexture" id="AtlasTexture_uu45h"]
 atlas = ExtResource("11_yu3wf")
 region = Rect2(304, 8, 64, 40)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_akqfy"]
+load_path = "res://.godot/imported/furniture.png-3c539439d2560ea2ca89cbaf88497f22.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avinl"]
+atlas = SubResource("CompressedTexture2D_akqfy")
+region = Rect2(208, 120, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k82gx"]
+atlas = SubResource("CompressedTexture2D_akqfy")
+region = Rect2(192, 128, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51jxy"]
+atlas = SubResource("CompressedTexture2D_akqfy")
+region = Rect2(48, 24, 48, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pwcpc"]
 atlas = ExtResource("11_yu3wf")
@@ -62,6 +79,10 @@ region = Rect2(512, 16, 16, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ayskg"]
 atlas = ExtResource("11_yu3wf")
 region = Rect2(496, 16, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ml074"]
+atlas = ExtResource("11_yu3wf")
+region = Rect2(624, 64, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxjf3"]
 
@@ -273,7 +294,7 @@ scale = Vector2(-1, 1)
 [node name="Guards" type="Node" parent="."]
 
 [node name="Guard1" parent="Guards" instance=ExtResource("8_su3oj")]
-position = Vector2(472, 464)
+position = Vector2(488, 464)
 path_patrol_points = NodePath("../../PatrolPaths/Nil")
 stay_still = true
 
@@ -340,8 +361,8 @@ position = Vector2(160, 160)
 pointed = Vector2(1, 0)
 
 [node name="SecurityCamera4" parent="SecurityCameras" instance=ExtResource("8_xkfet")]
-position = Vector2(520, 32)
-pointed = Vector2(1, 0)
+position = Vector2(552, 32)
+wait_time = 3600.0
 
 [node name="SecurityCamera5" parent="SecurityCameras" instance=ExtResource("8_xkfet")]
 position = Vector2(424, 96)
@@ -360,6 +381,36 @@ z_index = -2
 texture_filter = 1
 position = Vector2(528, 506)
 texture = SubResource("AtlasTexture_uu45h")
+
+[node name="Furniture3" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(76, 514)
+texture = SubResource("AtlasTexture_avinl")
+
+[node name="Furniture4" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(372, 66)
+texture = SubResource("AtlasTexture_avinl")
+
+[node name="Furniture5" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(400, 70)
+texture = SubResource("AtlasTexture_k82gx")
+
+[node name="Furniture7" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(560, 70)
+texture = SubResource("AtlasTexture_k82gx")
+
+[node name="Furniture6" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(296, 66)
+texture = SubResource("AtlasTexture_51jxy")
 
 [node name="Lamp1" type="Sprite2D" parent="Furniture"]
 z_index = -2
@@ -430,7 +481,7 @@ texture = SubResource("AtlasTexture_08nwt")
 [node name="FlickeringLight1" parent="Furniture/Lamp7" instance=ExtResource("11_625eh")]
 position = Vector2(0, 6)
 light_range = 80.0
-timings = Array[float]([5.0, 0.1, 0.5, 0.1, 1.0, 5.0, 0.1, 0.5, 0.1, 1.0])
+timings = Array[float]([3.0, 0.1, 0.4, 0.1, 0.9, 3.0, 0.1, 0.4, 0.1, 0.9])
 
 [node name="Lamp8" type="Sprite2D" parent="Furniture"]
 z_index = -2
@@ -574,6 +625,52 @@ light_range = 80.0
 [node name="LightToggle" parent="Furniture/Lamp20" instance=ExtResource("14_17ouq")]
 path_light = NodePath("../Light")
 
+[node name="Lamp21" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(560, 56)
+texture = SubResource("AtlasTexture_ml074")
+
+[node name="Light" parent="Furniture/Lamp21" instance=ExtResource("9_causn")]
+light_range = 80.0
+
+[node name="LightToggle" parent="Furniture/Lamp21" instance=ExtResource("14_17ouq")]
+path_light = NodePath("../Light")
+
+[node name="Lamp22" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(72, 482)
+texture = SubResource("AtlasTexture_08nwt")
+
+[node name="Light" parent="Furniture/Lamp22" instance=ExtResource("9_causn")]
+position = Vector2(0, 2)
+light_range = 80.0
+
+[node name="Lamp23" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(402, 56)
+texture = SubResource("AtlasTexture_ml074")
+
+[node name="Light" parent="Furniture/Lamp23" instance=ExtResource("9_causn")]
+light_range = 80.0
+
+[node name="LightToggle" parent="Furniture/Lamp23" instance=ExtResource("14_17ouq")]
+path_light = NodePath("../Light")
+
+[node name="Lamp24" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(287, 48)
+texture = SubResource("AtlasTexture_ml074")
+
+[node name="Light" parent="Furniture/Lamp24" instance=ExtResource("9_causn")]
+light_range = 80.0
+
+[node name="LightToggle" parent="Furniture/Lamp24" instance=ExtResource("14_17ouq")]
+path_light = NodePath("../Light")
+
 [node name="Lights" type="Node" parent="."]
 
 [node name="Dialogues" type="Node" parent="."]
@@ -606,10 +703,17 @@ shape = SubResource("RectangleShape2D_oxjf3")
 [node name="LevelExit" parent="Misc" instance=ExtResource("6_hlqkw")]
 position = Vector2(32, 528)
 
+[node name="Computer" parent="Misc" instance=ExtResource("17_icuwq")]
+position = Vector2(456, 464)
+
 [node name="HUD" parent="." instance=ExtResource("7_83k46")]
 path_player = NodePath("../Player")
 
 [node name="Scenario" type="Node" parent="."]
+script = ExtResource("19_14245")
+path_level_controller = NodePath("..")
+path_hud = NodePath("../HUD")
+path_level_exit = NodePath("../Misc/LevelExit")
 
 [connection signal="caught" from="Player" to="." method="_on_player_caught"]
 [connection signal="escaped" from="Player" to="." method="_on_player_escaped"]
@@ -620,3 +724,4 @@ path_player = NodePath("../Player")
 [connection signal="dialogue_finished" from="HUD" to="." method="_on_hud_dialogue_finished"]
 [connection signal="minigame_failed" from="HUD" to="." method="_on_hud_minigame_failed"]
 [connection signal="minigame_succeeded" from="HUD" to="." method="_on_hud_minigame_succeeded"]
+[connection signal="minigame_succeeded" from="HUD" to="Scenario" method="_on_hud_minigame_succeeded"]
