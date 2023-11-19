@@ -27,7 +27,7 @@ const AUDIO_STEPS : Array = [
 @onready var audio_land : AudioStreamPlayer2D = $Audio_Land
 @onready var audio_vent_hit : AudioStreamPlayer2D = $Audio_VentHit
 
-enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, ENTERING_LIFT, SEARCHING, SWIPING, HACKING, IN_PIPE, CAUGHT, ESCAPING}
+enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, ENTERING_LIFT, SEARCHING, SWIPING, HACKING, IN_PIPE, SMASHING_VASE, CAUGHT, ESCAPING}
 
 var current_state : int = State.NORMAL
 var anim_index : float = 0.0
@@ -57,6 +57,7 @@ var ignore_inputs : bool = false
 signal caught
 signal started_hacking
 signal escaped
+signal vase_smashed
 
 func can_interact() -> bool:
 	return area_interact.has_overlapping_areas()
@@ -83,6 +84,8 @@ func get_interact_action_label() -> String:
 			return &"Read"
 		elif interactable.is_in_group(&"light_toggle"):
 			return &"Toggle Light"
+		elif interactable.is_in_group(&"level3_vase"):
+			return &"Get Even"
 	return &""
 
 func can_be_spotted() -> bool:
@@ -161,6 +164,13 @@ func try_to_interact() -> void:
 				thing_to_search = interactable
 				current_state = State.SEARCHING
 				anim_index = 0.0
+		elif interactable.is_in_group(&"level3_vase"):
+			get_tree().call_group("game_camera", "zoom_in") # janky hack, m8
+			var bgm_player : AudioStreamPlayer = get_tree().get_first_node_in_group("bgm_player")
+			create_tween().tween_property(bgm_player, "pitch_scale", 0.25, 0.5)
+			interactable.queue_free()
+			current_state = State.SMASHING_VASE
+			anim_index = 0.0
 		else:
 			interactable.interact()
 
@@ -446,6 +456,18 @@ func _physics_process_in_pipe(delta : float) -> void:
 			collision_crouched.disabled = true
 			visible = true
 
+func _physics_process_smashing_vase(delta : float) -> void:
+	obscured = false
+	anim_index += delta
+	if anim_index > 5.0:
+		current_state = State.NORMAL
+		anim_index = 0.0
+		emit_signal("vase_smashed")
+		# janky hacks, m8
+		get_tree().call_group("game_camera", "zoom_out")
+		var bgm_player : AudioStreamPlayer = get_tree().get_first_node_in_group("bgm_player")
+		create_tween().tween_property(bgm_player, "pitch_scale", 1.0, 0.5)
+
 func _physics_process_caught(delta : float) -> void:
 	obscured = false
 	anim_index += delta * 15.0
@@ -468,6 +490,7 @@ func _physics_process(delta : float) -> void:
 		State.SEARCHING: _physics_process_searching(delta)
 		State.SWIPING: _physics_process_swiping(delta)
 		State.IN_PIPE: _physics_process_in_pipe(delta)
+		State.SMASHING_VASE: _physics_process_smashing_vase(delta)
 		State.CAUGHT: _physics_process_caught(delta)
 	lit = false
 	for illuminator in get_tree().get_nodes_in_group(&"illuminator"):

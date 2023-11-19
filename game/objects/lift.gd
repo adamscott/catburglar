@@ -1,8 +1,13 @@
+@tool
 extends Area2D
 
 const ANIM_SPEED : float = 24.0
 
 @export_node_path("Node2D") var destination
+@export var backless : bool:
+	set(val):
+		$Sprite2D.visible = !val
+		backless = val
 
 @onready var sprite_doors : Sprite2D = $Sprite2D_Doors
 @onready var timer_close_doors : Timer = $Timer_CloseDoors

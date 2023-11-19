@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://y2y02gmayr5k"]
+[gd_scene load_steps=28 format=3 uid="uid://y2y02gmayr5k"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_c0s35"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_fivng"]
@@ -39,6 +39,10 @@ atlas = ExtResource("13_k20i8")
 region = Rect2(640, 8, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58lti"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jevru"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(448, 104, 48, 40)
 
 [node name="Level1" type="Node"]
 process_mode = 1
@@ -462,6 +466,7 @@ shape = SubResource("RectangleShape2D_58lti")
 
 [node name="Computer" parent="Misc" instance=ExtResource("12_7hgq7")]
 position = Vector2(504, 384)
+desk_sprite = SubResource("AtlasTexture_jevru")
 
 [node name="LevelExit" parent="Misc" instance=ExtResource("14_qx2jl")]
 position = Vector2(-16, 704)

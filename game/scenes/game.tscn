@@ -103,7 +103,7 @@ offset_right = 1280.0
 offset_bottom = 720.001
 color = Color(0, 0, 0, 1)
 
-[node name="Audio_BGM" type="AudioStreamPlayer" parent="."]
+[node name="Audio_BGM" type="AudioStreamPlayer" parent="." groups=["bgm_player"]]
 volume_db = -10.0
 bus = &"BGM"
 
