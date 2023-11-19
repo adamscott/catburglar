@@ -1,6 +1,6 @@
 extends Camera2D
 
-const MOVE_SPEED : float = 2.0
+const MOVE_SPEED : float = 4.0
 
 @export_node_path("Node2D") var player
 

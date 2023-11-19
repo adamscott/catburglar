@@ -12,6 +12,7 @@ const AUDIO_STEPS : Array = [
 enum State {WAITING_AT_POINT, PATROLLING, ENTERING_SLEEP, SLEEPING, LEAVING_SLEEP, SPOTTED_PLAYER, ALERT}
 
 @export_node_path("Node") var path_patrol_points
+@export var stay_still : bool
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var patrol_points : Node = get_node(path_patrol_points)
@@ -71,11 +72,14 @@ func _physics_process_waiting(delta : float) -> void:
 		get_player().seen()
 	else:
 		waiting_time -= delta
-		if waiting_time <= 0.0:
+		if waiting_time <= 0.0 and !stay_still:
 			select_next_patrol_point()
 			current_state = State.PATROLLING
 
 func _physics_process_patrolling(delta : float) -> void:
+	if stay_still:
+		current_state = State.WAITING_AT_POINT
+		return
 	anim_index += delta * 10.0
 	sprite.frame = 10 + wrapf(anim_index, 0, 10)
 	if sprite.frame in [14, 19]:
@@ -87,7 +91,7 @@ func _physics_process_patrolling(delta : float) -> void:
 		get_player().seen()
 	else:
 		var destination_position : Vector2 = get_current_patrol_point().global_position
-		var distance_to_destination : float = global_position.distance_to(destination_position)
+		var distance_to_destination : float = abs(global_position.x - destination_position.x)
 		if distance_to_destination < 2.0:
 			if get_current_patrol_point().sleep_time > 0.0:
 				current_state = State.ENTERING_SLEEP

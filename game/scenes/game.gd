@@ -1,7 +1,5 @@
 extends Node
 
-const _Testbed : PackedScene = preload("res://scenes/levels/level1.tscn")
-
 @onready var audio_bgm : AudioStreamPlayer = $Audio_BGM
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 @onready var timer_restart_level : Timer = $Timer_RestartLevel
@@ -38,7 +36,8 @@ func _on_animation_player_animation_finished(anim_name : String) -> void:
 				get_tree().change_scene_to_file("res://scenes/level_complete.tscn")
 
 func spawn_level() -> void:
-	level = _Testbed.instantiate()
+	var scene : PackedScene = load(Constants.get_level_scene_path(GameProgress.current_level))
+	level = scene.instantiate()
 	level.connect("complete", _on_level_complete)
 	level.connect("game_over", _on_level_game_over)
 	add_child(level)

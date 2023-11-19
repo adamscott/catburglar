@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvndx7lqnykun"]
+[gd_scene load_steps=7 format=3 uid="uid://dvndx7lqnykun"]
 
 [ext_resource type="Script" path="res://objects/security_camera.gd" id="1_i7ij8"]
 [ext_resource type="Texture2D" uid="uid://ct64il0as8owa" path="res://sprites/security_camera.png" id="1_pqttt"]
 [ext_resource type="AudioStream" uid="uid://dj2fjuv7muunl" path="res://audio/sfx/camera_sight.ogg" id="3_31bku"]
+[ext_resource type="Texture2D" uid="uid://dv12q0obma5sy" path="res://sprites/lights/camera.png" id="3_mjdgy"]
 [ext_resource type="AudioStream" uid="uid://brlvjw2qijkll" path="res://audio/sfx/camera_nevermind.ogg" id="4_dcstg"]
 [ext_resource type="AudioStream" uid="uid://c833yeul0q5lk" path="res://audio/sfx/camera_alarm.ogg" id="5_4ahha"]
 
@@ -15,6 +16,14 @@ position = Vector2(0, 8)
 texture = ExtResource("1_pqttt")
 hframes = 8
 frame = 4
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.537255, 1, 0.631373, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("3_mjdgy")
+offset = Vector2(-32, 40)
+texture_scale = 1.5
 
 [node name="Raycasts" type="Node2D" parent="."]
 
@@ -41,6 +50,11 @@ collision_mask = 11
 [node name="RayCast2D5" type="RayCast2D" parent="Raycasts"]
 position = Vector2(-8, 12)
 target_position = Vector2(-80, 56)
+collision_mask = 11
+
+[node name="RayCast2D6" type="RayCast2D" parent="Raycasts"]
+position = Vector2(-8, 12)
+target_position = Vector2(-80, 36)
 collision_mask = 11
 
 [node name="Audio_Sight" type="AudioStreamPlayer2D" parent="."]

@@ -5,7 +5,7 @@ var loot : int
 var camera_alerts : int
 var secondary_objective_met : bool
 
-var current_level : int = 0
+var current_level : int = 1
 var dialogues_played : Array = []
 var hints_shown : Array = []
 

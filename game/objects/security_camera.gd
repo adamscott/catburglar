@@ -4,6 +4,7 @@ const THINKING_TIME : float = 0.5
 const ALARM_TIME : float = 3.0
 
 @onready var sprite : Sprite2D = $Sprite2D
+@onready var light : PointLight2D = $PointLight2D
 @onready var raycasts : Node2D = $Raycasts
 @onready var audio_sight : AudioStreamPlayer2D = $Audio_Sight
 @onready var audio_nevermind : AudioStreamPlayer2D = $Audio_Nevermind
@@ -11,10 +12,10 @@ const ALARM_TIME : float = 3.0
 
 enum State {WATCHING, MOVING, MAYBE, ALARM}
 
+@export var pointed : Vector2 = Vector2.LEFT
 @export var wait_time : float = 4.0
 
 var current_state : int = State.WATCHING
-var pointed : Vector2 = Vector2.LEFT
 var anim_index : float = 0.0
 
 func can_see_player() -> bool:
@@ -39,6 +40,9 @@ func get_raycast_collider() -> Node2D:
 
 func _physics_process_watching(delta : float) -> void:
 	sprite.frame = 0 if pointed == Vector2.LEFT else 2
+	light.enabled = true
+	light.color = Color.GREEN_YELLOW
+	light.scale.x = -pointed.x
 	anim_index += delta
 	if can_see_player():
 		current_state = State.MAYBE
@@ -51,6 +55,7 @@ func _physics_process_watching(delta : float) -> void:
 		raycasts.scale.x *= -1.0
 
 func _physics_process_moving(delta : float) -> void:
+	light.enabled = false
 	anim_index += delta * 4.0
 	if pointed == Vector2.LEFT:
 		sprite.frame = 7.9 - clampf(anim_index, 0.0, 3.0)
@@ -61,10 +66,13 @@ func _physics_process_moving(delta : float) -> void:
 		anim_index = 0.0
 
 func _physics_process_maybe(delta : float) -> void:
-	sprite.frame = 1 if pointed == Vector2.LEFT else 3
 	anim_index += delta
 	if fmod(anim_index, 0.2) > 0.1:
 		sprite.frame = 0 if pointed == Vector2.LEFT else 2
+		light.color = Color.GREEN_YELLOW
+	else:
+		sprite.frame = 1 if pointed == Vector2.LEFT else 3
+		light.color = Color.ORANGE_RED
 	if anim_index >= THINKING_TIME:
 		if can_see_player():
 			current_state = State.ALARM
@@ -78,10 +86,14 @@ func _physics_process_maybe(delta : float) -> void:
 			audio_nevermind.play()
 
 func _physics_process_alarm(delta : float) -> void:
-	sprite.frame = 1 if pointed == Vector2.LEFT else 3
+	light.color = Color.ORANGE_RED
 	anim_index += delta
 	if fmod(anim_index, 0.2) > 0.1:
 		sprite.frame = 4 if pointed == Vector2.LEFT else 7
+		light.enabled = false
+	else:
+		sprite.frame = 1 if pointed == Vector2.LEFT else 3
+		light.enabled = true
 	if anim_index >= ALARM_TIME:
 		current_state = State.WATCHING
 		anim_index = 0.0
@@ -92,3 +104,6 @@ func _physics_process(delta : float) -> void:
 		State.MOVING: _physics_process_moving(delta)
 		State.MAYBE: _physics_process_maybe(delta)
 		State.ALARM: _physics_process_alarm(delta)
+
+func _ready() -> void:
+	raycasts.scale.x = -pointed.x

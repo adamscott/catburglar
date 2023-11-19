@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2lfcpiy60nl0"]
+
+[ext_resource type="Script" path="res://objects/light_toggle.gd" id="1_fl6u4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wldas"]
+size = Vector2(4, 4)
+
+[node name="LightToggle" type="Area2D" groups=["interactable", "light_toggle"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_fl6u4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wldas")

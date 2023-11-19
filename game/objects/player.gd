@@ -77,6 +77,8 @@ func get_interact_action_label() -> String:
 			return &"Hack"
 		elif interactable.is_in_group(&"readable"):
 			return &"Read"
+		elif interactable.is_in_group(&"light_toggle"):
+			return &"Toggle Light"
 	return &""
 
 func can_be_spotted() -> bool:
@@ -145,6 +147,8 @@ func try_to_interact() -> void:
 				anim_index = 0.0
 				last_computer_used = interactable
 				emit_signal(&"started_hacking")
+		elif interactable.is_in_group(&"light_toggle"):
+			interactable.interact()
 		else:
 			interactable.interact()
 			current_state = State.SWIPING
@@ -401,6 +405,8 @@ func _physics_process_in_pipe(delta : float) -> void:
 		global_position = target_point
 		target_path_point_index += 1
 		pipe_next_point_timer = PIPE_MOVE_RATE
+		audio_vent_hit.pitch_scale = randf_range(0.9, 1.1)
+		audio_vent_hit.play()
 		if target_path_point_index >= pipe_path_points.size():
 			global_position = pipe_destination.global_position
 			current_state = State.ROLLING
@@ -410,9 +416,6 @@ func _physics_process_in_pipe(delta : float) -> void:
 			collision_standing.disabled = false
 			collision_crouched.disabled = true
 			visible = true
-		else:
-			audio_vent_hit.pitch_scale = randf_range(0.9, 1.1)
-			audio_vent_hit.play()
 
 func _physics_process_caught(delta : float) -> void:
 	obscured = false
