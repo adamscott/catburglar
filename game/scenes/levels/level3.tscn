@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d0lakkphu4x60"]
+[gd_scene load_steps=39 format=3 uid="uid://d0lakkphu4x60"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_ppg6j"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_jcqqr"]
@@ -11,11 +11,16 @@
 [ext_resource type="PackedScene" uid="uid://c7gy24dsii3su" path="res://objects/lift.tscn" id="7_yffut"]
 [ext_resource type="Texture2D" uid="uid://d3vu6iih0unoi" path="res://sprites/lift_double.png" id="8_jwoi5"]
 [ext_resource type="Texture2D" uid="uid://cki0solhdng5r" path="res://sprites/gradient.png" id="9_3r5t1"]
+[ext_resource type="PackedScene" uid="uid://c4mps0fd7w7o6" path="res://objects/guard.tscn" id="9_i2wtd"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="9_phv8s"]
+[ext_resource type="PackedScene" uid="uid://bghshtxr6m0nw" path="res://objects/patrol_point.tscn" id="10_0s7b0"]
 [ext_resource type="PackedScene" uid="uid://dcv1iqay33qep" path="res://objects/light.tscn" id="10_15laj"]
 [ext_resource type="PackedScene" uid="uid://b8rgrlge5sx1q" path="res://objects/computer.tscn" id="10_bhnl5"]
+[ext_resource type="PackedScene" uid="uid://dvndx7lqnykun" path="res://objects/security_camera.tscn" id="11_l88d4"]
 [ext_resource type="Script" path="res://scripts/scenarios/scenario3.gd" id="11_u8ehx"]
+[ext_resource type="PackedScene" uid="uid://baxdlnnmog5g7" path="res://objects/desk.tscn" id="14_ovs8b"]
 [ext_resource type="PackedScene" uid="uid://bw1i8xdu4yu1d" path="res://objects/level3_vase.tscn" id="14_t6wjd"]
+[ext_resource type="Texture2D" uid="uid://dbwl3us18m2it" path="res://sprites/box.png" id="15_i1sxc"]
 [ext_resource type="AudioStream" uid="uid://c2o0antp6wlcd" path="res://audio/music/caught2.ogg" id="17_xhhdy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bqa0o"]
@@ -41,6 +46,34 @@ region = Rect2(512, 24, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_c31gb"]
 atlas = ExtResource("9_phv8s")
 region = Rect2(624, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgj7q"]
+atlas = ExtResource("9_phv8s")
+region = Rect2(384, 56, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x710o"]
+atlas = ExtResource("9_phv8s")
+region = Rect2(416, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pgdkm"]
+atlas = ExtResource("9_phv8s")
+region = Rect2(544, 8, 16, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ad476"]
+atlas = ExtResource("9_phv8s")
+region = Rect2(304, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nt2pa"]
+atlas = ExtResource("9_phv8s")
+region = Rect2(256, 24, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xfbes"]
+atlas = ExtResource("9_phv8s")
+region = Rect2(192, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8amau"]
+atlas = ExtResource("9_phv8s")
+region = Rect2(48, 24, 48, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v8xw1"]
 atlas = ExtResource("9_phv8s")
@@ -294,9 +327,59 @@ texture = ExtResource("8_jwoi5")
 
 [node name="Guards" type="Node" parent="."]
 
+[node name="Guard1" parent="Guards" instance=ExtResource("9_i2wtd")]
+position = Vector2(224, 384)
+path_patrol_points = NodePath("../../PatrolPaths/PatrolPath1")
+
+[node name="Guard2" parent="Guards" instance=ExtResource("9_i2wtd")]
+position = Vector2(104, 192)
+path_patrol_points = NodePath("../../PatrolPaths/PatrolPath2")
+
+[node name="Guard3" parent="Guards" instance=ExtResource("9_i2wtd")]
+position = Vector2(416, 256)
+path_patrol_points = NodePath("../../PatrolPaths/PatrolPath3")
+
 [node name="PatrolPaths" type="Node" parent="."]
 
+[node name="PatrolPath1" type="Node" parent="PatrolPaths"]
+
+[node name="PatrolPoint1" parent="PatrolPaths/PatrolPath1" instance=ExtResource("10_0s7b0")]
+position = Vector2(160, 384)
+
+[node name="PatrolPoint2" parent="PatrolPaths/PatrolPath1" instance=ExtResource("10_0s7b0")]
+position = Vector2(288, 384)
+
+[node name="PatrolPath2" type="Node" parent="PatrolPaths"]
+
+[node name="PatrolPoint1" parent="PatrolPaths/PatrolPath2" instance=ExtResource("10_0s7b0")]
+position = Vector2(32, 192)
+
+[node name="PatrolPoint2" parent="PatrolPaths/PatrolPath2" instance=ExtResource("10_0s7b0")]
+position = Vector2(128, 192)
+
+[node name="PatrolPath3" type="Node" parent="PatrolPaths"]
+
+[node name="PatrolPoint1" parent="PatrolPaths/PatrolPath3" instance=ExtResource("10_0s7b0")]
+position = Vector2(336, 256)
+
+[node name="PatrolPoint2" parent="PatrolPaths/PatrolPath3" instance=ExtResource("10_0s7b0")]
+position = Vector2(576, 256)
+
 [node name="SecurityCameras" type="Node" parent="."]
+
+[node name="SecurityCamera1" parent="SecurityCameras" instance=ExtResource("11_l88d4")]
+position = Vector2(448, 272)
+
+[node name="SecurityCamera2" parent="SecurityCameras" instance=ExtResource("11_l88d4")]
+position = Vector2(240, 336)
+
+[node name="SecurityCamera3" parent="SecurityCameras" instance=ExtResource("11_l88d4")]
+position = Vector2(400, 208)
+pointed = Vector2(1, 0)
+
+[node name="SecurityCamera4" parent="SecurityCameras" instance=ExtResource("11_l88d4")]
+position = Vector2(304, 16)
+pointed = Vector2(1, 0)
 
 [node name="Furniture" type="Node" parent="."]
 
@@ -541,6 +624,52 @@ texture = SubResource("AtlasTexture_bqa0o")
 [node name="Light" parent="Furniture/Lamp25" instance=ExtResource("10_15laj")]
 position = Vector2(0, 2)
 light_range = 80.0
+
+[node name="Desk1" parent="Furniture" instance=ExtResource("14_ovs8b")]
+position = Vector2(192, 384)
+desk_sprite = ExtResource("15_i1sxc")
+
+[node name="Furniture1" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(420, 364)
+texture = SubResource("AtlasTexture_lgj7q")
+
+[node name="Furniture2" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(232, 240)
+texture = SubResource("AtlasTexture_x710o")
+
+[node name="Furniture3" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(576, 236)
+texture = SubResource("AtlasTexture_pgdkm")
+
+[node name="Furniture4" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(532, 360)
+texture = SubResource("AtlasTexture_ad476")
+
+[node name="Furniture5" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(100, 244)
+texture = SubResource("AtlasTexture_nt2pa")
+
+[node name="Furniture6" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(120, 248)
+texture = SubResource("AtlasTexture_xfbes")
+
+[node name="Furniture7" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(88, 116)
+texture = SubResource("AtlasTexture_8amau")
 
 [node name="Lights" type="Node" parent="."]
 

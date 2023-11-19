@@ -24,8 +24,11 @@ func _on_player_vase_smashed() -> void:
 	level_controller.play_dialogue("level3_vase")
 
 func _on_hud_minigame_succeeded() -> void:
-	GameProgress.secondary_objective_met = true
-	level_controller.play_dialogue("level2_computer")
+	computers_hacked += 1
+	if computers_hacked >= 3:
+		GameProgress.secondary_objective_met = true
+		hud.update_objective_value("Secondary objective complete.")
+		hud.show_objective()
 
 func _ready() -> void:
 	hud.update_objective_value("Find the vase.")

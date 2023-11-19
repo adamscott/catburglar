@@ -24,10 +24,16 @@ func _on_vase_stolen(value : int) -> void:
 	level_exit.become_active()
 	level_controller.play_dialogue("level2_goal")
 
+func _on_poster_stolen(value : int):
+	level_controller.play_dialogue("level2_poster")
+
 func _on_hud_minigame_succeeded() -> void:
 	GameProgress.secondary_objective_met = true
 	level_controller.play_dialogue("level2_computer")
+	hud.update_objective_value("Secondary objective complete.")
+	hud.show_objective()
 
 func _ready() -> void:
 	hud.update_objective_value("Steal the vase.")
 	hud.show_objective()
+

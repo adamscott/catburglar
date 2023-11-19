@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://djjs1exf7e7aq"]
+[gd_scene load_steps=53 format=3 uid="uid://djjs1exf7e7aq"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_t2k1n"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_cpp0q"]
@@ -31,6 +31,10 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 352, 2, 0, 0, 0, 0, 352, 194, 0, 0, 0, 0, 200, 194, 0, 0, 0, 0, 200, -270, 0, 0, 0, 0, 464, -270, 0, 0, 0, 0, 464, -62, 0, 0, 0, 0, -56, -62, 0, 0, 0, 0, -56, -126, 0, 0, 0, 0, 224, -126)
 }
 point_count = 10
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqs01"]
+atlas = ExtResource("11_yu3wf")
+region = Rect2(624, 0, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4xh5"]
 size = Vector2(8, 8)
@@ -73,6 +77,14 @@ region = Rect2(256, 24, 32, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ywumn"]
 atlas = SubResource("CompressedTexture2D_akqfy")
 region = Rect2(192, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13cq7"]
+atlas = SubResource("CompressedTexture2D_akqfy")
+region = Rect2(416, 104, 32, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uki68"]
+atlas = SubResource("CompressedTexture2D_akqfy")
+region = Rect2(208, 24, 48, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pwcpc"]
 atlas = ExtResource("11_yu3wf")
@@ -138,7 +150,7 @@ texture = ExtResource("2_cpp0q")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
-position = Vector2(0, 526)
+position = Vector2(0, 528)
 tile_set = ExtResource("3_2td3t")
 format = 2
 layer_0/name = "Foreground"
@@ -205,43 +217,43 @@ position = Vector2(0, -64)
 destination = NodePath("..")
 
 [node name="DoorE1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(112, 526)
+position = Vector2(112, 528)
 destination = NodePath("../DoorE2")
 
 [node name="DoorE2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(160, 526)
+position = Vector2(160, 528)
 destination = NodePath("../DoorE1")
 
 [node name="DoorF1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(432, 526)
+position = Vector2(432, 528)
 destination = NodePath("../DoorF2")
 
 [node name="DoorF2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(480, 526)
+position = Vector2(480, 528)
 destination = NodePath("../DoorF1")
 
 [node name="DoorG1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(128, 398)
+position = Vector2(128, 400)
 destination = NodePath("../DoorG2")
 
 [node name="DoorG2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(176, 398)
+position = Vector2(176, 400)
 destination = NodePath("../DoorG1")
 
 [node name="DoorH1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(256, 270)
+position = Vector2(256, 272)
 destination = NodePath("../DoorH2")
 
 [node name="DoorH2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(304, 270)
+position = Vector2(304, 272)
 destination = NodePath("../DoorH1")
 
 [node name="LiftI1" parent="Doors" instance=ExtResource("6_kh1so")]
-position = Vector2(488, 398)
+position = Vector2(488, 400)
 destination = NodePath("../LiftI2")
 
 [node name="LiftI2" parent="Doors" instance=ExtResource("6_kh1so")]
-position = Vector2(488, 334)
+position = Vector2(488, 336)
 destination = NodePath("../LiftI1")
 
 [node name="LiftJ1" parent="Doors" instance=ExtResource("6_kh1so")]
@@ -258,7 +270,7 @@ destination = NodePath("Destination")
 
 [node name="Destination" parent="Doors/LiftK" instance=ExtResource("6_kh1so")]
 z_index = 0
-position = Vector2(0, -130)
+position = Vector2(0, -128)
 destination = NodePath("..")
 
 [node name="LiftL" parent="Doors" instance=ExtResource("6_kh1so")]
@@ -267,11 +279,11 @@ destination = NodePath("Destination")
 
 [node name="Destination" parent="Doors/LiftL" instance=ExtResource("6_kh1so")]
 z_index = 0
-position = Vector2(0, -66)
+position = Vector2(0, -64)
 destination = NodePath("..")
 
 [node name="DoorM" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(432, 78)
+position = Vector2(432, 80)
 destination = NodePath("Destination")
 
 [node name="Destination" parent="Doors/DoorM" instance=ExtResource("6_848vf")]
@@ -280,19 +292,19 @@ position = Vector2(48, 0)
 destination = NodePath("..")
 
 [node name="DoorN1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(192, 78)
+position = Vector2(192, 80)
 destination = NodePath("../DoorN2")
 
 [node name="DoorN2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(240, 78)
+position = Vector2(240, 80)
 destination = NodePath("../DoorN1")
 
 [node name="DoorO1" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(160, 142)
+position = Vector2(160, 144)
 destination = NodePath("../DoorO2")
 
 [node name="DoorO2" parent="Doors" instance=ExtResource("6_848vf")]
-position = Vector2(208, 142)
+position = Vector2(208, 144)
 destination = NodePath("../DoorO1")
 
 [node name="LiftP" parent="Doors" instance=ExtResource("6_kh1so")]
@@ -301,7 +313,7 @@ destination = NodePath("Destination")
 
 [node name="Destination" parent="Doors/LiftP" instance=ExtResource("6_kh1so")]
 z_index = 0
-position = Vector2(0, -66)
+position = Vector2(0, -64)
 destination = NodePath("..")
 
 [node name="LiftQ" parent="Doors" instance=ExtResource("6_kh1so")]
@@ -310,19 +322,19 @@ destination = NodePath("Destination")
 
 [node name="Destination" parent="Doors/LiftQ" instance=ExtResource("6_kh1so")]
 z_index = 0
-position = Vector2(0, -66)
+position = Vector2(0, -64)
 destination = NodePath("..")
 
 [node name="Pipes" type="Node" parent="."]
 
 [node name="PipeA1" parent="Pipes" node_paths=PackedStringArray("journey", "destination") instance=ExtResource("7_40ony")]
-position = Vector2(96, 318)
+position = Vector2(96, 320)
 journey = NodePath("Path2D")
 destination = NodePath("Destination")
 exit_facing = Vector2(2, 0)
 
 [node name="Destination" type="Node2D" parent="Pipes/PipeA1"]
-position = Vector2(248, -126)
+position = Vector2(248, -128)
 
 [node name="Path2D" type="Path2D" parent="Pipes/PipeA1"]
 curve = SubResource("Curve2D_6laij")
@@ -334,9 +346,14 @@ scale = Vector2(-1, 1)
 [node name="Treasure" type="Node" parent="."]
 
 [node name="Vase" parent="Treasure" instance=ExtResource("9_rjy45")]
-position = Vector2(520, 50)
+position = Vector2(520, 52)
 value = 0
 treasure_sprite = ExtResource("10_ablqv")
+
+[node name="Poster" parent="Treasure" instance=ExtResource("9_rjy45")]
+position = Vector2(368, 248)
+value = 3
+treasure_sprite = SubResource("AtlasTexture_hqs01")
 
 [node name="Searchables" type="Node" parent="."]
 
@@ -357,7 +374,7 @@ shape = SubResource("RectangleShape2D_s4xh5")
 
 [node name="Searchable3" parent="Searchables" instance=ExtResource("9_y1ey0")]
 position = Vector2(304, 64)
-value = 200.0
+value = 150.0
 description = "A set of exquisite photo frames."
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable3"]
@@ -368,6 +385,14 @@ position = Vector2(344, 256)
 description = "Nothing. What were you expecting?"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable4"]
+shape = SubResource("RectangleShape2D_s4xh5")
+
+[node name="Searchable5" parent="Searchables" instance=ExtResource("9_y1ey0")]
+position = Vector2(88, 448)
+value = 50.0
+description = "A first edition copy of \"101 Ways to Stop Pacing Constantly\"."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable5"]
 shape = SubResource("RectangleShape2D_s4xh5")
 
 [node name="Guards" type="Node" parent="."]
@@ -384,6 +409,14 @@ path_patrol_points = NodePath("../../PatrolPaths/PatrolPath1")
 [node name="Guard3" parent="Guards" instance=ExtResource("8_su3oj")]
 position = Vector2(440, 144)
 path_patrol_points = NodePath("../../PatrolPaths/PatrolPath2")
+
+[node name="Guard4" parent="Guards" instance=ExtResource("8_su3oj")]
+position = Vector2(104, 80)
+path_patrol_points = NodePath("../../PatrolPaths/PatrolPath3")
+
+[node name="Guard5" parent="Guards" instance=ExtResource("8_su3oj")]
+position = Vector2(104, 464)
+path_patrol_points = NodePath("../../PatrolPaths/PatrolPath4")
 
 [node name="PatrolPaths" type="Node" parent="."]
 
@@ -426,6 +459,26 @@ wait_time = 0.5
 position = Vector2(512, 144)
 wait_time = 0.5
 
+[node name="PatrolPath3" type="Node" parent="PatrolPaths"]
+
+[node name="PatrolPoint1" parent="PatrolPaths/PatrolPath3" instance=ExtResource("9_avkl0")]
+position = Vector2(64, 80)
+wait_time = 0.1
+
+[node name="PatrolPoint2" parent="PatrolPaths/PatrolPath3" instance=ExtResource("9_avkl0")]
+position = Vector2(160, 80)
+wait_time = 0.1
+
+[node name="PatrolPath4" type="Node" parent="PatrolPaths"]
+
+[node name="PatrolPoint1" parent="PatrolPaths/PatrolPath4" instance=ExtResource("9_avkl0")]
+position = Vector2(64, 464)
+wait_time = 2.0
+
+[node name="PatrolPoint2" parent="PatrolPaths/PatrolPath4" instance=ExtResource("9_avkl0")]
+position = Vector2(136, 464)
+wait_time = 2.0
+
 [node name="SecurityCameras" type="Node" parent="."]
 
 [node name="SecurityCamera1" parent="SecurityCameras" instance=ExtResource("8_xkfet")]
@@ -452,73 +505,85 @@ pointed = Vector2(1, 0)
 [node name="Furniture1" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(336, 250)
+position = Vector2(336, 252)
 texture = SubResource("AtlasTexture_gy4mb")
 
 [node name="Furniture2" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(528, 506)
+position = Vector2(528, 508)
 texture = SubResource("AtlasTexture_uu45h")
 
 [node name="Furniture3" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(76, 514)
+position = Vector2(76, 516)
 texture = SubResource("AtlasTexture_j1152")
 
 [node name="Furniture4" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(372, 66)
+position = Vector2(372, 68)
 texture = SubResource("AtlasTexture_avinl")
 
 [node name="Furniture5" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(400, 70)
+position = Vector2(400, 72)
 texture = SubResource("AtlasTexture_k82gx")
 
 [node name="Furniture6" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(296, 66)
+position = Vector2(296, 68)
 texture = SubResource("AtlasTexture_51jxy")
 
 [node name="Furniture7" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(560, 70)
+position = Vector2(560, 72)
 texture = SubResource("AtlasTexture_k82gx")
 
 [node name="Furniture8" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(520, 66)
+position = Vector2(520, 68)
 texture = SubResource("AtlasTexture_vvm6j")
 
 [node name="Furniture9" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(272, 514)
+position = Vector2(272, 516)
 texture = SubResource("AtlasTexture_j1152")
 
 [node name="Furniture10" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(320, 514)
+position = Vector2(320, 516)
 texture = SubResource("AtlasTexture_ewvjm")
 
 [node name="Furniture11" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(300, 518)
+position = Vector2(300, 520)
 texture = SubResource("AtlasTexture_ywumn")
+
+[node name="Furniture12" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(88, 444)
+texture = SubResource("AtlasTexture_13cq7")
+
+[node name="Furniture13" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(128, 452)
+texture = SubResource("AtlasTexture_uki68")
 
 [node name="Lamp1" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(536, 486)
+position = Vector2(536, 488)
 texture = SubResource("AtlasTexture_pwcpc")
 
 [node name="Light" parent="Furniture/Lamp1" instance=ExtResource("9_causn")]
@@ -528,7 +593,7 @@ light_range = 80.0
 [node name="Lamp2" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(520, 354)
+position = Vector2(520, 356)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="Light" parent="Furniture/Lamp2" instance=ExtResource("9_causn")]
@@ -538,7 +603,7 @@ light_range = 80.0
 [node name="Lamp3" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(232, 448)
+position = Vector2(232, 450)
 texture = SubResource("AtlasTexture_0ss7s")
 
 [node name="Light" parent="Furniture/Lamp3" instance=ExtResource("9_causn")]
@@ -548,7 +613,7 @@ light_range = 80.0
 [node name="Lamp4" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(360, 448)
+position = Vector2(360, 450)
 texture = SubResource("AtlasTexture_0ss7s")
 
 [node name="Light" parent="Furniture/Lamp4" instance=ExtResource("9_causn")]
@@ -558,7 +623,7 @@ light_range = 80.0
 [node name="Lamp5" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(80, 354)
+position = Vector2(80, 356)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="Light" parent="Furniture/Lamp5" instance=ExtResource("9_causn")]
@@ -568,7 +633,7 @@ light_range = 80.0
 [node name="Lamp6" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(128, 416)
+position = Vector2(128, 418)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="Light" parent="Furniture/Lamp6" instance=ExtResource("9_causn")]
@@ -578,7 +643,7 @@ light_range = 80.0
 [node name="Lamp7" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(504, 418)
+position = Vector2(504, 420)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="FlickeringLight1" parent="Furniture/Lamp7" instance=ExtResource("11_625eh")]
@@ -589,7 +654,7 @@ timings = Array[float]([3.0, 0.1, 0.4, 0.1, 0.9, 3.0, 0.1, 0.4, 0.1, 0.9])
 [node name="Lamp8" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(208, 382)
+position = Vector2(208, 384)
 texture = SubResource("AtlasTexture_wmfpn")
 
 [node name="Light" parent="Furniture/Lamp8" instance=ExtResource("9_causn")]
@@ -602,7 +667,7 @@ path_light = NodePath("../Light")
 [node name="Lamp9" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(384, 382)
+position = Vector2(384, 384)
 texture = SubResource("AtlasTexture_wmfpn")
 
 [node name="Light" parent="Furniture/Lamp9" instance=ExtResource("9_causn")]
@@ -615,7 +680,7 @@ path_light = NodePath("../Light")
 [node name="Lamp10" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(432, 296)
+position = Vector2(432, 298)
 texture = SubResource("AtlasTexture_pk7jv")
 
 [node name="Light" parent="Furniture/Lamp10" instance=ExtResource("9_causn")]
@@ -625,7 +690,7 @@ light_range = 80.0
 [node name="Lamp11" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(544, 296)
+position = Vector2(544, 298)
 texture = SubResource("AtlasTexture_pk7jv")
 
 [node name="Light" parent="Furniture/Lamp11" instance=ExtResource("9_causn")]
@@ -635,7 +700,7 @@ light_range = 80.0
 [node name="Lamp12" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(344, 226)
+position = Vector2(344, 228)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="Light" parent="Furniture/Lamp12" instance=ExtResource("9_causn")]
@@ -645,7 +710,7 @@ light_range = 80.0
 [node name="Lamp13" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(120, 162)
+position = Vector2(120, 164)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="Light" parent="Furniture/Lamp13" instance=ExtResource("9_causn")]
@@ -655,17 +720,27 @@ light_range = 80.0
 [node name="Lamp14" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(80, 290)
+position = Vector2(80, 292)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="Light" parent="Furniture/Lamp14" instance=ExtResource("9_causn")]
 position = Vector2(0, 2)
 light_range = 80.0
 
+[node name="Lamp28" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(96, 100)
+texture = SubResource("AtlasTexture_08nwt")
+
+[node name="Light" parent="Furniture/Lamp28" instance=ExtResource("9_causn")]
+position = Vector2(0, 2)
+light_range = 80.0
+
 [node name="Lamp15" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(240, 98)
+position = Vector2(240, 100)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="Light" parent="Furniture/Lamp15" instance=ExtResource("9_causn")]
@@ -675,7 +750,7 @@ light_range = 80.0
 [node name="Lamp16" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(248, 290)
+position = Vector2(248, 292)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="Light" parent="Furniture/Lamp16" instance=ExtResource("9_causn")]
@@ -685,7 +760,7 @@ light_range = 80.0
 [node name="Lamp17" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(512, 168)
+position = Vector2(512, 170)
 texture = SubResource("AtlasTexture_2cloa")
 
 [node name="Light" parent="Furniture/Lamp17" instance=ExtResource("9_causn")]
@@ -695,7 +770,7 @@ light_range = 80.0
 [node name="Lamp18" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(376, 168)
+position = Vector2(376, 170)
 texture = SubResource("AtlasTexture_2cloa")
 
 [node name="Light" parent="Furniture/Lamp18" instance=ExtResource("9_causn")]
@@ -705,7 +780,7 @@ light_range = 80.0
 [node name="Lamp19" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(384, 126)
+position = Vector2(384, 128)
 texture = SubResource("AtlasTexture_ayskg")
 
 [node name="Light" parent="Furniture/Lamp19" instance=ExtResource("9_causn")]
@@ -718,7 +793,7 @@ path_light = NodePath("../Light")
 [node name="Lamp20" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(464, 126)
+position = Vector2(464, 128)
 texture = SubResource("AtlasTexture_ayskg")
 
 [node name="Light" parent="Furniture/Lamp20" instance=ExtResource("9_causn")]
@@ -731,7 +806,7 @@ path_light = NodePath("../Light")
 [node name="Lamp21" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(560, 56)
+position = Vector2(560, 58)
 texture = SubResource("AtlasTexture_ml074")
 
 [node name="Light" parent="Furniture/Lamp21" instance=ExtResource("9_causn")]
@@ -743,7 +818,7 @@ path_light = NodePath("../Light")
 [node name="Lamp22" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(72, 482)
+position = Vector2(72, 484)
 texture = SubResource("AtlasTexture_08nwt")
 
 [node name="Light" parent="Furniture/Lamp22" instance=ExtResource("9_causn")]
@@ -753,7 +828,7 @@ light_range = 80.0
 [node name="Lamp23" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(402, 56)
+position = Vector2(402, 58)
 texture = SubResource("AtlasTexture_ml074")
 
 [node name="Light" parent="Furniture/Lamp23" instance=ExtResource("9_causn")]
@@ -765,7 +840,7 @@ path_light = NodePath("../Light")
 [node name="Lamp24" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(287, 48)
+position = Vector2(287, 50)
 texture = SubResource("AtlasTexture_ml074")
 
 [node name="Light" parent="Furniture/Lamp24" instance=ExtResource("9_causn")]
@@ -777,7 +852,7 @@ path_light = NodePath("../Light")
 [node name="Lamp25" type="Sprite2D" parent="Furniture"]
 z_index = -2
 texture_filter = 1
-position = Vector2(300, 504)
+position = Vector2(300, 506)
 texture = SubResource("AtlasTexture_hkvhn")
 
 [node name="Light" parent="Furniture/Lamp25" instance=ExtResource("9_causn")]
@@ -785,6 +860,30 @@ light_range = 80.0
 
 [node name="LightToggle" parent="Furniture/Lamp25" instance=ExtResource("14_17ouq")]
 path_light = NodePath("../Light")
+
+[node name="Lamp26" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(168, 64)
+texture = SubResource("AtlasTexture_wmfpn")
+
+[node name="Light" parent="Furniture/Lamp26" instance=ExtResource("9_causn")]
+position = Vector2(0, -6)
+light_range = 80.0
+
+[node name="LightToggle" parent="Furniture/Lamp26" instance=ExtResource("14_17ouq")]
+path_light = NodePath("../Light")
+
+[node name="Lamp27" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(64, 36)
+texture = SubResource("AtlasTexture_08nwt")
+
+[node name="FlickeringLight1" parent="Furniture/Lamp27" instance=ExtResource("11_625eh")]
+position = Vector2(0, 6)
+light_range = 80.0
+timings = Array[float]([3.0, 0.1, 0.4, 0.1, 0.9, 3.0, 0.1, 0.4, 0.1, 0.9])
 
 [node name="Lights" type="Node" parent="."]
 
@@ -828,7 +927,7 @@ shape = SubResource("RectangleShape2D_oxjf3")
 [node name="Misc" type="Node" parent="."]
 
 [node name="LevelExit" parent="Misc" instance=ExtResource("6_hlqkw")]
-position = Vector2(0, 526)
+position = Vector2(0, 528)
 
 [node name="Computer" parent="Misc" instance=ExtResource("17_icuwq")]
 position = Vector2(456, 464)
@@ -851,10 +950,12 @@ bus = &"BGM"
 [connection signal="escaped" from="Player" to="." method="_on_player_escaped"]
 [connection signal="started_hacking" from="Player" to="." method="_on_player_started_hacking"]
 [connection signal="stolen" from="Treasure/Vase" to="Scenario" method="_on_vase_stolen"]
+[connection signal="stolen" from="Treasure/Poster" to="Scenario" method="_on_poster_stolen"]
 [connection signal="looted" from="Searchables/Searchable1" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable2" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable3" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable4" to="." method="_on_searchable_looted"]
+[connection signal="looted" from="Searchables/Searchable5" to="." method="_on_searchable_looted"]
 [connection signal="activated" from="Dialogues/DialogueTrigger1" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger2" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger3" to="." method="_on_dialogue_trigger_activated"]

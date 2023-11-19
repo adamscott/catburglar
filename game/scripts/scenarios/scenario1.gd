@@ -25,6 +25,8 @@ func _on_loot_value_changed(loot : int) -> void:
 func _on_hud_minigame_succeeded() -> void:
 	GameProgress.secondary_objective_met = true
 	level_controller.play_dialogue("level1_computer")
+	hud.update_objective_value("Secondary objective complete.")
+	hud.show_objective()
 
 func _ready() -> void:
 	hud.update_objective_value("Steal at least $500 worth of loot.")

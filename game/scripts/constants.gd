@@ -22,7 +22,7 @@ const LEVEL_DETAILS : Array = [
 	{
 		"name": "Level 3",
 		"briefing": "It's a fake. They hired me to steal a fake. The real vase is still out there, and every paper in the city is talking about it. They played me like a fool; used me to advertise their precious little bit of stoneware and then cut me loose. I'd be an idiot to go after the real thing.\n\nWell, I guess that makes me an idiot. But I'm not just after that vase now. I'm going to dig up every last dark secret they've got. By the time I'm done, I'll have enough dirt to bury them the moment they come knocking on my door.",
-		"objectives": "• Find the real vase.\n• Hack into one computer.\n• (Optional) Hack into all three computers..",
+		"objectives": "• Find the real vase.\n• (Optional) Hack into all three computers.",
 		"vo": "res://audio/vo/level3_briefing.ogg",
 		"music": "res://audio/music/level3.ogg",
 		"stinger": "res://audio/music/caught2.ogg",
