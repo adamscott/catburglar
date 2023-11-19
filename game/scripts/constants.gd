@@ -7,6 +7,7 @@ const LEVEL_DETAILS : Array = [
 		"objectives": "• Steal at least $500 worth of loot.\n• (Optional) Hack into Sternwood's computer.",
 		"vo": "res://audio/vo/level1_briefing.ogg",
 		"music": "res://audio/music/level1.ogg",
+		"stinger": "res://audio/music/caught1.ogg",
 		"scene": "res://scenes/levels/level1.tscn"
 	},
 	{
@@ -15,6 +16,7 @@ const LEVEL_DETAILS : Array = [
 		"objectives": "• Steal at least $500 worth of loot.\n• (Optional) Hack into Chandler's computer.",
 		"vo": "res://audio/vo/level2_briefing.ogg",
 		"music": "res://audio/music/level2.ogg",
+		"stinger": "res://audio/music/caught1.ogg",
 		"scene": "res://scenes/levels/level2.tscn"
 	},
 	{
@@ -23,6 +25,7 @@ const LEVEL_DETAILS : Array = [
 		"objectives": "• Find the real vase.\n• Hack into one computer.\n• (Optional) Hack into all three computers..",
 		"vo": "res://audio/vo/level3_briefing.ogg",
 		"music": "res://audio/music/level3.ogg",
+		"stinger": "res://audio/music/caught2.ogg",
 		"scene": "res://scenes/levels/level3.tscn"
 	},
 ]
@@ -41,6 +44,9 @@ func get_level_vo_path(which : int) -> String:
 
 func get_level_music_path(which : int) -> String:
 	return LEVEL_DETAILS[which]["music"]
+
+func get_level_stinger_path(which : int) -> String:
+	return LEVEL_DETAILS[which]["stinger"]
 
 func get_level_scene_path(which : int) -> String:
 	return LEVEL_DETAILS[which]["scene"]

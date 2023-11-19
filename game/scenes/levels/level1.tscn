@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://y2y02gmayr5k"]
+[gd_scene load_steps=29 format=3 uid="uid://y2y02gmayr5k"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_c0s35"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_fivng"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bghshtxr6m0nw" path="res://objects/patrol_point.tscn" id="18_o22ui"]
 [ext_resource type="Script" path="res://scripts/scenarios/scenario1.gd" id="19_g0c4x"]
 [ext_resource type="PackedScene" uid="uid://dvndx7lqnykun" path="res://objects/security_camera.tscn" id="19_p64sn"]
+[ext_resource type="AudioStream" uid="uid://vd83yed6t4hb" path="res://audio/music/caught1.ogg" id="22_5nt6l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ivaun"]
 atlas = ExtResource("13_k20i8")
@@ -479,6 +480,10 @@ script = ExtResource("19_g0c4x")
 path_level_controller = NodePath("..")
 path_hud = NodePath("../HUD")
 path_level_exit = NodePath("../Misc/LevelExit")
+
+[node name="Audio_Stinger" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_5nt6l")
+bus = &"BGM"
 
 [connection signal="caught" from="Player" to="." method="_on_player_caught"]
 [connection signal="escaped" from="Player" to="." method="_on_player_escaped"]

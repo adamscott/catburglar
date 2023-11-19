@@ -7,6 +7,7 @@ extends Node
 @onready var player : Node2D = get_node(path_player)
 
 @onready var hud : CanvasLayer = $HUD
+@onready var audio_stinger : AudioStreamPlayer = $Audio_Stinger
 
 signal complete
 signal game_over
@@ -19,6 +20,7 @@ func _on_hud_dialogue_finished() -> void:
 	player.ignore_inputs = false
 
 func _on_player_caught() -> void:
+	audio_stinger.play()
 	hud.do_game_over()
 	emit_signal("game_over")
 
