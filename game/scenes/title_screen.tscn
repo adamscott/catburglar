@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://6d8qhxgl0vum" path="res://sprites/and_the_rest.png" id="5_oi1k3"]
 [ext_resource type="Texture2D" uid="uid://obrdj1j4ch3e" path="res://sprites/jg.png" id="7_p4cu5"]
 [ext_resource type="Texture2D" uid="uid://c2d2eiovxpw0o" path="res://sprites/kyveri.png" id="8_wf3n4"]
-[ext_resource type="AudioStream" uid="uid://b48qqcxtpp6oh" path="res://audio/music/briefing.ogg" id="10_xw6hb"]
+[ext_resource type="AudioStream" uid="uid://bc01o3e75dgba" path="res://audio/music/title.ogg" id="10_syov0"]
 
 [sub_resource type="Animation" id="Animation_quns4"]
 resource_name = "fade_in"
@@ -338,7 +338,7 @@ theme_override_font_sizes/font_size = 32
 text = "Press (C) to go back"
 
 [node name="Audio_BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_xw6hb")
+stream = ExtResource("10_syov0")
 bus = &"BGM"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
