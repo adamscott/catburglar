@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://djjs1exf7e7aq"]
+[gd_scene load_steps=55 format=3 uid="uid://djjs1exf7e7aq"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_t2k1n"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_cpp0q"]
@@ -31,6 +31,12 @@ _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 352, 2, 0, 0, 0, 0, 352, 194, 0, 0, 0, 0, 200, 194, 0, 0, 0, 0, 200, -270, 0, 0, 0, 0, 464, -270, 0, 0, 0, 0, 464, -62, 0, 0, 0, 0, -56, -62, 0, 0, 0, 0, -56, -126, 0, 0, 0, 0, 224, -126)
 }
 point_count = 10
+
+[sub_resource type="Curve2D" id="Curve2D_7r0vi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 256, 0, 0, 0, 0, 0, 256, -136, 0, 0, 0, 0, -240, -136, 0, 0, 0, 0, -240, 320, 0, 0, 0, 0, 64, 320, 0, 0, 0, 0, 64, 128, 0, 0, 0, 0, 232, 128)
+}
+point_count = 8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqs01"]
 atlas = ExtResource("11_yu3wf")
@@ -127,6 +133,8 @@ region = Rect2(624, 64, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oxjf3"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i0i4m"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_0bh0x"]
 atlas = ExtResource("11_yu3wf")
 region = Rect2(448, 16, 48, 32)
@@ -222,6 +230,7 @@ destination = NodePath("../DoorE2")
 
 [node name="DoorE2" parent="Doors" instance=ExtResource("6_848vf")]
 position = Vector2(160, 528)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorE1")
 
 [node name="DoorF1" parent="Doors" instance=ExtResource("6_848vf")]
@@ -230,6 +239,7 @@ destination = NodePath("../DoorF2")
 
 [node name="DoorF2" parent="Doors" instance=ExtResource("6_848vf")]
 position = Vector2(480, 528)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorF1")
 
 [node name="DoorG1" parent="Doors" instance=ExtResource("6_848vf")]
@@ -238,6 +248,7 @@ destination = NodePath("../DoorG2")
 
 [node name="DoorG2" parent="Doors" instance=ExtResource("6_848vf")]
 position = Vector2(176, 400)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorG1")
 
 [node name="DoorH1" parent="Doors" instance=ExtResource("6_848vf")]
@@ -246,6 +257,7 @@ destination = NodePath("../DoorH2")
 
 [node name="DoorH2" parent="Doors" instance=ExtResource("6_848vf")]
 position = Vector2(304, 272)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorH1")
 
 [node name="LiftI1" parent="Doors" instance=ExtResource("6_kh1so")]
@@ -289,6 +301,7 @@ destination = NodePath("Destination")
 [node name="Destination" parent="Doors/DoorM" instance=ExtResource("6_848vf")]
 z_index = 0
 position = Vector2(48, 0)
+scale = Vector2(-1, 1)
 destination = NodePath("..")
 
 [node name="DoorN1" parent="Doors" instance=ExtResource("6_848vf")]
@@ -297,6 +310,7 @@ destination = NodePath("../DoorN2")
 
 [node name="DoorN2" parent="Doors" instance=ExtResource("6_848vf")]
 position = Vector2(240, 80)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorN1")
 
 [node name="DoorO1" parent="Doors" instance=ExtResource("6_848vf")]
@@ -305,6 +319,7 @@ destination = NodePath("../DoorO2")
 
 [node name="DoorO2" parent="Doors" instance=ExtResource("6_848vf")]
 position = Vector2(208, 144)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorO1")
 
 [node name="LiftP" parent="Doors" instance=ExtResource("6_kh1so")]
@@ -339,9 +354,18 @@ position = Vector2(248, -128)
 [node name="Path2D" type="Path2D" parent="Pipes/PipeA1"]
 curve = SubResource("Curve2D_6laij")
 
-[node name="PipeA2" parent="Pipes" instance=ExtResource("7_40ony")]
+[node name="PipeA2" parent="Pipes" node_paths=PackedStringArray("journey", "destination") instance=ExtResource("7_40ony")]
 position = Vector2(320, 192)
 scale = Vector2(-1, 1)
+journey = NodePath("Path2D")
+destination = NodePath("Destination")
+exit_facing = Vector2(-1, 0)
+
+[node name="Destination" type="Node2D" parent="Pipes/PipeA2"]
+position = Vector2(248, 128)
+
+[node name="Path2D" type="Path2D" parent="Pipes/PipeA2"]
+curve = SubResource("Curve2D_7r0vi")
 
 [node name="Treasure" type="Node" parent="."]
 
@@ -924,6 +948,20 @@ shape = SubResource("RectangleShape2D_oxjf3")
 
 [node name="Hints" type="Node" parent="."]
 
+[node name="HintTrigger1" parent="Hints" instance=ExtResource("8_46snf")]
+position = Vector2(208, 392)
+slug = "toggle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintTrigger1"]
+shape = SubResource("RectangleShape2D_i0i4m")
+
+[node name="HintTrigger2" parent="Hints" instance=ExtResource("8_46snf")]
+position = Vector2(384, 392)
+slug = "toggle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintTrigger2"]
+shape = SubResource("RectangleShape2D_i0i4m")
+
 [node name="Misc" type="Node" parent="."]
 
 [node name="LevelExit" parent="Misc" instance=ExtResource("6_hlqkw")]
@@ -959,6 +997,8 @@ bus = &"BGM"
 [connection signal="activated" from="Dialogues/DialogueTrigger1" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger2" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger3" to="." method="_on_dialogue_trigger_activated"]
+[connection signal="activated" from="Hints/HintTrigger1" to="HUD" method="_on_hint_trigger_activated"]
+[connection signal="activated" from="Hints/HintTrigger2" to="HUD" method="_on_hint_trigger_activated"]
 [connection signal="dialogue_finished" from="HUD" to="." method="_on_hud_dialogue_finished"]
 [connection signal="minigame_failed" from="HUD" to="." method="_on_hud_minigame_failed"]
 [connection signal="minigame_succeeded" from="HUD" to="." method="_on_hud_minigame_succeeded"]

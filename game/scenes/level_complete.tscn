@@ -244,6 +244,7 @@ text = "$0"
 horizontal_alignment = 2
 
 [node name="Label_Alerts_Label" type="Label" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 5
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
@@ -253,6 +254,7 @@ text = "Alerts"
 vertical_alignment = 1
 
 [node name="Label_Alerts_Value" type="Label" parent="GridContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 100
@@ -260,6 +262,7 @@ text = "0"
 horizontal_alignment = 2
 
 [node name="Label_Rank_Label" type="Label" parent="GridContainer"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 5
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
@@ -269,6 +272,7 @@ text = "Rank"
 vertical_alignment = 1
 
 [node name="Label_Rank_Value" type="Label" parent="GridContainer"]
+visible = false
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 100

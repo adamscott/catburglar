@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://y2y02gmayr5k"]
+[gd_scene load_steps=42 format=3 uid="uid://y2y02gmayr5k"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_c0s35"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_fivng"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://bf1drr1n10l11" path="res://objects/camera.tscn" id="5_6xjeu"]
 [ext_resource type="PackedScene" uid="uid://yc5fsy3tmtre" path="res://objects/door.tscn" id="6_w7e6l"]
 [ext_resource type="PackedScene" uid="uid://baxdlnnmog5g7" path="res://objects/desk.tscn" id="7_h13pv"]
+[ext_resource type="PackedScene" uid="uid://c7gy24dsii3su" path="res://objects/lift.tscn" id="7_pft3g"]
 [ext_resource type="PackedScene" uid="uid://dtgqt2tuo0uwg" path="res://objects/treasure.tscn" id="9_mfehv"]
 [ext_resource type="Texture2D" uid="uid://8cy5q4m01a7u" path="res://sprites/painting.png" id="10_go7e6"]
+[ext_resource type="PackedScene" uid="uid://hxebst30nlht" path="res://objects/searchable.tscn" id="10_ixctr"]
 [ext_resource type="PackedScene" uid="uid://b8rgrlge5sx1q" path="res://objects/computer.tscn" id="12_7hgq7"]
 [ext_resource type="PackedScene" uid="uid://c4mps0fd7w7o6" path="res://objects/guard.tscn" id="13_e576x"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="13_k20i8"]
@@ -22,6 +24,9 @@
 [ext_resource type="Script" path="res://scripts/scenarios/scenario1.gd" id="19_g0c4x"]
 [ext_resource type="PackedScene" uid="uid://dvndx7lqnykun" path="res://objects/security_camera.tscn" id="19_p64sn"]
 [ext_resource type="AudioStream" uid="uid://vd83yed6t4hb" path="res://audio/music/caught1.ogg" id="22_5nt6l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s2hxv"]
+size = Vector2(8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ivaun"]
 atlas = ExtResource("13_k20i8")
@@ -38,6 +43,46 @@ region = Rect2(48, 24, 48, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkadl"]
 atlas = ExtResource("13_k20i8")
 region = Rect2(640, 8, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_373j5"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(560, 8, 48, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nc7yd"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(208, 72, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1prwm"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(168, 72, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m7qrq"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(256, 72, 32, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38qfw"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(416, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvba8"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(512, 24, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_liqfa"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(208, 120, 48, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbp8y"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(512, 16, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqgew"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(512, 24, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5wyui"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(608, 64, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58lti"]
 
@@ -94,53 +139,14 @@ color = Color(0.12549, 0.156863, 0.25098, 1)
 
 [node name="Doors" type="Node" parent="."]
 
-[node name="DoorA1" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(656, 384)
-destination = NodePath("../DoorA2")
-
-[node name="DoorA2" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(656, 448)
-destination = NodePath("../DoorA1")
-
-[node name="DoorB1" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(656, 640)
-destination = NodePath("../DoorB2")
-
-[node name="DoorB2" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(656, 704)
-destination = NodePath("../DoorB1")
-
 [node name="DoorC1" parent="Doors" instance=ExtResource("6_w7e6l")]
 position = Vector2(224, 464)
 destination = NodePath("../DoorC2")
 
 [node name="DoorC2" parent="Doors" instance=ExtResource("6_w7e6l")]
 position = Vector2(272, 464)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorC1")
-
-[node name="DoorD1" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(552, 448)
-destination = NodePath("../DoorD2")
-
-[node name="DoorD2" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(552, 512)
-destination = NodePath("../DoorD1")
-
-[node name="DoorE1" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(32, 400)
-destination = NodePath("../DoorE2")
-
-[node name="DoorE2" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(32, 528)
-destination = NodePath("../DoorE1")
-
-[node name="DoorF1" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(32, 464)
-destination = NodePath("../DoorF2")
-
-[node name="DoorF2" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(32, 592)
-destination = NodePath("../DoorF1")
 
 [node name="DoorG1" parent="Doors" instance=ExtResource("6_w7e6l")]
 position = Vector2(128, 704)
@@ -148,31 +154,8 @@ destination = NodePath("../DoorG2")
 
 [node name="DoorG2" parent="Doors" instance=ExtResource("6_w7e6l")]
 position = Vector2(176, 704)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorG1")
-
-[node name="DoorH1" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(272, 704)
-destination = NodePath("../DoorH2")
-
-[node name="DoorH2" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(272, 640)
-destination = NodePath("../DoorH1")
-
-[node name="DoorI1" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(368, 704)
-destination = NodePath("../DoorI2")
-
-[node name="DoorI2" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(368, 640)
-destination = NodePath("../DoorI1")
-
-[node name="DoorJ1" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(408, 576)
-destination = NodePath("../DoorJ2")
-
-[node name="DoorJ2" parent="Doors" instance=ExtResource("6_w7e6l")]
-position = Vector2(408, 512)
-destination = NodePath("../DoorJ1")
 
 [node name="DoorK1" parent="Doors" instance=ExtResource("6_w7e6l")]
 position = Vector2(480, 640)
@@ -180,6 +163,7 @@ destination = NodePath("../DoorK2")
 
 [node name="DoorK2" parent="Doors" instance=ExtResource("6_w7e6l")]
 position = Vector2(528, 640)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorK1")
 
 [node name="DoorL1" parent="Doors" instance=ExtResource("6_w7e6l")]
@@ -188,7 +172,80 @@ destination = NodePath("../DoorL2")
 
 [node name="DoorL2" parent="Doors" instance=ExtResource("6_w7e6l")]
 position = Vector2(528, 704)
+scale = Vector2(-1, 1)
 destination = NodePath("../DoorL1")
+
+[node name="Lift1" parent="Doors" instance=ExtResource("7_pft3g")]
+position = Vector2(272, 704)
+destination = NodePath("Destination")
+
+[node name="Destination" parent="Doors/Lift1" instance=ExtResource("7_pft3g")]
+z_index = 0
+position = Vector2(0, -64)
+destination = NodePath("..")
+
+[node name="Lift2" parent="Doors" instance=ExtResource("7_pft3g")]
+position = Vector2(368, 704)
+destination = NodePath("Destination")
+
+[node name="Destination" parent="Doors/Lift2" instance=ExtResource("7_pft3g")]
+z_index = 0
+position = Vector2(0, -64)
+destination = NodePath("..")
+
+[node name="Lift3" parent="Doors" instance=ExtResource("7_pft3g")]
+position = Vector2(408, 576)
+destination = NodePath("Destination")
+
+[node name="Destination" parent="Doors/Lift3" instance=ExtResource("7_pft3g")]
+z_index = 0
+position = Vector2(0, -64)
+destination = NodePath("..")
+
+[node name="Lift4" parent="Doors" instance=ExtResource("7_pft3g")]
+position = Vector2(32, 528)
+destination = NodePath("Destination")
+
+[node name="Destination" parent="Doors/Lift4" instance=ExtResource("7_pft3g")]
+z_index = 0
+position = Vector2(0, -128)
+destination = NodePath("..")
+
+[node name="Lift5" parent="Doors" instance=ExtResource("7_pft3g")]
+position = Vector2(32, 592)
+destination = NodePath("Destination")
+
+[node name="Destination" parent="Doors/Lift5" instance=ExtResource("7_pft3g")]
+z_index = 0
+position = Vector2(0, -128)
+destination = NodePath("..")
+
+[node name="Lift6" parent="Doors" instance=ExtResource("7_pft3g")]
+position = Vector2(552, 512)
+destination = NodePath("Destination")
+
+[node name="Destination" parent="Doors/Lift6" instance=ExtResource("7_pft3g")]
+z_index = 0
+position = Vector2(0, -64)
+destination = NodePath("..")
+
+[node name="Lift7" parent="Doors" instance=ExtResource("7_pft3g")]
+position = Vector2(664, 448)
+destination = NodePath("Destination")
+
+[node name="Destination" parent="Doors/Lift7" instance=ExtResource("7_pft3g")]
+z_index = 0
+position = Vector2(0, -64)
+destination = NodePath("..")
+
+[node name="Lift8" parent="Doors" instance=ExtResource("7_pft3g")]
+position = Vector2(656, 704)
+destination = NodePath("Destination")
+
+[node name="Destination" parent="Doors/Lift8" instance=ExtResource("7_pft3g")]
+z_index = 0
+position = Vector2(0, -64)
+destination = NodePath("..")
 
 [node name="Pipes" type="Node" parent="."]
 
@@ -202,24 +259,16 @@ treasure_sprite = ExtResource("10_go7e6")
 position = Vector2(456, 616)
 treasure_sprite = ExtResource("10_go7e6")
 
-[node name="Treasure3" parent="Treasure" instance=ExtResource("9_mfehv")]
-position = Vector2(472, 488)
-treasure_sprite = ExtResource("10_go7e6")
-
 [node name="Treasure4" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(152, 440)
 treasure_sprite = ExtResource("10_go7e6")
 
 [node name="Treasure5" parent="Treasure" instance=ExtResource("9_mfehv")]
-position = Vector2(552, 360)
+position = Vector2(536, 360)
 treasure_sprite = ExtResource("10_go7e6")
 
 [node name="Treasure6" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(168, 344)
-treasure_sprite = ExtResource("10_go7e6")
-
-[node name="Treasure7" parent="Treasure" instance=ExtResource("9_mfehv")]
-position = Vector2(216, 504)
 treasure_sprite = ExtResource("10_go7e6")
 
 [node name="Treasure8" parent="Treasure" instance=ExtResource("9_mfehv")]
@@ -233,6 +282,40 @@ treasure_sprite = ExtResource("10_go7e6")
 [node name="Treasure10" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(616, 680)
 treasure_sprite = ExtResource("10_go7e6")
+
+[node name="Searchables" type="Node" parent="."]
+
+[node name="Searchable1" parent="Searchables" instance=ExtResource("10_ixctr")]
+position = Vector2(224, 512)
+value = 100.0
+description = "Cronjager's stash of vintage comics."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable1"]
+shape = SubResource("RectangleShape2D_s2hxv")
+
+[node name="Searchable2" parent="Searchables" instance=ExtResource("10_ixctr")]
+position = Vector2(476, 496)
+value = 50.0
+description = "\"A Study of Azitron Mating Habits.\""
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable2"]
+shape = SubResource("RectangleShape2D_s2hxv")
+
+[node name="Searchable3" parent="Searchables" instance=ExtResource("10_ixctr")]
+position = Vector2(616, 368)
+value = 150.0
+description = "Funny place to keep a bottle of Scotch..."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable3"]
+shape = SubResource("RectangleShape2D_s2hxv")
+
+[node name="Searchable4" parent="Searchables" instance=ExtResource("10_ixctr")]
+position = Vector2(512, 560)
+value = 100.0
+description = "Various company documents. Worth something, if you find the right buyer..."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable4"]
+shape = SubResource("RectangleShape2D_s2hxv")
 
 [node name="Guards" type="Node" parent="."]
 
@@ -261,10 +344,10 @@ path_patrol_points = NodePath("../../PatrolPaths/PatrolPath5")
 [node name="PatrolPath1" type="Node" parent="PatrolPaths"]
 
 [node name="PatrolPoint1" parent="PatrolPaths/PatrolPath1" instance=ExtResource("18_o22ui")]
-position = Vector2(384, 704)
+position = Vector2(344, 704)
 
 [node name="PatrolPoint2" parent="PatrolPaths/PatrolPath1" instance=ExtResource("18_o22ui")]
-position = Vector2(184, 704)
+position = Vector2(200, 704)
 
 [node name="PatrolPath2" type="Node" parent="PatrolPaths"]
 
@@ -355,6 +438,214 @@ texture = SubResource("AtlasTexture_fkadl")
 position = Vector2(0, 8)
 light_range = 80.0
 
+[node name="Furniture6" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(224, 508)
+texture = SubResource("AtlasTexture_373j5")
+
+[node name="Furniture7" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(544, 564)
+texture = SubResource("AtlasTexture_nc7yd")
+
+[node name="Furniture8" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(512, 564)
+texture = SubResource("AtlasTexture_1prwm")
+
+[node name="Furniture9" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(492, 564)
+texture = SubResource("AtlasTexture_m7qrq")
+
+[node name="Furniture10" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(476, 496)
+texture = SubResource("AtlasTexture_38qfw")
+
+[node name="Furniture11" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(448, 472)
+texture = SubResource("AtlasTexture_vvba8")
+
+[node name="Light" parent="Furniture/Furniture11" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 8)
+light_range = 80.0
+
+[node name="Furniture12" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(568, 372)
+texture = SubResource("AtlasTexture_liqfa")
+
+[node name="Furniture13" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(112, 616)
+texture = SubResource("AtlasTexture_xbp8y")
+
+[node name="Light1" parent="Furniture/Furniture13" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 12)
+light_range = 80.0
+
+[node name="Furniture14" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(32, 616)
+texture = SubResource("AtlasTexture_xbp8y")
+
+[node name="Light1" parent="Furniture/Furniture14" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 12)
+light_range = 80.0
+
+[node name="Furniture15" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(192, 552)
+texture = SubResource("AtlasTexture_xbp8y")
+
+[node name="Light1" parent="Furniture/Furniture15" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 12)
+light_range = 80.0
+
+[node name="Furniture16" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(608, 472)
+texture = SubResource("AtlasTexture_xbp8y")
+
+[node name="Light1" parent="Furniture/Furniture16" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 12)
+light_range = 80.0
+
+[node name="Furniture17" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(288, 488)
+texture = SubResource("AtlasTexture_xbp8y")
+
+[node name="Light1" parent="Furniture/Furniture17" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 12)
+light_range = 80.0
+
+[node name="Furniture18" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(448, 536)
+texture = SubResource("AtlasTexture_pqgew")
+
+[node name="Light1" parent="Furniture/Furniture18" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 8)
+light_range = 80.0
+
+[node name="Furniture25" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(416, 600)
+texture = SubResource("AtlasTexture_pqgew")
+
+[node name="Light1" parent="Furniture/Furniture25" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 8)
+light_range = 80.0
+
+[node name="Furniture26" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(608, 600)
+texture = SubResource("AtlasTexture_pqgew")
+
+[node name="Light1" parent="Furniture/Furniture26" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 8)
+light_range = 80.0
+
+[node name="Furniture19" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(320, 328)
+texture = SubResource("AtlasTexture_5wyui")
+
+[node name="Light1" parent="Furniture/Furniture19" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 4)
+light_range = 80.0
+
+[node name="Furniture20" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(224, 328)
+texture = SubResource("AtlasTexture_5wyui")
+
+[node name="Light1" parent="Furniture/Furniture20" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 4)
+light_range = 80.0
+
+[node name="Furniture21" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(128, 328)
+texture = SubResource("AtlasTexture_5wyui")
+
+[node name="Light1" parent="Furniture/Furniture21" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 4)
+light_range = 80.0
+
+[node name="Furniture22" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(416, 328)
+texture = SubResource("AtlasTexture_5wyui")
+
+[node name="Light1" parent="Furniture/Furniture22" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 4)
+light_range = 80.0
+
+[node name="Furniture23" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(480, 408)
+texture = SubResource("AtlasTexture_5wyui")
+
+[node name="Light1" parent="Furniture/Furniture23" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 4)
+light_range = 80.0
+
+[node name="Furniture24" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(616, 408)
+texture = SubResource("AtlasTexture_5wyui")
+
+[node name="Light1" parent="Furniture/Furniture24" instance=ExtResource("15_nes1r")]
+position = Vector2(0, 4)
+light_range = 80.0
+
+[node name="Furniture27" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(632, 664)
+texture = SubResource("AtlasTexture_pqgew")
+
+[node name="FlickeringLight1" parent="Furniture/Furniture27" instance=ExtResource("14_ri3ce")]
+position = Vector2(0, 8)
+light_range = 80.0
+timings = Array[float]([5.0, 0.1, 0.5, 0.1, 0.5, 3.0, 0.1, 0.5, 0.1, 0.5])
+
+[node name="Furniture28" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(552, 664)
+texture = SubResource("AtlasTexture_pqgew")
+
+[node name="FlickeringLight1" parent="Furniture/Furniture28" instance=ExtResource("14_ri3ce")]
+position = Vector2(0, 8)
+light_range = 80.0
+timings = Array[float]([5.0, 0.1, 0.5, 0.1, 0.5, 3.0, 0.1, 0.5, 0.1, 0.5])
+
 [node name="Lights" type="Node" parent="."]
 
 [node name="OutsideLight1" type="PointLight2D" parent="Lights"]
@@ -368,40 +659,6 @@ rotation = 3.14159
 scale = Vector2(1, -100)
 color = Color(0.25098, 0.376471, 0.501961, 1)
 texture = ExtResource("16_ecxg0")
-
-[node name="FlickeringLight1" parent="Lights" instance=ExtResource("14_ri3ce")]
-position = Vector2(632, 664)
-light_range = 80.0
-timings = Array[float]([5.0, 0.1, 0.5, 0.1, 0.5, 3.0, 0.1, 0.5, 0.1, 0.5])
-
-[node name="FlickeringLight2" parent="Lights" instance=ExtResource("14_ri3ce")]
-position = Vector2(568, 664)
-light_range = 80.0
-timings = Array[float]([5.0, 0.1, 0.5, 0.1, 0.5, 3.0, 0.1, 0.5, 0.1, 0.5])
-
-[node name="Light1" parent="Lights" instance=ExtResource("15_nes1r")]
-position = Vector2(600, 488)
-light_range = 80.0
-
-[node name="Light2" parent="Lights" instance=ExtResource("15_nes1r")]
-position = Vector2(328, 496)
-light_range = 80.0
-
-[node name="Light3" parent="Lights" instance=ExtResource("15_nes1r")]
-position = Vector2(200, 568)
-light_range = 80.0
-
-[node name="Light4" parent="Lights" instance=ExtResource("15_nes1r")]
-position = Vector2(64, 640)
-light_range = 80.0
-
-[node name="Light5" parent="Lights" instance=ExtResource("15_nes1r")]
-position = Vector2(416, 600)
-light_range = 80.0
-
-[node name="Light6" parent="Lights" instance=ExtResource("15_nes1r")]
-position = Vector2(568, 600)
-light_range = 80.0
 
 [node name="Light8" parent="Lights" instance=ExtResource("15_nes1r")]
 position = Vector2(464, 664)
@@ -417,18 +674,6 @@ light_range = 80.0
 
 [node name="Light11" parent="Lights" instance=ExtResource("15_nes1r")]
 position = Vector2(128, 424)
-light_range = 80.0
-
-[node name="Light12" parent="Lights" instance=ExtResource("15_nes1r")]
-position = Vector2(144, 336)
-light_range = 80.0
-
-[node name="Light13" parent="Lights" instance=ExtResource("15_nes1r")]
-position = Vector2(240, 336)
-light_range = 80.0
-
-[node name="Light15" parent="Lights" instance=ExtResource("15_nes1r")]
-position = Vector2(448, 536)
 light_range = 80.0
 
 [node name="Dialogues" type="Node" parent="."]
@@ -463,6 +708,14 @@ slug = "cover"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintTrigger1"]
 shape = SubResource("RectangleShape2D_58lti")
 
+[node name="HintTrigger2" parent="Hints" instance=ExtResource("16_rs7w6")]
+position = Vector2(544, 568)
+slug = "search"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintTrigger2"]
+position = Vector2(-56, 0)
+shape = SubResource("RectangleShape2D_58lti")
+
 [node name="Misc" type="Node" parent="."]
 
 [node name="Computer" parent="Misc" instance=ExtResource("12_7hgq7")]
@@ -490,18 +743,21 @@ bus = &"BGM"
 [connection signal="started_hacking" from="Player" to="." method="_on_player_started_hacking"]
 [connection signal="stolen" from="Treasure/Treasure1" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure2" to="." method="_on_treasure_stolen"]
-[connection signal="stolen" from="Treasure/Treasure3" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure4" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure5" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure6" to="." method="_on_treasure_stolen"]
-[connection signal="stolen" from="Treasure/Treasure7" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure8" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure9" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure10" to="." method="_on_treasure_stolen"]
+[connection signal="looted" from="Searchables/Searchable1" to="." method="_on_searchable_looted"]
+[connection signal="looted" from="Searchables/Searchable2" to="." method="_on_searchable_looted"]
+[connection signal="looted" from="Searchables/Searchable3" to="." method="_on_searchable_looted"]
+[connection signal="looted" from="Searchables/Searchable4" to="." method="_on_searchable_looted"]
 [connection signal="activated" from="Dialogues/DialogueTrigger1" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger2" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Dialogues/DialogueTrigger3" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Hints/HintTrigger1" to="HUD" method="_on_hint_trigger_activated"]
+[connection signal="activated" from="Hints/HintTrigger2" to="HUD" method="_on_hint_trigger_activated"]
 [connection signal="dialogue_finished" from="HUD" to="." method="_on_hud_dialogue_finished"]
 [connection signal="minigame_failed" from="HUD" to="." method="_on_hud_minigame_failed"]
 [connection signal="minigame_succeeded" from="HUD" to="." method="_on_hud_minigame_succeeded"]

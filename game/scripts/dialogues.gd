@@ -18,7 +18,9 @@ const DIALOGUE_LINES : Dictionary = {
 }
 
 const HINT_LINES : Dictionary = {
-	"cover": "Furniture that is positioned in front of Cynth can act as cover. Duck while in front of it to remind out of sight."
+	"cover": "Furniture that is positioned in front of Cynth can act as cover. Duck while in front of it to remind out of sight.",
+	"toggle": "Some lamps can be turned off if you can reach them, making it much easier to go unnoticed.",
+	"search": "Remember to search anything that looks like it might contain valuables. You never know what you'll find."
 }
 
 func get_dialogue_line(which : String) -> String:
