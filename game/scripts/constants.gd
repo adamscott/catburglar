@@ -4,7 +4,7 @@ const LEVEL_DETAILS : Array = [
 	{
 		"name": "Level 1",
 		"briefing": "Looks like Sternwood isn't home. Probably told his wife he was going to spend the night reading, then slipped away to meet a nice young friend. Not that I'm complaining; with any luck, he'll have forgotten to set the alarm.",
-		"objectives": "• Steal at least $500 worth of loot.\n• (Optional) Hack into Sternwood's computer.",
+		"objectives": "• Steal at least $300 worth of loot.\n• (Optional) Hack into Sternwood's computer.",
 		"vo": "res://audio/vo/level1_briefing.ogg",
 		"music": "res://audio/music/level1.ogg",
 		"stinger": "res://audio/music/caught1.ogg",
@@ -13,7 +13,7 @@ const LEVEL_DETAILS : Array = [
 	{
 		"name": "Level 2",
 		"briefing": "An old contact got back in touch with me this morning; said he knew of some work that could suit me. Lois Chandler recently brought home a certain vase. Worth millions... if you've got millions to spend on a vase. My cut won't be that much, but more than enough to get me out of this hole. Good thing my bag is well padded.",
-		"objectives": "• Steal at least $500 worth of loot.\n• (Optional) Hack into Chandler's computer.",
+		"objectives": "• Steal the vase.\n• (Optional) Hack into Chandler's computer.",
 		"vo": "res://audio/vo/level2_briefing.ogg",
 		"music": "res://audio/music/level2.ogg",
 		"stinger": "res://audio/music/caught1.ogg",

@@ -19,6 +19,7 @@ const AUDIO_STEPS : Array = [
 ]
 
 @onready var sprite : Sprite2D = $Sprite2D
+@onready var sprite_smash_vase : Sprite2D = $Sprite2D_SmashVase
 @onready var area_interact : Area2D = $Area2D_Interact
 @onready var collision_standing : CollisionShape2D = $CollisionShape2D_Standing
 @onready var collision_crouched : CollisionShape2D = $CollisionShape2D_Crouched
@@ -26,6 +27,7 @@ const AUDIO_STEPS : Array = [
 @onready var audio_roll : AudioStreamPlayer2D = $Audio_Roll
 @onready var audio_land : AudioStreamPlayer2D = $Audio_Land
 @onready var audio_vent_hit : AudioStreamPlayer2D = $Audio_VentHit
+@onready var audio_vase_smash : AudioStreamPlayer2D = $Audio_VaseSmash
 
 enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, ENTERING_LIFT, SEARCHING, SWIPING, HACKING, IN_PIPE, SMASHING_VASE, CAUGHT, ESCAPING}
 
@@ -101,8 +103,7 @@ func seen() -> void:
 	pass
 
 func camera_alerted() -> void:
-	if GameProgress.camera_alerts >= MAX_CAMERA_ALERTS:
-		catch()
+	catch()
 
 func catch() -> void:
 	current_state = State.CAUGHT
@@ -165,12 +166,17 @@ func try_to_interact() -> void:
 				current_state = State.SEARCHING
 				anim_index = 0.0
 		elif interactable.is_in_group(&"level3_vase"):
+			global_position.x = interactable.global_position.x
 			get_tree().call_group("game_camera", "zoom_in") # janky hack, m8
 			var bgm_player : AudioStreamPlayer = get_tree().get_first_node_in_group("bgm_player")
 			create_tween().tween_property(bgm_player, "pitch_scale", 0.25, 0.5)
 			interactable.queue_free()
 			current_state = State.SMASHING_VASE
 			anim_index = 0.0
+			sprite_smash_vase.show()
+			sprite.hide()
+			sprite.flip_h = true
+			facing = Vector2.LEFT
 		else:
 			interactable.interact()
 
@@ -458,8 +464,13 @@ func _physics_process_in_pipe(delta : float) -> void:
 
 func _physics_process_smashing_vase(delta : float) -> void:
 	obscured = false
-	anim_index += delta
-	if anim_index > 5.0:
+	anim_index += delta * 12.0
+	sprite_smash_vase.frame = clampf(anim_index, 0.0, 23.0)
+	if sprite_smash_vase.frame == 17 and not audio_vase_smash.playing:
+		audio_vase_smash.play()
+	if anim_index > 30.0:
+		sprite_smash_vase.hide()
+		sprite.show()
 		current_state = State.NORMAL
 		anim_index = 0.0
 		emit_signal("vase_smashed")

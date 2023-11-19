@@ -1,6 +1,6 @@
 extends Node
 
-const LOOT_REQUIRED : int = 100
+const LOOT_REQUIRED : int = 300
 
 @export_node_path("Node") var path_level_controller
 @onready var level_controller : Node = get_node(path_level_controller)
@@ -15,7 +15,7 @@ var objective_complete : bool = false
 var secondary_objective_complete : bool = false
 
 func _on_loot_value_changed(loot : int) -> void:
-	if loot >= 200 and !objective_complete:
+	if loot >= LOOT_REQUIRED and !objective_complete:
 		hud.update_objective_value("Escape.")
 		hud.show_objective()
 		objective_complete = true
@@ -29,5 +29,5 @@ func _on_hud_minigame_succeeded() -> void:
 	hud.show_objective()
 
 func _ready() -> void:
-	hud.update_objective_value("Steal at least $500 worth of loot.")
+	hud.update_objective_value("Steal at least $300 worth of loot.")
 	hud.show_objective()

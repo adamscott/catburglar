@@ -266,15 +266,6 @@ theme_override_font_sizes/font_size = 60
 text = "Play"
 horizontal_alignment = 2
 
-[node name="Settings" type="Label" parent="MainMenu/Menu"]
-modulate = Color(1, 1, 1, 0.501961)
-layout_mode = 2
-theme_override_constants/line_spacing = 0
-theme_override_fonts/font = ExtResource("3_vsoy8")
-theme_override_font_sizes/font_size = 60
-text = "Settings"
-horizontal_alignment = 2
-
 [node name="Credits" type="Label" parent="MainMenu/Menu"]
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2

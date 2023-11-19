@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://y2y02gmayr5k"]
+[gd_scene load_steps=46 format=3 uid="uid://y2y02gmayr5k"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_c0s35"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_fivng"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://baxdlnnmog5g7" path="res://objects/desk.tscn" id="7_h13pv"]
 [ext_resource type="PackedScene" uid="uid://c7gy24dsii3su" path="res://objects/lift.tscn" id="7_pft3g"]
 [ext_resource type="PackedScene" uid="uid://dtgqt2tuo0uwg" path="res://objects/treasure.tscn" id="9_mfehv"]
+[ext_resource type="Texture2D" uid="uid://btt6hhqltcgql" path="res://sprites/treasures.png" id="10_7riix"]
 [ext_resource type="Texture2D" uid="uid://8cy5q4m01a7u" path="res://sprites/painting.png" id="10_go7e6"]
 [ext_resource type="PackedScene" uid="uid://hxebst30nlht" path="res://objects/searchable.tscn" id="10_ixctr"]
 [ext_resource type="PackedScene" uid="uid://b8rgrlge5sx1q" path="res://objects/computer.tscn" id="12_7hgq7"]
@@ -24,6 +25,14 @@
 [ext_resource type="Script" path="res://scripts/scenarios/scenario1.gd" id="19_g0c4x"]
 [ext_resource type="PackedScene" uid="uid://dvndx7lqnykun" path="res://objects/security_camera.tscn" id="19_p64sn"]
 [ext_resource type="AudioStream" uid="uid://vd83yed6t4hb" path="res://audio/music/caught1.ogg" id="22_5nt6l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgm80"]
+atlas = ExtResource("10_7riix")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8u0uo"]
+atlas = ExtResource("10_7riix")
+region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2hxv"]
 size = Vector2(8, 8)
@@ -63,6 +72,10 @@ region = Rect2(256, 72, 32, 24)
 [sub_resource type="AtlasTexture" id="AtlasTexture_38qfw"]
 atlas = ExtResource("13_k20i8")
 region = Rect2(416, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpqyg"]
+atlas = ExtResource("13_k20i8")
+region = Rect2(192, 128, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vvba8"]
 atlas = ExtResource("13_k20i8")
@@ -256,19 +269,18 @@ position = Vector2(232, 680)
 treasure_sprite = ExtResource("10_go7e6")
 
 [node name="Treasure2" parent="Treasure" instance=ExtResource("9_mfehv")]
-position = Vector2(456, 616)
-treasure_sprite = ExtResource("10_go7e6")
+position = Vector2(608, 680)
+value = 100
+treasure_sprite = SubResource("AtlasTexture_hgm80")
 
-[node name="Treasure4" parent="Treasure" instance=ExtResource("9_mfehv")]
-position = Vector2(152, 440)
-treasure_sprite = ExtResource("10_go7e6")
+[node name="Treasure3" parent="Treasure" instance=ExtResource("9_mfehv")]
+z_index = -1
+position = Vector2(176, 349)
+value = 100
+treasure_sprite = SubResource("AtlasTexture_8u0uo")
 
 [node name="Treasure5" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(536, 360)
-treasure_sprite = ExtResource("10_go7e6")
-
-[node name="Treasure6" parent="Treasure" instance=ExtResource("9_mfehv")]
-position = Vector2(168, 344)
 treasure_sprite = ExtResource("10_go7e6")
 
 [node name="Treasure8" parent="Treasure" instance=ExtResource("9_mfehv")]
@@ -277,10 +289,6 @@ treasure_sprite = ExtResource("10_go7e6")
 
 [node name="Treasure9" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(616, 424)
-treasure_sprite = ExtResource("10_go7e6")
-
-[node name="Treasure10" parent="Treasure" instance=ExtResource("9_mfehv")]
-position = Vector2(616, 680)
 treasure_sprite = ExtResource("10_go7e6")
 
 [node name="Searchables" type="Node" parent="."]
@@ -467,6 +475,12 @@ z_index = -2
 texture_filter = 1
 position = Vector2(476, 496)
 texture = SubResource("AtlasTexture_38qfw")
+
+[node name="Furniture29" type="Sprite2D" parent="Furniture"]
+z_index = -2
+texture_filter = 1
+position = Vector2(176, 360)
+texture = SubResource("AtlasTexture_cpqyg")
 
 [node name="Furniture11" type="Sprite2D" parent="Furniture"]
 z_index = -2
@@ -743,12 +757,10 @@ bus = &"BGM"
 [connection signal="started_hacking" from="Player" to="." method="_on_player_started_hacking"]
 [connection signal="stolen" from="Treasure/Treasure1" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure2" to="." method="_on_treasure_stolen"]
-[connection signal="stolen" from="Treasure/Treasure4" to="." method="_on_treasure_stolen"]
+[connection signal="stolen" from="Treasure/Treasure3" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure5" to="." method="_on_treasure_stolen"]
-[connection signal="stolen" from="Treasure/Treasure6" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure8" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure9" to="." method="_on_treasure_stolen"]
-[connection signal="stolen" from="Treasure/Treasure10" to="." method="_on_treasure_stolen"]
 [connection signal="looted" from="Searchables/Searchable1" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable2" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable3" to="." method="_on_searchable_looted"]
