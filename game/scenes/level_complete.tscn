@@ -1,8 +1,141 @@
-[gd_scene load_steps=4 format=3 uid="uid://bylhny47vikrl"]
+[gd_scene load_steps=7 format=3 uid="uid://bylhny47vikrl"]
 
 [ext_resource type="FontFile" uid="uid://cwgn18qi488vs" path="res://fonts/breamcatcher rg.otf" id="1_0g4j8"]
 [ext_resource type="Script" path="res://scenes/level_complete.gd" id="1_pultl"]
 [ext_resource type="Texture2D" uid="uid://ycspb6nkcbog" path="res://sprites/banner1.png" id="2_12mdc"]
+
+[sub_resource type="Animation" id="Animation_njyte"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Banner:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(920, 0), Vector2(800, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-480, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GridContainer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label_Prompt:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_m4vsn"]
+resource_name = "disappear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Banner:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 0.25),
+"update": 0,
+"values": [Vector2(800, 0), Vector2(920, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Vector2(-480, 0), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GridContainer:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Label_Prompt:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t38e5"]
+_data = {
+"appear": SubResource("Animation_njyte"),
+"disappear": SubResource("Animation_m4vsn")
+}
 
 [node name="LevelComplete" type="Control"]
 layout_mode = 3
@@ -12,6 +145,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pultl")
+
+[node name="Banner" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 920.0
+offset_right = 1400.0
+offset_bottom = 720.0
+texture = ExtResource("2_12mdc")
+expand_mode = 5
+stretch_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -23,22 +165,24 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Label" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 96.0
+offset_left = 272.0
 offset_top = 40.0
-offset_right = 598.0
+offset_right = 774.0
 offset_bottom = 188.0
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 120
 text = "Level Complete"
 
 [node name="GridContainer" type="GridContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_left = 104.0
+offset_left = 360.0
 offset_top = 192.0
-offset_right = 595.0
+offset_right = 773.0
 offset_bottom = 616.0
-theme_override_constants/h_separation = 128
+theme_override_constants/h_separation = 50
 theme_override_constants/v_separation = -24
 columns = 2
 
@@ -49,6 +193,7 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 50
 text = "Time"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Label_TimeTaken_Value" type="Label" parent="GridContainer"]
@@ -65,6 +210,7 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 50
 text = "Loot"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Label_Loot_Value" type="Label" parent="GridContainer"]
@@ -81,6 +227,7 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 50
 text = "Alerts"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Label_Alerts_Value" type="Label" parent="GridContainer"]
@@ -97,6 +244,7 @@ theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 50
 text = "Rank"
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="Label_Rank_Value" type="Label" parent="GridContainer"]
@@ -107,23 +255,23 @@ text = "A"
 horizontal_alignment = 2
 
 [node name="Label_Prompt" type="Label" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-offset_left = 104.0
+offset_left = 392.0
 offset_top = 624.0
-offset_right = 399.0
+offset_right = 767.0
 offset_bottom = 688.0
 size_flags_vertical = 5
 theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
 theme_override_fonts/font = ExtResource("1_0g4j8")
 theme_override_font_sizes/font_size = 32
 text = "P r e s s   X   t o   c o n t i n u e"
+horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Banner1" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 672.0
-offset_right = 1152.0
-offset_bottom = 720.0
-texture = ExtResource("2_12mdc")
-expand_mode = 5
-stretch_mode = 4
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t38e5")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
