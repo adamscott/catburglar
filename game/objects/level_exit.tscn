@@ -18,7 +18,7 @@ position = Vector2(0, -16)
 texture = ExtResource("1_mtpm2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -16)
+position = Vector2(24, -16)
 shape = SubResource("RectangleShape2D_aipis")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

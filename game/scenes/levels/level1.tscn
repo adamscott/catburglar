@@ -353,13 +353,12 @@ light_range = 80.0
 [node name="Lights" type="Node" parent="."]
 
 [node name="OutsideLight1" type="PointLight2D" parent="Lights"]
-position = Vector2(32, 0)
 scale = Vector2(1, 100)
 color = Color(0.25098, 0.376471, 0.501961, 1)
 texture = ExtResource("16_ecxg0")
 
 [node name="OutsideLight2" type="PointLight2D" parent="Lights"]
-position = Vector2(656, 0)
+position = Vector2(688, 0)
 rotation = 3.14159
 scale = Vector2(1, -100)
 color = Color(0.25098, 0.376471, 0.501961, 1)
@@ -465,7 +464,7 @@ shape = SubResource("RectangleShape2D_58lti")
 position = Vector2(504, 384)
 
 [node name="LevelExit" parent="Misc" instance=ExtResource("14_qx2jl")]
-position = Vector2(32, 704)
+position = Vector2(-16, 704)
 
 [node name="HUD" parent="." instance=ExtResource("17_x1xen")]
 path_player = NodePath("../Player")

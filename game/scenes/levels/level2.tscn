@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dcv1iqay33qep" path="res://objects/light.tscn" id="9_causn"]
 [ext_resource type="PackedScene" uid="uid://dtgqt2tuo0uwg" path="res://objects/treasure.tscn" id="9_rjy45"]
 [ext_resource type="PackedScene" uid="uid://hxebst30nlht" path="res://objects/searchable.tscn" id="9_y1ey0"]
-[ext_resource type="Texture2D" uid="uid://fv8pyh60q8ee" path="res://sprites/gold.png" id="10_dby50"]
+[ext_resource type="Texture2D" uid="uid://bqj7211lhnd4d" path="res://sprites/vase.png" id="10_ablqv"]
 [ext_resource type="PackedScene" uid="uid://26dcmt2uqm4y" path="res://objects/flickering_light.tscn" id="11_625eh"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="11_yu3wf"]
 [ext_resource type="PackedScene" uid="uid://b2lfcpiy60nl0" path="res://objects/light_toggle.tscn" id="14_17ouq"]
@@ -329,9 +329,9 @@ scale = Vector2(-1, 1)
 [node name="Treasure" type="Node" parent="."]
 
 [node name="Vase" parent="Treasure" instance=ExtResource("9_rjy45")]
-position = Vector2(520, 54)
+position = Vector2(520, 50)
 value = 0
-treasure_sprite = ExtResource("10_dby50")
+treasure_sprite = ExtResource("10_ablqv")
 
 [node name="Searchables" type="Node" parent="."]
 
@@ -784,13 +784,12 @@ path_light = NodePath("../Light")
 [node name="Lights" type="Node" parent="."]
 
 [node name="OutsideLight1" type="PointLight2D" parent="Lights"]
-position = Vector2(32, 0)
 scale = Vector2(1, 100)
 color = Color(0.25098, 0.376471, 0.501961, 1)
 texture = ExtResource("15_gkbw6")
 
 [node name="OutsideLight2" type="PointLight2D" parent="Lights"]
-position = Vector2(560, 0)
+position = Vector2(592, 0)
 rotation = 3.14159
 scale = Vector2(1, -100)
 color = Color(0.25098, 0.376471, 0.501961, 1)
@@ -824,7 +823,7 @@ shape = SubResource("RectangleShape2D_oxjf3")
 [node name="Misc" type="Node" parent="."]
 
 [node name="LevelExit" parent="Misc" instance=ExtResource("6_hlqkw")]
-position = Vector2(32, 528)
+position = Vector2(0, 526)
 
 [node name="Computer" parent="Misc" instance=ExtResource("17_icuwq")]
 position = Vector2(456, 464)
