@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://v3a8dskxord5"]
+[gd_scene load_steps=10 format=3 uid="uid://v3a8dskxord5"]
 
 [ext_resource type="Texture2D" uid="uid://dsavliaq6yeck" path="res://sprites/ending.png" id="1_b5vyb"]
 [ext_resource type="Script" path="res://scenes/ending.gd" id="1_qymq5"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://d2sjpo0g5bsly" path="res://audio/amb/beach.ogg" id="3_c43lt"]
 [ext_resource type="FontFile" uid="uid://dobcyrrdj03ub" path="res://fonts/CaviarDreams.ttf" id="3_ytmr0"]
 [ext_resource type="FontFile" uid="uid://cwgn18qi488vs" path="res://fonts/breamcatcher rg.otf" id="4_fm7bh"]
+[ext_resource type="AudioStream" uid="uid://cl8jn8rddlc0m" path="res://audio/music/ending.ogg" id="7_y3nou"]
 
 [sub_resource type="Animation" id="Animation_qn46v"]
 resource_name = "ending"
@@ -113,6 +114,21 @@ tracks/7/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Audio_BGM")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_y3nou")
+}],
+"times": PackedFloat32Array(8)
+}
+tracks/8/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vwbv8"]
 _data = {
@@ -203,6 +219,10 @@ horizontal_alignment = 1
 [node name="Audio_Ambience" type="AudioStreamPlayer" parent="."]
 volume_db = -60.0
 bus = &"AMB"
+
+[node name="Audio_BGM" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+bus = &"BGM"
 
 [node name="Audio_VO" type="AudioStreamPlayer" parent="."]
 
