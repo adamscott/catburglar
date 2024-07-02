@@ -3,6 +3,7 @@ extends Node
 @onready var audio_bgm : AudioStreamPlayer = $Audio_BGM
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
 @onready var timer_restart_level : Timer = $Timer_RestartLevel
+@onready var pause_screen : Control = $CanvasLayer/PauseScreen
 
 enum State {IN_GAME, PAUSED, GAME_OVER, LEVEL_COMPLETE}
 
@@ -35,6 +36,10 @@ func _on_animation_player_animation_finished(anim_name : String) -> void:
 				get_tree().paused = false
 				get_tree().change_scene_to_file("res://scenes/level_complete.tscn")
 
+func _on_pause_screen_exited() -> void:
+	get_tree().paused = false
+	current_state = State.IN_GAME
+
 func spawn_level() -> void:
 	var scene : PackedScene = load(Constants.get_level_scene_path(GameProgress.current_level))
 	level = scene.instantiate()
@@ -45,8 +50,18 @@ func spawn_level() -> void:
 	GameProgress.start_level()
 	Utilities.start_timer()
 
+func pause() -> void:
+	get_tree().paused = true
+	current_state = State.PAUSED
+	pause_screen.appear()
+
+func _input(event : InputEvent) -> void:
+	if event.is_action_pressed("pause") and current_state == State.IN_GAME:
+		pause()
+
 func _ready() -> void:
 	spawn_level()
 	anim_player.play("anim_in")
 	audio_bgm.stream = load(Constants.get_level_music_path(GameProgress.current_level))
 	audio_bgm.play()
+

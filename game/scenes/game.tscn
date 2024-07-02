@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://btmwklwbjyob0"]
+[gd_scene load_steps=6 format=3 uid="uid://btmwklwbjyob0"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_icy1q"]
+[ext_resource type="PackedScene" uid="uid://b7ajk7rvap5nu" path="res://objects/ui/pause_screen.tscn" id="2_64b4y"]
 
 [sub_resource type="Animation" id="Animation_no1i5"]
 resource_name = "anim_in"
@@ -92,15 +93,17 @@ script = ExtResource("1_icy1q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("2_64b4y")]
+
 [node name="Bar_Top" type="ColorRect" parent="CanvasLayer"]
+offset_top = -360.0
 offset_right = 1280.0
-offset_bottom = 360.0
 color = Color(0, 0, 0, 1)
 
 [node name="Bar_Bottom" type="ColorRect" parent="CanvasLayer"]
-offset_top = 360.0
+offset_top = 720.0
 offset_right = 1280.0
-offset_bottom = 720.001
+offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
 [node name="Audio_BGM" type="AudioStreamPlayer" parent="." groups=["bgm_player"]]
@@ -116,5 +119,6 @@ libraries = {
 wait_time = 1.5
 one_shot = true
 
+[connection signal="exited" from="CanvasLayer/PauseScreen" to="." method="_on_pause_screen_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Timer_RestartLevel" to="." method="_on_timer_restart_level_timeout"]
