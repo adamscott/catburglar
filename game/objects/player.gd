@@ -77,6 +77,8 @@ func get_interact_action_label() -> String:
 		elif interactable.is_in_group(&"hiding_place"):
 			return &"Hide"
 		elif interactable.is_in_group(&"door"):
+			door_destination = interactable.get_destination()
+			door_destination.make_outline_visible()
 			return &"Enter"
 		elif interactable.is_in_group(&"level_exit"):
 			return &"Escape"

@@ -10,6 +10,7 @@ const ANIM_SPEED : float = 24.0
 		backless = val
 
 @onready var sprite_doors : Sprite2D = $Sprite2D_Doors
+@onready var sprite_outline : Sprite2D = $Sprite2D_Outline
 @onready var timer_close_doors : Timer = $Timer_CloseDoors
 
 var actual_frame : float = 0.0
@@ -21,6 +22,9 @@ func _on_timer_close_doors_timeout() -> void:
 func get_destination() -> Node2D:
 	return get_node(destination)
 
+func make_outline_visible() -> void:
+	sprite_outline.modulate.a = 1.0
+
 func open() -> void:
 	target_frame = 5.0
 	timer_close_doors.start()
@@ -28,3 +32,5 @@ func open() -> void:
 func _physics_process(delta : float) -> void:
 	actual_frame = move_toward(actual_frame, target_frame, ANIM_SPEED * delta)
 	sprite_doors.frame = actual_frame
+	if sprite_outline.modulate.a > 0.0:
+		sprite_outline.modulate.a -= delta * 4.0
