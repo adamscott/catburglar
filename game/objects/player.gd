@@ -18,6 +18,8 @@ const AUDIO_STEPS : Array = [
 	preload("res://audio/sfx/step3.ogg")
 ]
 
+@export_node_path("Camera2D") var path_camera
+
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var sprite_smash_vase : Sprite2D = $Sprite2D_SmashVase
 @onready var area_interact : Area2D = $Area2D_Interact
@@ -28,6 +30,7 @@ const AUDIO_STEPS : Array = [
 @onready var audio_land : AudioStreamPlayer2D = $Audio_Land
 @onready var audio_vent_hit : AudioStreamPlayer2D = $Audio_VentHit
 @onready var audio_vase_smash : AudioStreamPlayer2D = $Audio_VaseSmash
+@onready var camera : Camera2D = get_node(path_camera)
 
 enum State {NORMAL, CROUCHING_DOWN, CROUCHED, STANDING_UP, ENTERING_ROLL, ROLLING, LEAVING_ROLL, FALLING, LANDING, ENTERING_DOOR, LEAVING_DOOR, ENTERING_LIFT, SEARCHING, SWIPING, HACKING, IN_PIPE, SMASHING_VASE, CAUGHT, ESCAPING}
 
@@ -63,6 +66,17 @@ signal vase_smashed
 
 func can_interact() -> bool:
 	return area_interact.has_overlapping_areas()
+
+func update_camera_offset() -> void:
+	camera.override = false
+	var interactables : Array[Area2D] = area_interact.get_overlapping_areas()
+	for interactable in interactables:
+		if interactable.is_in_group(&"door"):
+			door_destination = interactable.get_destination()
+			var difference : Vector2 = door_destination.global_position - global_position
+			if difference.length() > 100.0:
+				camera.override = true
+				camera.override_position = (global_position + door_destination.global_position) / 2.0
 
 # This function assumes that we'll never be overlapping two or more interactables at once
 func get_interact_action_label() -> String:
@@ -358,6 +372,7 @@ func _physics_process_leaving_roll(delta : float) -> void:
 	do_rolling_fall(delta)
 
 func _physics_process_normal(delta : float) -> void:
+	update_camera_offset()
 	obscured = false
 	var movement_desired : float = Input.get_axis(&"left", &"right")
 	if movement_desired != 0.0 and !ignore_inputs:

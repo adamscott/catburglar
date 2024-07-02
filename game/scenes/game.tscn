@@ -96,14 +96,14 @@ script = ExtResource("1_icy1q")
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("2_64b4y")]
 
 [node name="Bar_Top" type="ColorRect" parent="CanvasLayer"]
-offset_top = -360.0
 offset_right = 1280.0
+offset_bottom = 360.0
 color = Color(0, 0, 0, 1)
 
 [node name="Bar_Bottom" type="ColorRect" parent="CanvasLayer"]
-offset_top = 720.0
+offset_top = 360.0
 offset_right = 1280.0
-offset_bottom = 1080.0
+offset_bottom = 720.001
 color = Color(0, 0, 0, 1)
 
 [node name="Audio_BGM" type="AudioStreamPlayer" parent="." groups=["bgm_player"]]

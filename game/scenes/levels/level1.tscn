@@ -133,6 +133,7 @@ layer_1/tile_data = PackedInt32Array(2686976, 327681, 0, 2752512, 262145, 1, 281
 
 [node name="Player" parent="." instance=ExtResource("4_xwqo5")]
 position = Vector2(64, 704)
+path_camera = NodePath("../Camera")
 
 [node name="Camera" parent="." instance=ExtResource("5_6xjeu")]
 position = Vector2(64, 704)
