@@ -207,7 +207,16 @@ func can_stand_up() -> bool:
 func do_horizontal_movement(movement_desired : float, speed : float, delta : float) -> void:
 	sprite.flip_h = movement_desired < 0.0
 	facing = Vector2.RIGHT if movement_desired > 0.0 else Vector2.LEFT
-	var collision : KinematicCollision2D = move_and_collide(Vector2.RIGHT * movement_desired * delta * WALK_SPEED)
+	var movement_direction : Vector2 = facing
+	var downslope : bool = false
+	var test_collision : KinematicCollision2D = move_and_collide(Vector2.DOWN, true)
+	if test_collision != null:
+		var test_normal : Vector2 = test_collision.get_normal().snapped(Vector2(0.25, 0.25))
+		if (test_normal == Vector2(0.75, -0.75) and movement_desired == 1.0) or (test_normal == Vector2(-0.75, -0.75) and movement_desired == -1.0):
+			downslope = true
+			movement_direction.y = 1.0
+	
+	var collision : KinematicCollision2D = move_and_collide(movement_direction * delta * WALK_SPEED)
 	if collision != null:
 		var normal : Vector2 = collision.get_normal().snapped(Vector2(0.25, 0.25))
 		if normal == Vector2(0.75, -0.75):
