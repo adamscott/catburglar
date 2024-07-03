@@ -344,6 +344,9 @@ func _physics_process_entering_roll(delta : float) -> void:
 	if anim_index >= 2.0:
 		current_state = State.ROLLING
 		anim_index = 0.0
+	if Input.is_action_just_pressed(&"down") and !ignore_inputs:
+		set_collision_mask_value(4, false)
+		platforms_on_timer = PLATFORMS_OFF_LENGTH
 	do_rolling_horizontal_movement(HALF_ROLL_SPEED, delta)
 	do_rolling_fall(delta)
 
@@ -351,6 +354,9 @@ func _physics_process_rolling(delta : float) -> void:
 	update_obscured()
 	anim_index += delta * 15.0
 	sprite.frame = 86 + wrapf(anim_index, 0.0, 4.0)
+	if Input.is_action_just_pressed(&"down") and !ignore_inputs:
+		set_collision_mask_value(4, false)
+		platforms_on_timer = PLATFORMS_OFF_LENGTH
 	do_rolling_horizontal_movement(ROLL_SPEED, delta)
 	do_rolling_fall(delta)
 	roll_distance -= ROLL_SPEED * delta
