@@ -10,7 +10,7 @@ const DIALOGUE_LINES : Dictionary = {
 	"level2_guard": {"line": "Aw, Cronjager... burning the midnight oil again? Someone hasn't had his coffee. I could make use of that."},
 	"level2_statue": {"line": "Talk about still life..."},
 	"level2_poster": {"line": "*sigh* I was really looking forward to that movie..."},
-	"level2_vent1": {"line": "That vent looks large about to fit in. It's not graceful, but it's the best way of getting about completely undetected."},
+	"level2_vent1": {"line": "That vent looks large enough to fit in. It's not graceful, but it's the best way of getting about completely undetected."},
 	"level2_vent2": {"line": "Completely. Un. Detected."},
 	"level2_computer": {"line": "Holding out on Uncle Sam, are we, Chandler? Cab drivers pay more tax than that."},
 	"level2_goal": {"line": "Well, aren't you a pretty little thing. Lighter than I was expecting, too..."},
