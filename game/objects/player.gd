@@ -106,6 +106,9 @@ func get_interact_action_label() -> String:
 			return &"Get Even"
 	return &""
 
+func should_hud_update_visibility() -> bool:
+	return current_state in [State.NORMAL, State.CROUCHING_DOWN, State.CROUCHED, State.STANDING_UP, State.ENTERING_ROLL, State.ROLLING, State.LEAVING_ROLL, State.FALLING, State.LANDING, State.SWIPING]
+
 func can_be_spotted() -> bool:
 	return current_state in [State.NORMAL, State.CROUCHING_DOWN, State.CROUCHED, State.STANDING_UP, State.ENTERING_ROLL, State.ROLLING, State.LEAVING_ROLL, State.FALLING, State.LANDING, State.SWIPING, State.HACKING, State.CAUGHT] and lit and !obscured and !ignore_inputs
 

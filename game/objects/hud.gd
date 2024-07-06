@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+enum Visibility {IN_LIGHT, IN_SHADOW, HIDDEN, NIL}
+
 const LOOT_SHOW_TIME : float = 3.0
 const OBJECTIVE_SHOW_TIME : float = 6.0
 const MOVE_SPEED : float = 4.0
@@ -7,9 +9,9 @@ const MOVE_SPEED : float = 4.0
 @export_node_path("Node2D") var path_player
 @onready var player : Node2D = get_node(path_player)
 
-@onready var texture_in_light : TextureRect = $Texture_InLight
-@onready var texture_in_shadow : TextureRect = $Texture_InShadow
-@onready var texture_hidden : TextureRect = $Texture_Hidden
+@onready var label_visibility : Label = $Visibility/Label_Visibility_Label
+@onready var texture_eye_left : TextureRect = $Visibility/Texture_Eye_Left
+@onready var texture_eye_right : TextureRect = $Visibility/Texture_Eye_Right
 @onready var label_loot_value : Label = $Loot/Label_Loot_Value
 @onready var label_objective_value : Label = $Objective/Label_Objective_Value
 @onready var loot : Control = $Loot
@@ -26,9 +28,13 @@ const MOVE_SPEED : float = 4.0
 @onready var timer_hide_hint : Timer = $Timer_HideHint
 @onready var timer_hide_loot_description : Timer = $Timer_HideLootDescription
 @onready var audio_vo : AudioStreamPlayer = $Audio_VO
+@onready var audio_in_light : AudioStreamPlayer = $Audio_InLight
+@onready var audio_in_shadow : AudioStreamPlayer = $Audio_InShadow
 
 var loot_show_time : float = 0.0
 var objective_show_time : float = 0.0
+
+var current_visibility : int = Visibility.NIL
 
 var game_over : bool = false
 var grey_amount : float = 0.0
@@ -109,15 +115,39 @@ func show_loot() -> void:
 func show_objective() -> void:
 	objective_show_time = OBJECTIVE_SHOW_TIME
 
+func get_visibility() -> int:
+	if player.lit and !player.obscured and !game_over:
+		return Visibility.IN_LIGHT
+	elif !player.lit and !game_over:
+		return Visibility.IN_SHADOW
+	elif player.lit and player.obscured and !game_over:
+		return Visibility.HIDDEN
+	return Visibility.NIL
+
+func change_visibility(visibility : int) -> void:
+	match visibility:
+		Visibility.IN_LIGHT:
+			label_visibility.text = "IN LIGHT"
+			audio_in_light.play()
+		Visibility.IN_SHADOW:
+			label_visibility.text = "IN SHADOW"
+			audio_in_shadow.play()
+		Visibility.HIDDEN:
+			label_visibility.text = "HIDDEN"
+	texture_eye_left.visible = visibility == Visibility.IN_LIGHT
+	texture_eye_right.visible = visibility == Visibility.IN_LIGHT
+	current_visibility = visibility
+
 func _input(event : InputEvent) -> void:
 	if event.is_action_pressed("interact") and playing_dialogue:
 		audio_vo.stop()
 		_on_audio_vo_finished()
 
 func _physics_process(delta : float) -> void:
-	texture_in_light.visible = player.lit and !player.obscured and !game_over
-	texture_in_shadow.visible = !player.lit and !game_over
-	texture_hidden.visible = player.lit and player.obscured and !game_over
+	if player.should_hud_update_visibility():
+		var new_visibility : int = get_visibility()
+		if current_visibility != new_visibility:
+			change_visibility(new_visibility)
 	var loot_target_pos : float = 16.0 if loot_show_time > 0.0 else -32.0
 	var objective_target_pos : float = 680.0 if objective_show_time > 0.0 else 720.0
 	if loot_show_time > 0.0: loot_show_time -= delta
