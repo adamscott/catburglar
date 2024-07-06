@@ -1,10 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://c4mps0fd7w7o6"]
+[gd_scene load_steps=11 format=3 uid="uid://c4mps0fd7w7o6"]
 
 [ext_resource type="Script" path="res://objects/guard.gd" id="1_2k1pj"]
 [ext_resource type="Texture2D" uid="uid://qvu3r3ukmghp" path="res://sprites/guard.png" id="1_a0fpc"]
 [ext_resource type="Texture2D" uid="uid://ce0pjre7apwa1" path="res://sprites/question_bubble.png" id="3_sd5la"]
 [ext_resource type="Texture2D" uid="uid://fr4jedx70irm" path="res://sprites/exclamation_bubble.png" id="4_n77mr"]
 [ext_resource type="AudioStream" uid="uid://c1gqsmlautaac" path="res://audio/sfx/step1.ogg" id="5_85jyf"]
+[ext_resource type="AudioStream" uid="uid://dcywbslfkywks" path="res://audio/sfx/guard_huh.ogg" id="6_hiyb2"]
+[ext_resource type="AudioStream" uid="uid://c2tydfwvlmqi6" path="res://audio/sfx/guard_nevermind.ogg" id="7_inugm"]
+[ext_resource type="AudioStream" uid="uid://6tfitprj6h8" path="res://audio/sfx/guard_alert.ogg" id="8_5dea6"]
+[ext_resource type="AudioStream" uid="uid://72fdpcxhl7wd" path="res://audio/sfx/guard_sleep.ogg" id="9_kgait"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gke4u"]
 size = Vector2(16, 40)
@@ -74,5 +78,27 @@ texture = ExtResource("4_n77mr")
 
 [node name="Audio_Step" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_85jyf")
+max_distance = 640.0
+bus = &"sfx"
+
+[node name="Audio_Huh" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_hiyb2")
+max_distance = 640.0
+bus = &"sfx"
+
+[node name="Audio_Nevermind" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_inugm")
+max_distance = 640.0
+bus = &"sfx"
+
+[node name="Audio_Alert" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_5dea6")
+volume_db = 5.0
+max_distance = 640.0
+bus = &"sfx"
+
+[node name="Audio_Sleep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_kgait")
+volume_db = -10.0
 max_distance = 640.0
 bus = &"sfx"

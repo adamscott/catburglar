@@ -20,6 +20,10 @@ enum State {WAITING_AT_POINT, PATROLLING, ENTERING_SLEEP, SLEEPING, LEAVING_SLEE
 @onready var sprite_question : Sprite2D = $Sprite_Question
 @onready var sprite_exclamation : Sprite2D = $Sprite_Exclamation
 @onready var audio_step : AudioStreamPlayer2D = $Audio_Step
+@onready var audio_huh : AudioStreamPlayer2D = $Audio_Huh
+@onready var audio_nevermind : AudioStreamPlayer2D = $Audio_Nevermind
+@onready var audio_alert : AudioStreamPlayer2D = $Audio_Alert
+@onready var audio_sleep : AudioStreamPlayer2D = $Audio_Sleep
 
 var current_state : int = State.PATROLLING
 var patrol_point_index : int = 0
@@ -89,6 +93,7 @@ func _physics_process_patrolling(delta : float) -> void:
 		thinking_time = THINKING_TIME
 		sprite_question.show()
 		get_player().seen()
+		audio_huh.play()
 	else:
 		var destination_position : Vector2 = get_current_patrol_point().global_position
 		var distance_to_destination : float = abs(global_position.x - destination_position.x)
@@ -97,6 +102,7 @@ func _physics_process_patrolling(delta : float) -> void:
 				current_state = State.ENTERING_SLEEP
 				sleeping_time = get_current_patrol_point().sleep_time
 				anim_index = 0.0
+				audio_sleep.play()
 			else:
 				current_state = State.WAITING_AT_POINT
 				waiting_time = get_current_patrol_point().wait_time
@@ -142,9 +148,11 @@ func _physics_process_spotted_player(delta : float) -> void:
 			current_state = State.ALERT
 			sprite_question.hide()
 			sprite_exclamation.show()
+			audio_alert.play()
 		else:
 			current_state = State.PATROLLING
 			sprite_question.hide()
+			audio_nevermind.play()
 
 func _physics_process(delta : float) -> void:
 	match current_state:
