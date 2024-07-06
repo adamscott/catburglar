@@ -430,7 +430,6 @@ func _physics_process_falling(delta : float) -> void:
 	if fall_collision != null:
 		set_collision_mask_value(4, true)
 		if velocity.y > LAND_THRESHOLD:
-			print(velocity.y)
 			if Input.is_action_pressed(&"down") and !ignore_inputs:
 				collision_standing.disabled = true
 				collision_crouched.disabled = false
