@@ -8,6 +8,7 @@ var rebinding_action : String
 var target_cursor_y : float
 var cursor_y : float
 var active : bool = false
+var time_to_next_analogue_input : float = 0.0
 
 signal button_pressed
 signal closed
@@ -57,22 +58,29 @@ func _input_rebinding(event : InputEvent) -> void:
 		get_child(current_item).refresh()
 
 func _input_menu(event : InputEvent) -> void:
+	if event is InputEventJoypadMotion and time_to_next_analogue_input > 0.0:
+		get_viewport().set_input_as_handled()
+		return
 	if event.is_action_pressed("up"):
 		current_item = wrapi(current_item - 1, 0, get_child_count())
 		maybe_skip(-1)
 		get_viewport().set_input_as_handled()
+		time_to_next_analogue_input = 0.2
 		#SoundController.play_sound("ui_move")
 	elif event.is_action_pressed("down"):
 		current_item = wrapi(current_item + 1, 0, get_child_count())
 		maybe_skip(1)
 		get_viewport().set_input_as_handled()
+		time_to_next_analogue_input = 0.2
 		#SoundController.play_sound("ui_move")
 	elif event.is_action_pressed("left"):
 		get_child(current_item).decrease()
 		get_viewport().set_input_as_handled()
+		time_to_next_analogue_input = 0.2
 	elif event.is_action_pressed("right"):
 		get_child(current_item).increase()
 		get_viewport().set_input_as_handled()
+		time_to_next_analogue_input = 0.2
 	elif event.is_action_pressed("interact"):
 		get_viewport().set_input_as_handled()
 		get_child(current_item).activate()
@@ -90,6 +98,8 @@ func _input(event : InputEvent) -> void:
 		_input_menu(event)
 
 func _physics_process(delta : float) -> void:
+	if time_to_next_analogue_input > 0.0:
+		time_to_next_analogue_input -= delta
 	cursor_y = lerp(cursor_y, target_cursor_y, 20.0 * delta)
 	queue_redraw()
 
