@@ -9,6 +9,7 @@ const ALARM_TIME : float = 3.0
 @onready var audio_sight : AudioStreamPlayer2D = $Audio_Sight
 @onready var audio_nevermind : AudioStreamPlayer2D = $Audio_Nevermind
 @onready var audio_alarm : AudioStreamPlayer2D = $Audio_Alarm
+@onready var audio_move : AudioStreamPlayer2D = $Audio_Move
 
 enum State {WATCHING, MOVING, MAYBE, ALARM}
 
@@ -53,6 +54,7 @@ func _physics_process_watching(delta : float) -> void:
 		anim_index = 0.0
 		pointed.x *= -1.0
 		raycasts.scale.x *= -1.0
+		audio_move.play()
 
 func _physics_process_moving(delta : float) -> void:
 	light.enabled = false
