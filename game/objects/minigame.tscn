@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dv15ok1gu3g6l"]
+[gd_scene load_steps=9 format=3 uid="uid://dv15ok1gu3g6l"]
 
 [ext_resource type="Texture2D" uid="uid://ch3qjq80rkfat" path="res://sprites/minigame/background.png" id="1_4245s"]
 [ext_resource type="Script" path="res://objects/minigame.gd" id="1_uyrc2"]
 [ext_resource type="Texture2D" uid="uid://ck56e00b007lg" path="res://sprites/minigame/progress.png" id="2_dvjwv"]
 [ext_resource type="Texture2D" uid="uid://ttxinhahp78h" path="res://sprites/minigame/arrows.png" id="3_girdl"]
 [ext_resource type="Texture2D" uid="uid://dmwbkcsrmijxg" path="res://sprites/minigame/timer.png" id="4_vyjxg"]
+[ext_resource type="AudioStream" uid="uid://bcjqf2fqlokw0" path="res://audio/amb/hacking.ogg" id="6_w0fu3"]
+[ext_resource type="AudioStream" uid="uid://decvaljuqa3g8" path="res://audio/sfx/hack_yes.ogg" id="7_56p0t"]
+[ext_resource type="AudioStream" uid="uid://cphdv1qpacjn0" path="res://audio/sfx/hack_no.ogg" id="8_nup70"]
 
 [node name="Minigame" type="Node2D"]
 script = ExtResource("1_uyrc2")
@@ -51,3 +54,18 @@ frame = 3
 texture_filter = 1
 position = Vector2(0, -27.5)
 texture = ExtResource("4_vyjxg")
+
+[node name="Audio_BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_w0fu3")
+volume_db = -5.0
+bus = &"amb"
+
+[node name="Audio_Yes" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_56p0t")
+volume_db = -5.0
+bus = &"sfx"
+
+[node name="Audio_No" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_nup70")
+volume_db = -5.0
+bus = &"sfx"
