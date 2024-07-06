@@ -75,4 +75,4 @@ texture = ExtResource("4_n77mr")
 [node name="Audio_Step" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_85jyf")
 max_distance = 640.0
-bus = &"SFX"
+bus = &"sfx"

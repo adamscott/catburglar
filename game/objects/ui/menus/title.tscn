@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://cowuxseai4hbv"]
+
+[ext_resource type="Script" path="res://scripts/menu.gd" id="1_4yfa0"]
+[ext_resource type="PackedScene" uid="uid://hc8gvdg03bpo" path="res://objects/ui/menu/menu_item_button.tscn" id="3_6504m"]
+
+[node name="TitleMenu" type="VBoxContainer"]
+texture_filter = 1
+offset_right = 256.0
+offset_bottom = 120.0
+theme_override_constants/separation = 0
+script = ExtResource("1_4yfa0")
+
+[node name="Play" parent="." instance=ExtResource("3_6504m")]
+layout_mode = 2
+id = "play"
+title = "Play"
+
+[node name="Settings" parent="." instance=ExtResource("3_6504m")]
+layout_mode = 2
+id = "settings"
+title = "Settings"
+
+[node name="Credits" parent="." instance=ExtResource("3_6504m")]
+layout_mode = 2
+id = "credits"
+title = "Credits"
+
+[node name="Quit" parent="." instance=ExtResource("3_6504m")]
+layout_mode = 2
+id = "quit"
+title = "Quit"

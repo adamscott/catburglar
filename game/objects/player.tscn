@@ -58,24 +58,24 @@ shape = SubResource("RectangleShape2D_e00du")
 [node name="Audio_Step" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_kmt07")
 max_distance = 640.0
-bus = &"SFX"
+bus = &"sfx"
 
 [node name="Audio_Roll" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_u2kjq")
 max_distance = 640.0
-bus = &"SFX"
+bus = &"sfx"
 
 [node name="Audio_Land" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_pk6tb")
 max_distance = 640.0
-bus = &"SFX"
+bus = &"sfx"
 
 [node name="Audio_VentHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_7fhh8")
 max_distance = 640.0
-bus = &"SFX"
+bus = &"sfx"
 
 [node name="Audio_VaseSmash" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_6xrgm")
 max_distance = 640.0
-bus = &"SFX"
+bus = &"sfx"

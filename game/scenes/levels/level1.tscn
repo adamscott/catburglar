@@ -727,6 +727,20 @@ slug = "search"
 position = Vector2(-56, 0)
 shape = SubResource("RectangleShape2D_58lti")
 
+[node name="HintTrigger3" parent="Hints" instance=ExtResource("16_rs7w6")]
+position = Vector2(416, 440)
+slug = "roll_under"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintTrigger3"]
+shape = SubResource("RectangleShape2D_58lti")
+
+[node name="HintTrigger4" parent="Hints" instance=ExtResource("16_rs7w6")]
+position = Vector2(376, 568)
+slug = "short_roll"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintTrigger4"]
+shape = SubResource("RectangleShape2D_58lti")
+
 [node name="Misc" type="Node" parent="."]
 
 [node name="Computer" parent="Misc" instance=ExtResource("12_7hgq7")]
@@ -747,7 +761,7 @@ path_level_exit = NodePath("../Misc/LevelExit")
 
 [node name="Audio_Stinger" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_5nt6l")
-bus = &"BGM"
+bus = &"bgm"
 
 [connection signal="caught" from="Player" to="." method="_on_player_caught"]
 [connection signal="escaped" from="Player" to="." method="_on_player_escaped"]
@@ -767,6 +781,8 @@ bus = &"BGM"
 [connection signal="activated" from="Dialogues/DialogueTrigger3" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Hints/HintTrigger1" to="HUD" method="_on_hint_trigger_activated"]
 [connection signal="activated" from="Hints/HintTrigger2" to="HUD" method="_on_hint_trigger_activated"]
+[connection signal="activated" from="Hints/HintTrigger3" to="HUD" method="_on_hint_trigger_activated"]
+[connection signal="activated" from="Hints/HintTrigger4" to="HUD" method="_on_hint_trigger_activated"]
 [connection signal="dialogue_finished" from="HUD" to="." method="_on_hud_dialogue_finished"]
 [connection signal="minigame_failed" from="HUD" to="." method="_on_hud_minigame_failed"]
 [connection signal="minigame_succeeded" from="HUD" to="." method="_on_hud_minigame_succeeded"]

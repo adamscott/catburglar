@@ -23,6 +23,7 @@ Constants="*res://scripts/constants.gd"
 Utilities="*res://scripts/utilities.gd"
 GameProgress="*res://scripts/game_progress.gd"
 Dialogues="*res://scripts/dialogues.gd"
+Settings="*res://scripts/settings.gd"
 
 [display]
 

@@ -756,7 +756,7 @@ path_level_exit = NodePath("../Misc/LevelExit")
 
 [node name="Audio_Stinger" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_xhhdy")
-bus = &"BGM"
+bus = &"bgm"
 
 [connection signal="caught" from="Player" to="." method="_on_player_caught"]
 [connection signal="escaped" from="Player" to="." method="_on_player_escaped"]
