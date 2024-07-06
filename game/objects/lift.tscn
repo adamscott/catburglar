@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c7gy24dsii3su"]
+[gd_scene load_steps=9 format=3 uid="uid://c7gy24dsii3su"]
 
 [ext_resource type="Script" path="res://objects/lift.gd" id="1_gaicb"]
 [ext_resource type="Texture2D" uid="uid://bgn43xwrbyrjs" path="res://sprites/lift_single.png" id="2_dvofd"]
 [ext_resource type="Texture2D" uid="uid://ddfbiav6gy0pu" path="res://sprites/lift_doors.png" id="2_ncetw"]
 [ext_resource type="Shader" path="res://shaders/ants.gdshader" id="4_bu3o8"]
 [ext_resource type="Texture2D" uid="uid://ctbt27rsu75pm" path="res://sprites/lift_outline.png" id="5_1hxn6"]
+[ext_resource type="AudioStream" uid="uid://dxv1v3dvqrmpa" path="res://audio/sfx/lift_open.ogg" id="6_emwt0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c1dm2"]
 shader = ExtResource("4_bu3o8")
@@ -41,6 +42,10 @@ texture = ExtResource("5_1hxn6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -20)
 shape = SubResource("RectangleShape2D_kxvj4")
+
+[node name="Audio_Open" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_emwt0")
+bus = &"sfx"
 
 [node name="Timer_CloseDoors" type="Timer" parent="."]
 wait_time = 0.5

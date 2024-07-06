@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://djjs1exf7e7aq"]
+[gd_scene load_steps=59 format=3 uid="uid://djjs1exf7e7aq"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_t2k1n"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_cpp0q"]
@@ -20,8 +20,12 @@
 [ext_resource type="Texture2D" uid="uid://bqj7211lhnd4d" path="res://sprites/vase.png" id="10_ablqv"]
 [ext_resource type="PackedScene" uid="uid://26dcmt2uqm4y" path="res://objects/flickering_light.tscn" id="11_625eh"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="11_yu3wf"]
+[ext_resource type="AudioStream" uid="uid://c1ksgc4glnvq4" path="res://audio/sfx/fridge_open.ogg" id="13_rudei"]
 [ext_resource type="PackedScene" uid="uid://b2lfcpiy60nl0" path="res://objects/light_toggle.tscn" id="14_17ouq"]
+[ext_resource type="AudioStream" uid="uid://bmecgrnajhabc" path="res://audio/sfx/drawer_open.ogg" id="14_kga06"]
 [ext_resource type="Texture2D" uid="uid://cki0solhdng5r" path="res://sprites/gradient.png" id="15_gkbw6"]
+[ext_resource type="AudioStream" uid="uid://cigqwvtafftdf" path="res://audio/sfx/toilet_flush.ogg" id="15_ps5t6"]
+[ext_resource type="AudioStream" uid="uid://dwnwhp7iub0l6" path="res://audio/sfx/bookshelf_search.ogg" id="16_kvcl7"]
 [ext_resource type="PackedScene" uid="uid://b8rgrlge5sx1q" path="res://objects/computer.tscn" id="17_icuwq"]
 [ext_resource type="Script" path="res://scripts/scenarios/scenario2.gd" id="19_14245"]
 [ext_resource type="AudioStream" uid="uid://vd83yed6t4hb" path="res://audio/music/caught1.ogg" id="25_lx1dw"]
@@ -389,6 +393,7 @@ shape = SubResource("RectangleShape2D_s4xh5")
 [node name="Searchable2" parent="Searchables" instance=ExtResource("9_y1ey0")]
 position = Vector2(504, 504)
 description = "Some expired milk. Ew."
+search_sound = ExtResource("13_rudei")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable2"]
 shape = SubResource("RectangleShape2D_s4xh5")
@@ -397,6 +402,7 @@ shape = SubResource("RectangleShape2D_s4xh5")
 position = Vector2(304, 64)
 value = 150.0
 description = "A set of exquisite photo frames."
+search_sound = ExtResource("14_kga06")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable3"]
 shape = SubResource("RectangleShape2D_s4xh5")
@@ -404,6 +410,7 @@ shape = SubResource("RectangleShape2D_s4xh5")
 [node name="Searchable4" parent="Searchables" instance=ExtResource("9_y1ey0")]
 position = Vector2(344, 256)
 description = "Nothing. What were you expecting?"
+search_sound = ExtResource("15_ps5t6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable4"]
 shape = SubResource("RectangleShape2D_s4xh5")
@@ -412,6 +419,7 @@ shape = SubResource("RectangleShape2D_s4xh5")
 position = Vector2(88, 448)
 value = 50.0
 description = "A first edition copy of \"101 Ways to Stop Pacing Constantly\"."
+search_sound = ExtResource("16_kvcl7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable5"]
 shape = SubResource("RectangleShape2D_s4xh5")

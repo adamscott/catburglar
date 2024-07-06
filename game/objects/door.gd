@@ -6,6 +6,7 @@ const ANIM_SPEED : float = 24.0
 
 @onready var sprite : Sprite2D = $Sprite2D
 @onready var sprite_outline : Sprite2D = $Sprite2D_Outline
+@onready var audio_open : AudioStreamPlayer2D = $Audio_Open
 @onready var timer_close_door : Timer = $Timer_CloseDoor
 
 var actual_frame : float = 0.0
@@ -21,6 +22,7 @@ func make_outline_visible() -> void:
 	sprite_outline.modulate.a = 1.0
 
 func open() -> void:
+	audio_open.play()
 	target_frame = 6.0
 	timer_close_door.start()
 

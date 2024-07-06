@@ -178,6 +178,7 @@ func try_to_interact() -> void:
 			anim_index = 0.0
 		elif interactable.is_in_group(&"searchable"):
 			if !interactable.searched:
+				interactable.play_search_sound()
 				thing_to_search = interactable
 				current_state = State.SEARCHING
 				anim_index = 0.0

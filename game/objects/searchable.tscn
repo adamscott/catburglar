@@ -6,3 +6,6 @@
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_3bkfp")
+
+[node name="Audio_Searched" type="AudioStreamPlayer2D" parent="."]
+bus = &"sfx"

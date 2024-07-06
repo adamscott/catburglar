@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://y2y02gmayr5k"]
+[gd_scene load_steps=49 format=3 uid="uid://y2y02gmayr5k"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_c0s35"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_fivng"]
@@ -12,11 +12,14 @@
 [ext_resource type="Texture2D" uid="uid://btt6hhqltcgql" path="res://sprites/treasures.png" id="10_7riix"]
 [ext_resource type="Texture2D" uid="uid://8cy5q4m01a7u" path="res://sprites/painting.png" id="10_go7e6"]
 [ext_resource type="PackedScene" uid="uid://hxebst30nlht" path="res://objects/searchable.tscn" id="10_ixctr"]
+[ext_resource type="AudioStream" uid="uid://hemovyj06nlx" path="res://audio/sfx/cabinet_open.ogg" id="12_5o5a8"]
 [ext_resource type="PackedScene" uid="uid://b8rgrlge5sx1q" path="res://objects/computer.tscn" id="12_7hgq7"]
+[ext_resource type="AudioStream" uid="uid://dwnwhp7iub0l6" path="res://audio/sfx/bookshelf_search.ogg" id="13_c1ncg"]
 [ext_resource type="PackedScene" uid="uid://c4mps0fd7w7o6" path="res://objects/guard.tscn" id="13_e576x"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="13_k20i8"]
 [ext_resource type="PackedScene" uid="uid://b0pwne8tissnt" path="res://objects/level_exit.tscn" id="14_qx2jl"]
 [ext_resource type="PackedScene" uid="uid://26dcmt2uqm4y" path="res://objects/flickering_light.tscn" id="14_ri3ce"]
+[ext_resource type="AudioStream" uid="uid://bmecgrnajhabc" path="res://audio/sfx/drawer_open.ogg" id="14_u0h42"]
 [ext_resource type="PackedScene" uid="uid://dcv1iqay33qep" path="res://objects/light.tscn" id="15_nes1r"]
 [ext_resource type="Texture2D" uid="uid://cki0solhdng5r" path="res://sprites/gradient.png" id="16_ecxg0"]
 [ext_resource type="PackedScene" uid="uid://bms12ql4d2pev" path="res://objects/dialogue_trigger.tscn" id="16_rs7w6"]
@@ -294,6 +297,7 @@ treasure_sprite = ExtResource("10_go7e6")
 position = Vector2(224, 512)
 value = 100.0
 description = "Cronjager's stash of vintage comics."
+search_sound = ExtResource("12_5o5a8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable1"]
 shape = SubResource("RectangleShape2D_s2hxv")
@@ -302,6 +306,7 @@ shape = SubResource("RectangleShape2D_s2hxv")
 position = Vector2(476, 496)
 value = 50.0
 description = "\"A Study of Azitron Mating Habits.\""
+search_sound = ExtResource("13_c1ncg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable2"]
 shape = SubResource("RectangleShape2D_s2hxv")
@@ -310,6 +315,7 @@ shape = SubResource("RectangleShape2D_s2hxv")
 position = Vector2(616, 368)
 value = 150.0
 description = "Funny place to keep a bottle of Scotch..."
+search_sound = ExtResource("14_u0h42")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable3"]
 shape = SubResource("RectangleShape2D_s2hxv")
@@ -318,6 +324,7 @@ shape = SubResource("RectangleShape2D_s2hxv")
 position = Vector2(512, 560)
 value = 100.0
 description = "Various company documents. Worth something, if you find the right buyer..."
+search_sound = ExtResource("14_u0h42")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Searchables/Searchable4"]
 shape = SubResource("RectangleShape2D_s2hxv")
