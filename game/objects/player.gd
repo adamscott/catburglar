@@ -407,7 +407,7 @@ func _physics_process_normal(delta : float) -> void:
 		collision_standing.disabled = true
 		collision_crouched.disabled = false
 	anim_index += delta * 10.0
-	if movement_desired == 0.0:
+	if movement_desired == 0.0 or ignore_inputs:
 		sprite.frame = wrapf(anim_index, 0, 14)
 	elif !ignore_inputs:
 		sprite.frame = 14 + wrapf(anim_index, 0, 8)
