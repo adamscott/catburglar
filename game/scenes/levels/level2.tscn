@@ -967,6 +967,20 @@ slug = "toggle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintTrigger2"]
 shape = SubResource("RectangleShape2D_i0i4m")
 
+[node name="HintTrigger3" parent="Hints" instance=ExtResource("8_46snf")]
+position = Vector2(72, 328)
+slug = "venting"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintTrigger3"]
+shape = SubResource("RectangleShape2D_i0i4m")
+
+[node name="HintTrigger4" parent="Hints" instance=ExtResource("8_46snf")]
+position = Vector2(528, 136)
+slug = "blind_cameras"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hints/HintTrigger4"]
+shape = SubResource("RectangleShape2D_i0i4m")
+
 [node name="Misc" type="Node" parent="."]
 
 [node name="LevelExit" parent="Misc" instance=ExtResource("6_hlqkw")]
@@ -1004,6 +1018,8 @@ bus = &"bgm"
 [connection signal="activated" from="Dialogues/DialogueTrigger3" to="." method="_on_dialogue_trigger_activated"]
 [connection signal="activated" from="Hints/HintTrigger1" to="HUD" method="_on_hint_trigger_activated"]
 [connection signal="activated" from="Hints/HintTrigger2" to="HUD" method="_on_hint_trigger_activated"]
+[connection signal="activated" from="Hints/HintTrigger3" to="HUD" method="_on_hint_trigger_activated"]
+[connection signal="activated" from="Hints/HintTrigger4" to="HUD" method="_on_hint_trigger_activated"]
 [connection signal="dialogue_finished" from="HUD" to="." method="_on_hud_dialogue_finished"]
 [connection signal="minigame_failed" from="HUD" to="." method="_on_hud_minigame_failed"]
 [connection signal="minigame_succeeded" from="HUD" to="." method="_on_hud_minigame_succeeded"]

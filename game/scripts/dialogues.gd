@@ -23,6 +23,8 @@ const HINT_LINES : Dictionary = {
 	"search": "Remember to search anything that looks like it might contain valuables. You never know what you'll find.",
 	"roll_under": "While rolling, tap the crouch button again to roll underneath stairs or thin platforms.",
 	"short_roll": "You can interrupt your roll mid-way by tapping the Interact button.",
+	"venting": "To enter a vent, roll into it.",
+	"blind_cameras": "Cameras can't see you in the dark. Turn the environment to your adventage...",
 }
 
 func get_dialogue_line(which : String) -> String:
