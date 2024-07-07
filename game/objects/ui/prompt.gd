@@ -20,13 +20,14 @@ func refresh() -> void:
 	$Label_Key.text = "[" + keyname + "]"
 	var joycode : int = Settings.get_joybinding(action_name)
 	var joy_offset : int = Settings.JOY_BUTTON_ICON[joycode]
-	button.texture.region.position.x = joy_offset * ICON_WIDTH
+	$Texture_Button.texture.region.position.x = joy_offset * ICON_WIDTH
+	$Texture_Button.texture.region.position.y = Settings.controller_type * ICON_WIDTH
 	if Settings.last_input_was_controller:
-		button.show()
-		key.hide()
+		$Texture_Button.show()
+		$Label_Key.hide()
 	else:
-		button.hide()
-		key.show()
+		$Texture_Button.hide()
+		$Label_Key.show()
 
 func _ready() -> void:
 	button.texture = button.texture.duplicate(true)

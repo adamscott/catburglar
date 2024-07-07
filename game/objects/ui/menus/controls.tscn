@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cp7kakv4lupju"]
+[gd_scene load_steps=7 format=3 uid="uid://cp7kakv4lupju"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_xvpad"]
 [ext_resource type="PackedScene" uid="uid://bfulh2dvrrw3" path="res://objects/ui/menu/menu_item_keybind.tscn" id="2_m4pw5"]
 [ext_resource type="PackedScene" uid="uid://bjgcuauwpy41d" path="res://objects/ui/menu/menu_item_title_bar.tscn" id="2_wny77"]
 [ext_resource type="PackedScene" uid="uid://mkrn1dowrter" path="res://objects/ui/menu/menu_item_gap.tscn" id="5_ofvkf"]
+[ext_resource type="PackedScene" uid="uid://ctg8603hwn317" path="res://objects/ui/menu/menu_item_selector.tscn" id="5_t863r"]
 [ext_resource type="PackedScene" uid="uid://hc8gvdg03bpo" path="res://objects/ui/menu/menu_item_button.tscn" id="6_welid"]
 
 [node name="Controls" type="VBoxContainer"]
@@ -53,6 +54,15 @@ title = "Pause"
 action_name = "pause"
 
 [node name="Gap1" parent="." instance=ExtResource("5_ofvkf")]
+layout_mode = 2
+
+[node name="MenuItem_Selector" parent="." instance=ExtResource("5_t863r")]
+layout_mode = 2
+id = "controller_type"
+title = "Gamepad Type"
+values = Array[String](["Xbox", "Nintendo", "PlayStation"])
+
+[node name="Gap2" parent="." instance=ExtResource("5_ofvkf")]
 layout_mode = 2
 
 [node name="Back" parent="." instance=ExtResource("6_welid")]

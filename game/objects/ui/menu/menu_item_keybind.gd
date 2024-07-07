@@ -22,8 +22,9 @@ func refresh() -> void:
 	$Key.text = "[" + keyname + "] / "
 	var joycode : int = Settings.get_joybinding(action_name)
 	var joy_offset : int = Settings.JOY_BUTTON_ICON[joycode]
-	button.texture.region.position.x = joy_offset * ICON_WIDTH
-	button.show()
+	$Button.texture.region.position.x = joy_offset * ICON_WIDTH
+	$Button.texture.region.position.y = Settings.controller_type * ICON_WIDTH
+	$Button.show()
 
 func activate() -> void:
 	get_parent()._on_rebinding_started(action_name)

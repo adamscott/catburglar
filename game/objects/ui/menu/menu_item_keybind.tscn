@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" path="res://objects/ui/menu/menu_item_keybind.gd" id="1_aucan"]
 [ext_resource type="FontFile" uid="uid://cwgn18qi488vs" path="res://fonts/breamcatcher rg.otf" id="2_drwbu"]
-[ext_resource type="Texture2D" uid="uid://dvem4udg77q8t" path="res://sprites/ui/controller_icons.png" id="3_hugua"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_83457"]
-atlas = ExtResource("3_hugua")
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_3f52f"]
+load_path = "res://.godot/imported/controller_icons.png-e70d88880307bc3d080427da2bea682f.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pfwc"]
+atlas = SubResource("CompressedTexture2D_3f52f")
 region = Rect2(0, 0, 64, 64)
 margin = Rect2(0, 1, 0, 3)
 
@@ -31,5 +33,5 @@ text = "[Space] / "
 
 [node name="Button" type="TextureRect" parent="."]
 layout_mode = 2
-texture = SubResource("AtlasTexture_83457")
+texture = SubResource("AtlasTexture_3pfwc")
 expand_mode = 3

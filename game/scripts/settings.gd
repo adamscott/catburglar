@@ -1,5 +1,7 @@
 extends Node
 
+enum ControllerType {XBOX, NINTENDO, PLAYSTATION}
+
 const CONFIG_PATH : String = "user://settings.ini"
 
 const ACTIONS : Array = ["up", "down", "left", "right", "interact", "shoot", "pause"]
@@ -27,6 +29,7 @@ var vibration : bool = true
 
 var keybindings : Dictionary
 var joybindings : Dictionary
+var controller_type : int = ControllerType.XBOX
 
 var last_input_was_controller : bool = false
 
@@ -41,7 +44,7 @@ func apply_volume_setting(bus_name : String, amount : int) -> void:
 	AudioServer.set_bus_volume_db(bus_id, linear_to_db(amount / 12.0))
 
 func apply_selector_settings() -> void:
-	pass
+	get_tree().call_group("keybind_or_prompt", "refresh")
 
 func apply_volume_settings() -> void:
 	apply_volume_setting("sfx", sfx_volume)
@@ -72,11 +75,14 @@ func set_tickbox_setting(setting_name : String, value : bool) -> void:
 
 func get_selector_setting(setting_name : String) -> int:
 	match setting_name:
+		"controller_type": return controller_type
 		_:
 			printerr("Unknown setting: " + setting_name)
 			return 0
 
 func set_selector_setting(setting_name : String, value : int) -> void:
+	match setting_name:
+		"controller_type": controller_type = value
 	apply_selector_settings()
 	save_settings()
 
@@ -157,7 +163,7 @@ func load_settings() -> void:
 	ui_volume = config_file.get_value("audio", "ui", 10)
 	amb_volume = config_file.get_value("audio", "amb", 10)
 	vo_volume = config_file.get_value("audio", "vo", 10)
-	vibration = config_file.get_value("game", "vibration", true)
+	controller_type = config_file.get_value("game", "controller_type", ControllerType.XBOX)
 	for action_name in ACTIONS:
 		keybindings[action_name] = config_file.get_value("keybindings", action_name, DEFAULT_KEYBINDINGS[action_name])
 		joybindings[action_name] = config_file.get_value("joybindings", action_name, DEFAULT_JOYBINDINGS[action_name])
@@ -170,7 +176,7 @@ func save_settings() -> void:
 	config_file.set_value("audio", "ui", ui_volume)
 	config_file.set_value("audio", "amb", amb_volume)
 	config_file.set_value("audio", "vo", vo_volume)
-	config_file.set_value("game", "vibration", vibration)
+	config_file.set_value("game", "controller_type", controller_type)
 	for action_name in ACTIONS:
 		config_file.set_value("keybindings", action_name, get_keybinding(action_name))
 		config_file.set_value("joybindings", action_name, get_joybinding(action_name))
