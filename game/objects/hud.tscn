@@ -1,14 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://ctu21mpqd6ic7"]
+[gd_scene load_steps=15 format=3 uid="uid://ctu21mpqd6ic7"]
 
-[ext_resource type="Texture2D" uid="uid://w4nq8u07csbl" path="res://sprites/ui/in_light.png" id="1_b307x"]
 [ext_resource type="Script" path="res://objects/hud.gd" id="1_u7oft"]
-[ext_resource type="Texture2D" uid="uid://beflwuqvx2rj8" path="res://sprites/ui/in_shadow.png" id="2_hgbn0"]
-[ext_resource type="Texture2D" uid="uid://bvxf26kxreek2" path="res://sprites/ui/hidden.png" id="4_cea3m"]
 [ext_resource type="Texture2D" uid="uid://d1o2i1yqn177x" path="res://sprites/ui/circle.png" id="5_78t5h"]
 [ext_resource type="Texture2D" uid="uid://ceudyh73hkp8j" path="res://sprites/ui/eye.png" id="6_eh55u"]
 [ext_resource type="FontFile" uid="uid://c4edf8hd56tf2" path="res://fonts/CaviarDreams_Bold.ttf" id="7_qhic6"]
 [ext_resource type="FontFile" uid="uid://dobcyrrdj03ub" path="res://fonts/CaviarDreams.ttf" id="8_ererx"]
 [ext_resource type="Texture2D" uid="uid://ckbn23ym0rqk5" path="res://sprites/mugshot.png" id="8_ijmbr"]
+[ext_resource type="PackedScene" uid="uid://cxucawp22wfyt" path="res://objects/ui/prompt.tscn" id="8_jf8jl"]
 [ext_resource type="Shader" path="res://shaders/game_over.gdshader" id="8_w2msb"]
 [ext_resource type="Texture2D" uid="uid://cki0solhdng5r" path="res://sprites/gradient.png" id="9_k6bj4"]
 [ext_resource type="PackedScene" uid="uid://dv15ok1gu3g6l" path="res://objects/minigame.tscn" id="9_nlp0m"]
@@ -25,51 +23,6 @@ shader_parameter/amount = 0.0
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_u7oft")
 
-[node name="Texture_InLight" type="TextureRect" parent="."]
-visible = false
-texture_filter = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = 8.0
-offset_right = 96.0
-offset_bottom = 40.0
-grow_horizontal = 2
-texture = ExtResource("1_b307x")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="Texture_InShadow" type="TextureRect" parent="."]
-visible = false
-texture_filter = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = 8.0
-offset_right = 96.0
-offset_bottom = 40.0
-grow_horizontal = 2
-texture = ExtResource("2_hgbn0")
-expand_mode = 2
-stretch_mode = 4
-
-[node name="Texture_Hidden" type="TextureRect" parent="."]
-visible = false
-texture_filter = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -96.0
-offset_top = 8.0
-offset_right = 96.0
-offset_bottom = 40.0
-grow_horizontal = 2
-texture = ExtResource("4_cea3m")
-expand_mode = 2
-stretch_mode = 4
-
 [node name="Visibility" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 5
@@ -81,7 +34,7 @@ offset_right = 96.0
 offset_bottom = 48.0
 grow_horizontal = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Visibility"]
+[node name="Oval" type="NinePatchRect" parent="Visibility"]
 modulate = Color(0.2, 0.223529, 0.254902, 1)
 layout_mode = 0
 offset_left = -8.0
@@ -94,6 +47,7 @@ patch_margin_right = 20
 
 [node name="Label_Visibility_Label" type="Label" parent="Visibility"]
 texture_filter = 1
+layout_mode = 0
 offset_right = 192.0
 offset_bottom = 31.0
 theme_override_colors/font_color = Color(0.701961, 0.72549, 0.819608, 1)
@@ -271,19 +225,19 @@ anchors_preset = 0
 offset_left = 640.0
 offset_top = 536.0
 offset_right = 1280.0
-offset_bottom = 616.0
+offset_bottom = 608.0
 
 [node name="TextureRect" type="TextureRect" parent="Hint"]
 material = SubResource("CanvasItemMaterial_l8ofe")
 layout_mode = 0
 offset_right = 640.0
-offset_bottom = 80.0
+offset_bottom = 72.0
 texture = ExtResource("9_k6bj4")
 flip_h = true
 
 [node name="Label_Line" type="Label" parent="Hint"]
 layout_mode = 0
-offset_left = 8.0
+offset_left = 112.0
 offset_top = 8.0
 offset_right = 624.0
 offset_bottom = 64.0
@@ -292,41 +246,50 @@ theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("8_ererx")
 theme_override_font_sizes/font_size = 20
-text = "Furniture that is  positioned in front of Cynth can act as cover. Duck while in front of it to remind out of sight."
+text = "Furniture that is positioned in front of Cynth can act as cover. Duck while in front of it to remind out of sight."
 horizontal_alignment = 2
 autowrap_mode = 2
 
-[node name="Prompt" type="HBoxContainer" parent="."]
-offset_left = 760.0
-offset_top = 672.0
-offset_right = 1264.0
-offset_bottom = 712.0
-theme_override_constants/separation = 10
-alignment = 2
+[node name="Prompt" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -56.0
+offset_right = 96.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="Label_Button" type="Label" parent="Prompt"]
-texture_filter = 1
-layout_mode = 2
-theme_override_colors/font_color = Color(0.701961, 0.72549, 0.819608, 1)
-theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("7_qhic6")
-theme_override_font_sizes/font_size = 24
-text = "(X)"
+[node name="Oval" type="NinePatchRect" parent="Prompt"]
+modulate = Color(0.2, 0.223529, 0.254902, 1)
+layout_mode = 0
+offset_left = -8.0
+offset_right = 200.0
+offset_bottom = 40.0
+texture = ExtResource("5_78t5h")
+patch_margin_left = 20
+patch_margin_right = 20
 
-[node name="Label_Action" type="Label" parent="Prompt"]
-texture_filter = 1
-layout_mode = 2
-theme_override_colors/font_color = Color(0.854902, 0.878431, 0.917647, 1)
-theme_override_colors/font_shadow_color = Color(0.2, 0.223529, 0.254902, 1)
-theme_override_constants/shadow_offset_x = 0
-theme_override_constants/shadow_offset_y = 2
-theme_override_constants/shadow_outline_size = 0
-theme_override_fonts/font = ExtResource("8_ererx")
-theme_override_font_sizes/font_size = 24
-text = "Interact"
+[node name="Prompt" parent="Prompt" instance=ExtResource("8_jf8jl")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -192.0
+offset_top = -40.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 1
+title = "Interact"
+action_name = "interact"
 
 [node name="Minigame" parent="." instance=ExtResource("9_nlp0m")]
 position = Vector2(1440, 560)
@@ -366,5 +329,3 @@ bus = &"ui"
 [connection signal="timeout" from="Timer_HideHint" to="." method="_on_timer_hide_hint_timeout"]
 [connection signal="timeout" from="Timer_HideLootDescription" to="." method="_on_timer_hide_loot_description_timeout"]
 [connection signal="finished" from="Audio_VO" to="." method="_on_audio_vo_finished"]
-[connection signal="finished" from="Audio_InLight" to="." method="_on_audio_vo_finished"]
-[connection signal="finished" from="Audio_InShadow" to="." method="_on_audio_vo_finished"]

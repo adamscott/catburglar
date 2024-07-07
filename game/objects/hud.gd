@@ -9,6 +9,7 @@ const MOVE_SPEED : float = 4.0
 @export_node_path("Node2D") var path_player
 @onready var player : Node2D = get_node(path_player)
 
+@onready var oval_visibility : NinePatchRect = $Visibility/Oval
 @onready var label_visibility : Label = $Visibility/Label_Visibility_Label
 @onready var texture_eye_left : TextureRect = $Visibility/Texture_Eye_Left
 @onready var texture_eye_right : TextureRect = $Visibility/Texture_Eye_Right
@@ -24,7 +25,7 @@ const MOVE_SPEED : float = 4.0
 @onready var hint : Control = $Hint
 @onready var hint_line : Label = $Hint/Label_Line
 @onready var prompt : Control = $Prompt
-@onready var prompt_action : Label = $Prompt/Label_Action
+@onready var prompt_prompt : Control = $Prompt/Prompt # I know. I know.
 @onready var timer_hide_hint : Timer = $Timer_HideHint
 @onready var timer_hide_loot_description : Timer = $Timer_HideLootDescription
 @onready var audio_vo : AudioStreamPlayer = $Audio_VO
@@ -93,10 +94,10 @@ func show_loot_description(desc : String) -> void:
 func set_prompt(vis : bool, action : String) -> void:
 	if playing_dialogue:
 		prompt.visible = true
-		prompt_action.text = &"Skip"
+		prompt_prompt.title = &"Skip"
 	else:
 		prompt.visible = vis
-		prompt_action.text = action
+		prompt_prompt.title = action
 
 func do_game_over() -> void:
 	game_over = true
@@ -127,6 +128,8 @@ func get_visibility() -> int:
 func change_visibility(visibility : int) -> void:
 	match visibility:
 		Visibility.IN_LIGHT:
+			oval_visibility.modulate = Color("8b93af")
+			get_tree().create_tween().tween_property(oval_visibility, "modulate", Color("333941"), 0.2)
 			label_visibility.text = "IN LIGHT"
 			audio_in_light.play()
 		Visibility.IN_SHADOW:

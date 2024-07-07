@@ -92,6 +92,7 @@ process_mode = 3
 script = ExtResource("1_icy1q")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 50
 
 [node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("2_64b4y")]
 
