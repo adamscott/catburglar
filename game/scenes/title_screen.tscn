@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scenes/title_screen.gd" id="1_15vqh"]
 [ext_resource type="VideoStream" path="res://video/title.ogv" id="2_kecq5"]
 [ext_resource type="Texture2D" uid="uid://bbkrd4a4vf8jq" path="res://sprites/logo.png" id="2_te855"]
-[ext_resource type="Texture2D" uid="uid://daa3b88n7srnw" path="res://sprites/credits.png" id="5_i1f76"]
 [ext_resource type="Texture2D" uid="uid://6d8qhxgl0vum" path="res://sprites/and_the_rest.png" id="5_oi1k3"]
 [ext_resource type="PackedScene" uid="uid://cowuxseai4hbv" path="res://objects/ui/menus/title.tscn" id="7_eycgn"]
 [ext_resource type="Texture2D" uid="uid://obrdj1j4ch3e" path="res://sprites/jg.png" id="7_p4cu5"]
@@ -13,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dlkta45kvdfku" path="res://objects/ui/menus/audio.tscn" id="10_6cc7h"]
 [ext_resource type="AudioStream" uid="uid://bc01o3e75dgba" path="res://audio/music/title.ogg" id="10_syov0"]
 [ext_resource type="PackedScene" uid="uid://cp7kakv4lupju" path="res://objects/ui/menus/controls.tscn" id="11_hypax"]
+[ext_resource type="PackedScene" uid="uid://7x1hdqybj404" path="res://objects/ui/credits.tscn" id="12_t04ux"]
 [ext_resource type="PackedScene" uid="uid://cxucawp22wfyt" path="res://objects/ui/prompt.tscn" id="14_5k0o0"]
 
 [sub_resource type="Animation" id="Animation_quns4"]
@@ -293,31 +293,13 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Credits" type="Control" parent="."]
+[node name="Credits" parent="." instance=ExtResource("12_t04ux")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="Credits"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -416.0
-offset_top = -300.0
-offset_right = 416.0
-offset_bottom = 220.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_i1f76")
-expand_mode = 3
-stretch_mode = 4
+offset_left = 320.0
+offset_top = 136.0
+offset_right = -320.0
+offset_bottom = -136.0
 
 [node name="Prompts" type="HBoxContainer" parent="."]
 layout_mode = 0
