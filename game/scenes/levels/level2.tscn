@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://djjs1exf7e7aq"]
+[gd_scene load_steps=64 format=3 uid="uid://djjs1exf7e7aq"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_t2k1n"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_cpp0q"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://bqj7211lhnd4d" path="res://sprites/vase.png" id="10_ablqv"]
 [ext_resource type="PackedScene" uid="uid://26dcmt2uqm4y" path="res://objects/flickering_light.tscn" id="11_625eh"]
 [ext_resource type="Texture2D" uid="uid://cps8flbpi8arq" path="res://sprites/furniture.png" id="11_yu3wf"]
+[ext_resource type="Texture2D" uid="uid://btt6hhqltcgql" path="res://sprites/treasures.png" id="12_xoghg"]
 [ext_resource type="AudioStream" uid="uid://c1ksgc4glnvq4" path="res://audio/sfx/fridge_open.ogg" id="13_rudei"]
 [ext_resource type="PackedScene" uid="uid://b2lfcpiy60nl0" path="res://objects/light_toggle.tscn" id="14_17ouq"]
 [ext_resource type="AudioStream" uid="uid://bmecgrnajhabc" path="res://audio/sfx/drawer_open.ogg" id="14_kga06"]
@@ -45,6 +46,22 @@ point_count = 8
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqs01"]
 atlas = ExtResource("11_yu3wf")
 region = Rect2(624, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xnjdt"]
+atlas = ExtResource("12_xoghg")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xcfaj"]
+atlas = ExtResource("12_xoghg")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eb8qr"]
+atlas = ExtResource("12_xoghg")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n80jp"]
+atlas = ExtResource("12_xoghg")
+region = Rect2(80, 16, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s4xh5"]
 size = Vector2(8, 8)
@@ -379,6 +396,22 @@ treasure_sprite = ExtResource("10_ablqv")
 position = Vector2(368, 248)
 value = 3
 treasure_sprite = SubResource("AtlasTexture_hqs01")
+
+[node name="Treasure1" parent="Treasure" instance=ExtResource("9_rjy45")]
+position = Vector2(544, 312)
+treasure_sprite = SubResource("AtlasTexture_xnjdt")
+
+[node name="Treasure2" parent="Treasure" instance=ExtResource("9_rjy45")]
+position = Vector2(408, 184)
+treasure_sprite = SubResource("AtlasTexture_xcfaj")
+
+[node name="Treasure3" parent="Treasure" instance=ExtResource("9_rjy45")]
+position = Vector2(120, 56)
+treasure_sprite = SubResource("AtlasTexture_eb8qr")
+
+[node name="Treasure4" parent="Treasure" instance=ExtResource("9_rjy45")]
+position = Vector2(424, 120)
+treasure_sprite = SubResource("AtlasTexture_n80jp")
 
 [node name="Searchables" type="Node" parent="."]
 
@@ -1008,6 +1041,10 @@ bus = &"bgm"
 [connection signal="started_hacking" from="Player" to="." method="_on_player_started_hacking"]
 [connection signal="stolen" from="Treasure/Vase" to="Scenario" method="_on_vase_stolen"]
 [connection signal="stolen" from="Treasure/Poster" to="Scenario" method="_on_poster_stolen"]
+[connection signal="stolen" from="Treasure/Treasure1" to="." method="_on_treasure_stolen"]
+[connection signal="stolen" from="Treasure/Treasure2" to="." method="_on_treasure_stolen"]
+[connection signal="stolen" from="Treasure/Treasure3" to="." method="_on_treasure_stolen"]
+[connection signal="stolen" from="Treasure/Treasure4" to="." method="_on_treasure_stolen"]
 [connection signal="looted" from="Searchables/Searchable1" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable2" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable3" to="." method="_on_searchable_looted"]

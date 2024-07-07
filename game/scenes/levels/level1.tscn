@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://y2y02gmayr5k"]
+[gd_scene load_steps=52 format=3 uid="uid://y2y02gmayr5k"]
 
 [ext_resource type="Script" path="res://scripts/level_controller.gd" id="1_c0s35"]
 [ext_resource type="Texture2D" uid="uid://dd4870wip81gy" path="res://sprites/background.png" id="2_fivng"]
@@ -29,6 +29,10 @@
 [ext_resource type="PackedScene" uid="uid://dvndx7lqnykun" path="res://objects/security_camera.tscn" id="19_p64sn"]
 [ext_resource type="AudioStream" uid="uid://vd83yed6t4hb" path="res://audio/music/caught1.ogg" id="22_5nt6l"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvlo8"]
+atlas = ExtResource("10_7riix")
+region = Rect2(80, 16, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_hgm80"]
 atlas = ExtResource("10_7riix")
 region = Rect2(80, 0, 16, 16)
@@ -36,6 +40,14 @@ region = Rect2(80, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_8u0uo"]
 atlas = ExtResource("10_7riix")
 region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iefgw"]
+atlas = ExtResource("10_7riix")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2fpj"]
+atlas = ExtResource("10_7riix")
+region = Rect2(80, 48, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s2hxv"]
 size = Vector2(8, 8)
@@ -266,7 +278,7 @@ destination = NodePath("..")
 
 [node name="Treasure1" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(232, 680)
-treasure_sprite = ExtResource("10_go7e6")
+treasure_sprite = SubResource("AtlasTexture_cvlo8")
 
 [node name="Treasure2" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(608, 680)
@@ -279,17 +291,17 @@ position = Vector2(176, 349)
 value = 100
 treasure_sprite = SubResource("AtlasTexture_8u0uo")
 
-[node name="Treasure5" parent="Treasure" instance=ExtResource("9_mfehv")]
+[node name="Treasure4" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(536, 360)
-treasure_sprite = ExtResource("10_go7e6")
+treasure_sprite = SubResource("AtlasTexture_iefgw")
 
-[node name="Treasure8" parent="Treasure" instance=ExtResource("9_mfehv")]
+[node name="Treasure5" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(136, 504)
 treasure_sprite = ExtResource("10_go7e6")
 
-[node name="Treasure9" parent="Treasure" instance=ExtResource("9_mfehv")]
+[node name="Treasure6" parent="Treasure" instance=ExtResource("9_mfehv")]
 position = Vector2(616, 424)
-treasure_sprite = ExtResource("10_go7e6")
+treasure_sprite = SubResource("AtlasTexture_b2fpj")
 
 [node name="Searchables" type="Node" parent="."]
 
@@ -776,9 +788,9 @@ bus = &"bgm"
 [connection signal="stolen" from="Treasure/Treasure1" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure2" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure3" to="." method="_on_treasure_stolen"]
+[connection signal="stolen" from="Treasure/Treasure4" to="." method="_on_treasure_stolen"]
 [connection signal="stolen" from="Treasure/Treasure5" to="." method="_on_treasure_stolen"]
-[connection signal="stolen" from="Treasure/Treasure8" to="." method="_on_treasure_stolen"]
-[connection signal="stolen" from="Treasure/Treasure9" to="." method="_on_treasure_stolen"]
+[connection signal="stolen" from="Treasure/Treasure6" to="." method="_on_treasure_stolen"]
 [connection signal="looted" from="Searchables/Searchable1" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable2" to="." method="_on_searchable_looted"]
 [connection signal="looted" from="Searchables/Searchable3" to="." method="_on_searchable_looted"]
