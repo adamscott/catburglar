@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://d8flqb4ktbdj"]
+[gd_scene load_steps=20 format=3 uid="uid://d8flqb4ktbdj"]
 
 [ext_resource type="Script" path="res://scenes/title_screen.gd" id="1_15vqh"]
 [ext_resource type="VideoStream" path="res://video/title.ogv" id="2_kecq5"]
 [ext_resource type="Texture2D" uid="uid://bbkrd4a4vf8jq" path="res://sprites/logo.png" id="2_te855"]
+[ext_resource type="Texture2D" uid="uid://cki0solhdng5r" path="res://sprites/gradient.png" id="3_s1htk"]
 [ext_resource type="Texture2D" uid="uid://6d8qhxgl0vum" path="res://sprites/and_the_rest.png" id="5_oi1k3"]
 [ext_resource type="PackedScene" uid="uid://cowuxseai4hbv" path="res://objects/ui/menus/title.tscn" id="7_eycgn"]
 [ext_resource type="Texture2D" uid="uid://obrdj1j4ch3e" path="res://sprites/jg.png" id="7_p4cu5"]
@@ -14,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://cp7kakv4lupju" path="res://objects/ui/menus/controls.tscn" id="11_hypax"]
 [ext_resource type="PackedScene" uid="uid://7x1hdqybj404" path="res://objects/ui/credits.tscn" id="12_t04ux"]
 [ext_resource type="PackedScene" uid="uid://cxucawp22wfyt" path="res://objects/ui/prompt.tscn" id="14_5k0o0"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qocyx"]
+blend_mode = 2
 
 [sub_resource type="Animation" id="Animation_quns4"]
 resource_name = "fade_in"
@@ -193,6 +197,14 @@ stream = ExtResource("2_kecq5")
 autoplay = true
 expand = true
 
+[node name="Gradient" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.25098)
+material = SubResource("CanvasItemMaterial_qocyx")
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 720.0
+texture = ExtResource("3_s1htk")
+
 [node name="JG" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
@@ -323,7 +335,6 @@ action_name = "shoot"
 
 [node name="Audio_BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_syov0")
-volume_db = -40.0
 bus = &"bgm"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
