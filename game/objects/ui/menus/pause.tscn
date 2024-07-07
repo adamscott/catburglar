@@ -20,6 +20,11 @@ layout_mode = 2
 id = "resume"
 title = "Resume"
 
+[node name="RestartLevel" parent="." instance=ExtResource("6_7y20u")]
+layout_mode = 2
+id = "restart_level"
+title = "Restart Level"
+
 [node name="Settings" parent="." instance=ExtResource("6_7y20u")]
 layout_mode = 2
 id = "settings"

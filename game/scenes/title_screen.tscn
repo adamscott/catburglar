@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scenes/title_screen.gd" id="1_15vqh"]
 [ext_resource type="VideoStream" path="res://video/title.ogv" id="2_kecq5"]
 [ext_resource type="Texture2D" uid="uid://bbkrd4a4vf8jq" path="res://sprites/logo.png" id="2_te855"]
-[ext_resource type="FontFile" uid="uid://cwgn18qi488vs" path="res://fonts/breamcatcher rg.otf" id="3_vsoy8"]
 [ext_resource type="Texture2D" uid="uid://daa3b88n7srnw" path="res://sprites/credits.png" id="5_i1f76"]
 [ext_resource type="Texture2D" uid="uid://6d8qhxgl0vum" path="res://sprites/and_the_rest.png" id="5_oi1k3"]
 [ext_resource type="PackedScene" uid="uid://cowuxseai4hbv" path="res://objects/ui/menus/title.tscn" id="7_eycgn"]
@@ -14,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dlkta45kvdfku" path="res://objects/ui/menus/audio.tscn" id="10_6cc7h"]
 [ext_resource type="AudioStream" uid="uid://bc01o3e75dgba" path="res://audio/music/title.ogg" id="10_syov0"]
 [ext_resource type="PackedScene" uid="uid://cp7kakv4lupju" path="res://objects/ui/menus/controls.tscn" id="11_hypax"]
+[ext_resource type="PackedScene" uid="uid://cxucawp22wfyt" path="res://objects/ui/prompt.tscn" id="14_5k0o0"]
 
 [sub_resource type="Animation" id="Animation_quns4"]
 resource_name = "fade_in"
@@ -153,6 +153,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Prompts:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nlgrs"]
 _data = {
@@ -243,61 +255,43 @@ offset_right = 400.0
 offset_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(400, 128)
 texture = ExtResource("2_te855")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="MainMenu" type="Control" parent="."]
+[node name="MainMenu" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = -832.0
+offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
 [node name="Title" parent="MainMenu" instance=ExtResource("7_eycgn")]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 128.0
-offset_top = -104.0
-offset_right = 233.0
-offset_bottom = 112.0
-grow_vertical = 2
+layout_mode = 2
 
 [node name="Settings" parent="MainMenu" instance=ExtResource("8_rwlwe")]
 visible = false
-layout_mode = 0
-offset_left = 128.0
-offset_top = 200.0
-offset_right = 512.0
-offset_bottom = 497.0
+layout_mode = 2
 
 [node name="Graphics" parent="MainMenu" instance=ExtResource("9_u1ega")]
 visible = false
-layout_mode = 0
-offset_left = 128.0
-offset_top = 200.0
-offset_right = 512.0
-offset_bottom = 497.0
+layout_mode = 2
 
 [node name="Audio" parent="MainMenu" instance=ExtResource("10_6cc7h")]
 visible = false
-layout_mode = 0
-offset_left = 128.0
-offset_top = 144.0
-offset_right = 512.0
-offset_bottom = 549.0
+layout_mode = 2
 
 [node name="Controls" parent="MainMenu" instance=ExtResource("11_hypax")]
 visible = false
-layout_mode = 0
-offset_left = 128.0
-offset_top = 96.0
-offset_right = 512.0
-offset_bottom = 609.0
+layout_mode = 2
 
 [node name="Credits" type="Control" parent="."]
 visible = false
@@ -325,26 +319,29 @@ texture = ExtResource("5_i1f76")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="Credits"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -95.5
-offset_top = -72.0
-offset_right = 95.5
-offset_bottom = -30.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
-theme_override_fonts/font = ExtResource("3_vsoy8")
-theme_override_font_sizes/font_size = 32
-text = "Press (C) to go back"
+[node name="Prompts" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 664.0
+offset_right = 384.0
+offset_bottom = 704.0
+theme_override_constants/separation = 16
+
+[node name="Prompt_Select" parent="Prompts" instance=ExtResource("14_5k0o0")]
+visible = false
+layout_mode = 2
+title = "Select"
+action_name = "interact"
+
+[node name="Prompt_Back" parent="Prompts" instance=ExtResource("14_5k0o0")]
+visible = false
+layout_mode = 2
+title = "Back"
+action_name = "shoot"
 
 [node name="Audio_BGM" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_syov0")
+volume_db = -40.0
 bus = &"bgm"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

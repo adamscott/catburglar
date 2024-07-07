@@ -1,7 +1,7 @@
 extends Control
 
-enum State {INTRO, MENU, SETTINGS, CREDITS, FADE_OUT_GAME, FADE_OUT_QUIT}
-enum Menu {MAIN, ACHIEVEMENTS, CREDITS, SETTINGS, GRAPHICS, AUDIO, CONTROLS}
+enum State {WARMUP, INTRO, MENU, SETTINGS, CREDITS, FADE_OUT_GAME, FADE_OUT_QUIT}
+enum Menu {MAIN, CREDITS, SETTINGS, GRAPHICS, AUDIO, CONTROLS}
 
 @onready var logo : Control = $Logo
 @onready var main_menu : Control = $MainMenu
@@ -14,11 +14,12 @@ enum Menu {MAIN, ACHIEVEMENTS, CREDITS, SETTINGS, GRAPHICS, AUDIO, CONTROLS}
 @onready var video_player : VideoStreamPlayer = $VideoStreamPlayer
 @onready var audio_bgm : AudioStreamPlayer = $Audio_BGM
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
+@onready var prompt_select : Control = $Prompts/Prompt_Select
+@onready var prompt_back : Control = $Prompts/Prompt_Back
 
-var current_state : int = State.INTRO
+var current_state : int = State.WARMUP
 
 func set_active_menu(menu : int) -> void:
-	logo.visible = menu == Menu.MAIN
 	title_menu.visible = menu == Menu.MAIN
 	title_menu.active = menu == Menu.MAIN
 	credits.visible = menu == Menu.CREDITS
@@ -30,8 +31,8 @@ func set_active_menu(menu : int) -> void:
 	audio_menu.active = menu == Menu.AUDIO
 	controls_menu.visible = menu == Menu.CONTROLS
 	controls_menu.active = menu == Menu.CONTROLS
-	#prompt_select.visible = !(menu in [Menu.ACHIEVEMENTS, Menu.CREDITS])
-	#prompt_back.visible = menu != Menu.MAIN
+	prompt_select.visible = menu != Menu.CREDITS
+	prompt_back.visible = menu != Menu.MAIN
 
 func _on_title_button_pressed(button_id : String) -> void:
 	match button_id:
@@ -76,7 +77,7 @@ func _on_animation_player_animation_finished(anim_name : String) -> void:
 	match anim_name:
 		"fade_in":
 			current_state = State.MENU
-			title_menu.active = true
+			set_active_menu(Menu.MAIN)
 		"fade_out":
 			match current_state:
 				State.FADE_OUT_GAME:
@@ -103,5 +104,6 @@ func _input(event : InputEvent) -> void:
 
 func _ready() -> void:
 	await get_tree().create_timer(1.0).timeout
+	current_state = State.INTRO
 	audio_bgm.play()
 	anim_player.play("fade_in")
