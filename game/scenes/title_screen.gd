@@ -4,12 +4,11 @@ enum State {WARMUP, INTRO, MENU, SETTINGS, CREDITS, FADE_OUT_GAME, FADE_OUT_QUIT
 enum Menu {MAIN, CREDITS, SETTINGS, GRAPHICS, AUDIO, CONTROLS}
 
 @onready var logo : Control = $Logo
-@onready var main_menu : Control = $MainMenu
-@onready var title_menu : Control = $MainMenu/Title
-@onready var settings_menu : Control = $MainMenu/Settings
-@onready var graphics_menu : Control = $MainMenu/Graphics
-@onready var audio_menu : Control = $MainMenu/Audio
-@onready var controls_menu : Control = $MainMenu/Controls
+@onready var title_menu : Control = $Menus/Title
+@onready var settings_menu : Control = $Menus/Settings
+@onready var graphics_menu : Control = $Menus/Graphics
+@onready var audio_menu : Control = $Menus/Audio
+@onready var controls_menu : Control = $Menus/Controls
 @onready var credits : Control = $Credits
 @onready var video_player : VideoStreamPlayer = $VideoStreamPlayer
 @onready var audio_bgm : AudioStreamPlayer = $Audio_BGM
@@ -103,6 +102,8 @@ func _input(event : InputEvent) -> void:
 				title_menu.active = true
 
 func _ready() -> void:
+	if OS.get_name() == "Web":
+		$Menus/Title/Quit.queue_free()
 	await get_tree().create_timer(1.0).timeout
 	current_state = State.INTRO
 	audio_bgm.play()

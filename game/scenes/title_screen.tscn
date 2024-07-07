@@ -93,7 +93,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("MainMenu/Title:modulate")
+tracks/6/path = NodePath("Menus/Title:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -144,7 +144,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("MainMenu/Title:modulate")
+tracks/3/path = NodePath("Menus/Title:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -260,7 +260,7 @@ texture = ExtResource("2_te855")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="MainMenu" type="VBoxContainer" parent="."]
+[node name="Menus" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -273,23 +273,23 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Title" parent="MainMenu" instance=ExtResource("7_eycgn")]
+[node name="Title" parent="Menus" instance=ExtResource("7_eycgn")]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="Settings" parent="MainMenu" instance=ExtResource("8_rwlwe")]
+[node name="Settings" parent="Menus" instance=ExtResource("8_rwlwe")]
 visible = false
 layout_mode = 2
 
-[node name="Graphics" parent="MainMenu" instance=ExtResource("9_u1ega")]
+[node name="Graphics" parent="Menus" instance=ExtResource("9_u1ega")]
 visible = false
 layout_mode = 2
 
-[node name="Audio" parent="MainMenu" instance=ExtResource("10_6cc7h")]
+[node name="Audio" parent="Menus" instance=ExtResource("10_6cc7h")]
 visible = false
 layout_mode = 2
 
-[node name="Controls" parent="MainMenu" instance=ExtResource("11_hypax")]
+[node name="Controls" parent="Menus" instance=ExtResource("11_hypax")]
 visible = false
 layout_mode = 2
 
@@ -350,10 +350,10 @@ libraries = {
 }
 
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
-[connection signal="button_pressed" from="MainMenu/Title" to="." method="_on_title_button_pressed"]
-[connection signal="button_pressed" from="MainMenu/Settings" to="." method="_on_settings_button_pressed"]
-[connection signal="closed" from="MainMenu/Settings" to="." method="_on_settings_closed"]
-[connection signal="closed" from="MainMenu/Graphics" to="." method="_on_graphics_closed"]
-[connection signal="closed" from="MainMenu/Audio" to="." method="_on_audio_closed"]
-[connection signal="closed" from="MainMenu/Controls" to="." method="_on_controls_closed"]
+[connection signal="button_pressed" from="Menus/Title" to="." method="_on_title_button_pressed"]
+[connection signal="button_pressed" from="Menus/Settings" to="." method="_on_settings_button_pressed"]
+[connection signal="closed" from="Menus/Settings" to="." method="_on_settings_closed"]
+[connection signal="closed" from="Menus/Graphics" to="." method="_on_graphics_closed"]
+[connection signal="closed" from="Menus/Audio" to="." method="_on_audio_closed"]
+[connection signal="closed" from="Menus/Controls" to="." method="_on_controls_closed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
